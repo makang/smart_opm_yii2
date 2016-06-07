@@ -27,6 +27,7 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
+            $this->assign('data','dsafdsfdsa');
             return $this->render("index");
         } else {
             $this->redirect("/site/login");
