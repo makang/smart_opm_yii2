@@ -159,7 +159,7 @@ class SideNav extends \yii\widgets\Menu
             Html::addCssClass($this->headingOptions, 'panel-heading');
             $heading = Html::tag('div', '<h3 class="panel-title">' . $this->heading . '</h3>', $this->headingOptions);
         }
-        $body = Html::tag('div', $this->renderMenu(), ['class' => 'table']);
+        $body =  $this->renderMenu();
         $type = in_array($this->type, self::$_validTypes) ? $this->type : self::TYPE_DEFAULT;
         Html::addCssClass($this->containerOptions, "panel panel-{$type}");
         echo Html::tag('div', $heading . $body, $this->containerOptions);
@@ -178,9 +178,9 @@ class SideNav extends \yii\widgets\Menu
         }
         $items = $this->normalizeItems($this->items, $hasActiveChild);
         $options = $this->options;
-        $tag = ArrayHelper::remove($options, 'tag', 'ul');
+        //$tag = ArrayHelper::remove($options, 'tag', 'ul');
 
-        return Html::tag($tag, $this->renderItems($items), $options);
+        return Html::tag('ul', $this->renderItems($items), ['class' => 'nav nav-list']);
     }
 
     /**
