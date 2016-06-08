@@ -159,6 +159,19 @@ class Menu extends Widget
      */
     public $params;
 
+    private $icon  = array(
+        'icon-dashboard',
+        'icon-text-width',
+        'icon-desktop',
+        'icon-list',
+        'icon-edit',
+        'icon-list-alt',
+        'icon-calendar',
+        'icon-picture',
+        'icon-tag',
+        'icon-file-alt',
+
+    );
 
     /**
      * Renders the menu.
@@ -210,14 +223,39 @@ class Menu extends Widget
                 }
             }
 
-            $menu = $this->renderItem($item);
-            if (!empty($item['items'])) {
-                $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
-                $menu .= strtr($submenuTemplate, [
-                    '{items}' => $this->renderItems($item['items']),
-                ]);
+//            $menu = $this->renderItem($item);
+//            if (!empty($item['items'])) {
+//                $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
+//                $menu .= strtr($submenuTemplate, [
+//                    '{items}' => $this->renderItems($item['items']),
+//                ]);
+//            }
+//          $lines[] = Html::tag($tag, $menu, $options);
+            $menu = '<li class="'.($item['active']?(isset($item['items'])?'active open':'active'):'').'">
+                        <a href="'.($item['url'][0]?$item['url'][0]:$item['url']).'" class="'.(isset($item['items'])?"dropdown-toggle":"").'">
+                            <i class="'.$this->icon[$i].'"></i>
+                            <span class="menu-text"> '.$item['label'].' </span>
+                            '.(isset($item['items'])?'<b class="arrow icon-angle-down"></b>':'').'
+                        </a>
+
+                        {items}
+                    </li>';
+            if(!empty($item['items'])){
+                $items = '<ul class="submenu">';
+                foreach($item['items'] as $it){
+
+                    $items .= '<li class="'.($it['active']?'active':'').'">
+                                    <a href="'.$it['url'][0].'">
+                                        <i class="icon-double-angle-right"></i>
+                                        '.$it['label'].'
+                                    </a>
+                                </li>';
+                }
+                $items .= '</ul>';
+                $menu = str_replace('{items}',$items,$menu);
             }
-            $lines[] = Html::tag($tag, $menu, $options);
+            $menu = str_replace('{items}','',$menu);
+            $lines[] = $menu;
         }
 
         return implode("\n", $lines);
