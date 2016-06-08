@@ -8,6 +8,7 @@ $params = array_merge(
 
 return [
     'id' => 'backend',
+    'name' => '智慧影院后台管理中心',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
