@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = '登录';
+$this->title = '智慧影院后台登录';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
     <div class="row" style="margin-top: 5%">
@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
-                    <div class="form-group">
+                    <div class="form-group" style="margin-left:150px;">
                         <?= Html::submitButton('登录', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                     </div>
                     <?php ActiveForm::end(); ?>
