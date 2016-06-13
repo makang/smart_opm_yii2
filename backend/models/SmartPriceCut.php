@@ -93,9 +93,10 @@ class SmartPriceCut extends \yii\db\ActiveRecord
         !empty($params['name'])?$query->andFilterWhere(['like','name',$params['name']]):'';
         isset($params['status']) && $params['status']!=='' ?$query->andFilterWhere(['status'=>$params['status']]):'';
         $query->addOrderBy('pc_id desc');
+
+        $opOrders = array();
         foreach($dataProvider->getModels() as $v){
             $modelArray = $v->toArray();
-
             $ticketNum   =   SmartPriceCutLog::model()->iGetConsmeTicket($v->pc_id);
             $modelArray['ticket_num'] = $ticketNum;
             $sendMoney   =   SmartPriceCutExtends::model()->iGetSendMoney($v->pc_id);
