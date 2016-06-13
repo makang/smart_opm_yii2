@@ -60,7 +60,7 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'mdm\admin\Module',
-            'layout' => 'left-menu',
+            'layout' => 'top-menu',
             'controllerMap' => [
             ],
             'menus' => [

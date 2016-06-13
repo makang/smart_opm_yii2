@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <p>
+        <?= Html::a(Yii::t('rbac-admin', '新建用户'), ['signup'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?=
     GridView::widget([
