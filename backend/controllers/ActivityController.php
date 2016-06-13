@@ -34,6 +34,10 @@ class ActivityController  extends CommonController{
     }
 
 
+    public function actionAdd(){
+        return $this->render('add');
+    }
+
     /*
     * 删除活动列表
     *
