@@ -31,8 +31,6 @@ class SiteController extends Controller
         } else {
             $this->redirect("/site/login");
         }
-
-
     }
 
     public function actionLogin()
