@@ -48,6 +48,7 @@ class SmartTongjiWxOrder extends \yii\db\ActiveRecord
         if(!empty($params['cinema_no'])){
             $cinema = new SmartCinema();
             $ids = $cinema->aGetCinemaNoByName($params['cinema_no']);
+            $ids = array_keys($ids);
             $query->andFilterWhere(['cinema_no'=>$ids]);
         }
         $params['date'] = !empty($params['start_date'])?$params['start_date']:date('Y-m');
@@ -86,7 +87,7 @@ class SmartTongjiWxOrder extends \yii\db\ActiveRecord
         $query->andFilterWhere(['between','dateline',$startDate,$endDate]);
         $query->andFilterWhere(['status'=>[1,2]]);
         $wxOrder = $this->aGetWxData($params['cinema_no'],$startDate,$endDate);
-
+        $opOrders = array();
         foreach($dataProvider->getModels() as $v){
             $modelArray = $v->toArray();
             $opOrders[] = $modelArray;

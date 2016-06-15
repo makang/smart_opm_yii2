@@ -19,40 +19,25 @@ class SmartCinema extends \yii\db\ActiveRecord
         return "open_base_cinema";
     }
 
+    public static function model($className=__CLASS__){
+        return new $className;
+    }
 
-
+    /**根据影院关键字获取影院名称和影院id
+     * @param $cinemaName
+     * @return array
+     */
     public function aGetCinemaNoByName($cinemaName){
 
         $ret = array();
-        $list = $this::find()->select('CinemaNo')->where('CinemaName like "%'.$cinemaName.'%" or CinemaNo='.$cinemaName)->asArray()
+        $list = $this::find()->select('CinemaNo,CinemaName')->where('CinemaName like "%'.$cinemaName.'%" or CinemaNo="'.$cinemaName.'"')->asArray()
             ->all();
         foreach($list as $v){
-            $ret[] = $v['CinemaNo'];
+            $ret[$v['CinemaNo']] = $v['CinemaName'];
         }
         return $ret;
     }
 
 
-
-
-
-
-
-    /**对象转化成数组
-     * @param $criteria
-     * @return mixed|static[]
-     */
-    private function _toArray($criteria){
-        $ret = $this->findAll($criteria);
-        $ret = json_decode(CJSON::encode($ret),true);
-        if($criteria->select !='*'){
-            $field = explode(',',$criteria->select);
-            $field = array_flip($field);
-            foreach($ret as $k => $v){
-                $ret[$k] = array_intersect_key($v,$field);
-            }
-        }
-        return $ret;
-    }
 }
 ?>
