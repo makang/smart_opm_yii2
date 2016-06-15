@@ -11,8 +11,13 @@ use yii\widgets\ActiveForm;
     window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
-<link rel="stylesheet" href="/assets_ace/css/chosen.css" />
+<script src="/assets_ace/js/jquery.slimscroll.min.js"></script>
 
+<script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
+
+
+<link rel="stylesheet" href="/assets_ace/css/chosen.css" />
+<link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
 
 <div class="page-content">
     <div class="page-header">
@@ -39,20 +44,20 @@ use yii\widgets\ActiveForm;
                                 <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail">
                                     <span class="btn bt1n-small btn-purple no-border">
                                         <i class=" icon-envelope bigger-130"></i>
-                                        <span class="bigger-110">保存活动</span>
+                                        <span class="bigger-110">发布活动</span>
                                     </span>
                                 </a>
                             </li><!-- ./li-new-mail -->
 
 
-                            <li class="active">
+                            <li class="active" >
                                 <a data-toggle="tab" href="#info">
                                     <i class="blue icon-inbox bigger-130"></i>
                                     <span class="bigger-110">创建营销活动</span>
                                 </a>
                             </li>
 
-                            <li>
+                            <li >
                                 <a data-toggle="tab" href="#time">
                                     <i class="orange icon-location-arrow bigger-130 "></i>
                                     <span class="bigger-110">设定场次信息</span>
@@ -61,7 +66,7 @@ use yii\widgets\ActiveForm;
 
 
 
-                            <li>
+                            <li >
                                 <a data-toggle="tab" href="#price">
                                     <i class="green icon-pencil bigger-130"></i>
                                     <span class="bigger-110">设定价格方案</span>
@@ -83,9 +88,18 @@ use yii\widgets\ActiveForm;
                             </div><!-- /.tab-pane -->
 
 
-                            <div class="tab-pane" id="time">
+                            <div class="tab-pane " id="time">
                                 <?php  echo $this->render('_time'); ?>
+                            </div>
+
+                            <div class="tab-pane " id="price">
+                                <?php  echo $this->render('_price'); ?>
                             </div><!-- /.tab-pane -->
+
+                            <div class="tab-pane" id="ticket">
+                                <?php  echo $this->render('_ticket'); ?>
+                            </div><!-- /.tab-pane -->
+                            <!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
                     </div><!-- /.tabbable -->
                 </div><!-- /.col -->

@@ -16,7 +16,10 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次优惠日期 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
+                <input type="text" id="datepickersTs" name="start_date" class="search-query datepicker" placeholder="开始日期" value=""/>
+                --
+                <input type="text" id="datepickereTe" name="start_date" class="search-query datepicker" placeholder="结束日期" value=""/>
+
             </div>
         </div>
 
@@ -26,13 +29,167 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次优惠时段 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="form-field-1" placeholder="Username" class="col-xs-10 col-sm-5" />
+                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                    <input id="" type="text" class="form-control timepicker" />
+
+                </div>
+                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                    <input id="" type="text" class="form-control timepicker" />
+                    <span class="input-group-addon">
+                        <i class="icon-time bigger-110"></i>
+                    </span>
+                </div>
+                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                    <button class="btn btn-info btn-sm" type="button" id="addTime">
+                        <i class="icon-plus bigger-110"></i>
+                    </button>
+                </div>
+            </div>
+
+
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
+
+            <div class="col-sm-9 " id="addTimeContenter">
+
+            </div>
+
+
+        </div>
+
+        <div class="space-4"></div>
+
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 排除优惠时间 </label>
+
+            <div class="col-sm-9">
+                <input type="text"  name="start_date" class="search-query datepicker" placeholder="开始日期" value=""/>
+                <button class="btn btn-info btn-sm" type="button" id="addDay">
+                    <i class="icon-plus bigger-110"></i>
+                </button>
+            </div>
+
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
+
+            <div class="col-sm-9 " id="addDayContenter">
+
             </div>
         </div>
 
         <div class="space-4"></div>
 
 
+        <div class="form-group">
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 影厅 </label>
+
+            <div class="col-sm-9">
+                <label class="col-xs-2 rl">
+                    <input class="" type="radio" name="Selecthalls" checked value="0">
+                    <span class="label pointer label-warning">全部</span>
+                </label>
+
+                <label class="col-xs-2 rl">
+                    <input class="" type="radio" name="Selecthalls" value="1">
+                    <span class="label pointer"> 选择影厅</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="space-4"></div>
+
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> </label>
+            <div class="col-sm-8">
+                <div class="widget-box ">
+                    <div class="widget-header">
+                        <h4 class="lighter smaller">
+                            <i class="icon-comment blue"></i>
+                            待选影厅
+                        </h4>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="widget-main no-padding">
+                            <div class="dialogs">
+
+                                <ul class="item-list ui-sortable" id="cinemaHall">
+
+                                    <li class="item-blue clearfix" >
+                                        <label class="inline checkbox-all">
+                                            <input type="checkbox" class="ace " value="0">
+                                            <span class="lbl"> 全选（xxxxx影院）</span>
+                                        </label>
+
+                                        <label class="inline">
+                                            <input type="checkbox" class="ace">
+                                            <span class="lbl"> 格瓦拉厅</span>
+                                        </label>
+
+                                    </li>
+
+
+                                    <li class="item-blue clearfix" >
+                                        <label class="inline checkbox-all" >
+                                            <input type="checkbox" class="ace ">
+                                            <span class="lbl"> 全选（xxxxx影院）</span>
+                                        </label>
+
+
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </div>
+
+<script>
+
+
+        $('.timepicker').timepicker({
+            minuteStep: 1,
+            showMeridian: false
+        }).next().on(ace.click_event, function(){
+            $(this).prev().focus();
+        });
+
+
+        function generateHall(halls){
+            $('#cinemaHall').html('');
+            for(prv in halls){
+
+                chooseHall(halls[prv],totalCinema[prv]);
+            }
+        }
+
+        function chooseHall(hall,cinema){
+            //var hall = data['hall'];
+            var hallstr = '';
+
+            hallstr   += '<li class="item-blue clearfix" >';
+            hallstr   += '<label class="inline checkbox-all pointer">';
+            hallstr   += '<input type="checkbox" class="ace " value="0">';
+            hallstr   += '<span class="lbl text-primary"> 全选（'+cinema+'）</span>';
+            hallstr   += '</label>';
+            for(pt in hall)
+            {
+                hallstr   += '<label class="inline checkbox-all pointer">';
+                hallstr   += '<input type="checkbox" class="ace " value="'+hall[pt]['hall_no']+'">';
+                hallstr   += '<span class="lbl"> '+hall[pt]['hall_name']+'</span>';
+                hallstr   += '</label>';
+            }
+            hallstr   += '</li>';
+
+            $(hallstr).appendTo('#cinemaHall');
+        }
+
+</script>
