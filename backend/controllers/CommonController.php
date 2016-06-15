@@ -4,6 +4,12 @@ namespace backend\controllers;
 use Yii;
 class CommonController extends \yii\web\Controller
 {
+
+
+    public $_ERROR_CODE = array(
+        'NOPARAM'   =>'100'                     //错误code,100代表没有参数
+    );
+
     public function init(){
         parent::init();
         // 检查操作员是否有对本功能操作的权限
@@ -28,5 +34,14 @@ class CommonController extends \yii\web\Controller
         $url = parse_url($url);
         return $url['query'];
     }
+
+    protected function output($data){
+        echo json_encode($data);exit;
+    }
+
+    protected function AjaxError($errMsg,$errCode='200'){
+        $this->output(array('code'=>$errCode,'msg'=>$errMsg));
+    }
+
 
 }

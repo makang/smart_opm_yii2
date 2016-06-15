@@ -7,6 +7,9 @@
  * @since 1.0
  */
 namespace backend\controllers;
+use backend\models\SmartCinema;
+use backend\models\SmartFilm;
+use backend\models\SmartHall;
 use backend\models\SmartPriceCut;
 use Yii;
 use backend\controllers\CommonController;
@@ -88,6 +91,28 @@ class ActivityController  extends CommonController{
             $this->jump($jumpUrl);
         }
     }
+
+
+    public function actionAjaxGetCinema(){
+        $keyword = Yii::$app->request->get('key');
+        if(!$keyword){
+            $this->AjaxError('请输入关键字',$this->_ERROR_CODE['NOPARAM']);
+        }
+        $cinema['cinema']   = SmartCinema::model()->aGetCinemaNoByName($keyword);
+        $cinema['hall']     = SmartHall::model()->aGetHallByCinemaNos(array_keys($cinema['cinema']));
+        $this->output($cinema);
+    }
+
+
+    public function actionAjaxGetFilm(){
+        $keyword = Yii::$app->request->get('key');
+        if(!$keyword){
+            $this->AjaxError('请输入关键字',$this->_ERROR_CODE['NOPARAM']);
+        }
+        $film['film']   = SmartFilm::model()->aGetFilmsByName($keyword);
+        $this->output($film);
+    }
+
 
 
 
