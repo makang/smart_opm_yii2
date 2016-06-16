@@ -14,42 +14,42 @@
     <div class="message-list-container" style="padding-top:10px">
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1">
-                活动名称
+                <span class="red">*</span>活动名称
             </label>
 
             <div class="col-sm-9">
-                <input type="text" id="form-field-1" placeholder="请输入优惠名称且长度不能超过8个汉字" class="col-xs-10 col-sm-5" />
+                <input type="text" id="" name="name" maxlength="8" placeholder="请输入优惠名称且长度不能超过8个汉字" class="col-xs-10 col-sm-5" />
             </div>
         </div>
 
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动文案 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>活动文案 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="form-field-1" placeholder="请输入活动文案且长度不能超过14个汉字" class="col-xs-10 col-sm-5" />
+                <input type="text" id="" name="title" maxlength="14" placeholder="请输入活动文案且长度不能超过14个汉字" class="col-xs-10 col-sm-5" />
             </div>
         </div>
 
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动说明 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>活动说明 </label>
 
             <div class="col-sm-9">
-                <textarea id="form-field-8" class="col-xs-10 col-sm-5" placeholder="请输入活动说明且长度不能超过140个汉字"></textarea>
+                <textarea id="" maxlength="140" name="desc" class="col-xs-10 col-sm-5" placeholder="请输入活动说明且长度不能超过140个汉字"></textarea>
 
             </div>
         </div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 起止时间 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>起止时间 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="datepickers" name="start_date" class="search-query datepicker" placeholder="开始日期" value=""/>
+                <input type="text" id="" name="startDatetime" readonly class="search-query datepicker" placeholder="开始日期" value=""/>
                 --
-                <input type="text" id="datepickere" name="start_date" class="search-query datepicker" placeholder="结束日期" value=""/>
+                <input type="text" id="" name="endDatetime" readonly class="search-query datepicker" placeholder="结束日期" value=""/>
 
             </div>
         </div>
@@ -57,7 +57,7 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 活动结束 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>活动结束 </label>
 
             <div>
                 <label class="col-xs-2 rl">
@@ -75,7 +75,7 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 用户人群 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>用户人群 </label>
 
             <div>
                 <label class="col-xs-1 rl">
@@ -102,7 +102,7 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 参与影院 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>参与影院 </label>
 
             <div >
                 <label class="col-xs-1 rl">
@@ -198,6 +198,9 @@
 </div><!-- /.message-container -->
 
 <script>
+
+
+
     var selectCinema = {};              //选择上的影院
     var totalCinema  = {};              //全部的影厅
     var selectHall   = {};              //选择上的影厅
@@ -235,7 +238,8 @@
                 alert('请选择日期');
             }else{
                 $('<span class="label label-warning" style="margin-right:1px">'+date+' ' +
-                '<i class="icon-remove red bigger-120"></i> </span>').appendTo('#addDayContenter');
+                '<i class="icon-remove red bigger-120"></i> ' +
+                '<input type="hidden" name="myNoUseDates[]" value="'+date+'"></span>').appendTo('#addDayContenter');
             }
         })
 
@@ -248,7 +252,8 @@
                 alert('请选择时间段');
             }else{
                 $('<span class="label label-warning" style="margin-right:1px;margin-top:1px">'+start+"-"+end+' ' +
-                '<i class="icon-remove red bigger-120"></i> </span>').appendTo('#addTimeContenter');
+                '<i class="icon-remove red bigger-120"></i>' +
+                '<input type="hidden" name="useTimes[]" value="'+start+"-"+end+'"> </span>').appendTo('#addTimeContenter');
             }
 
         })
@@ -266,7 +271,15 @@
                 from = name+'To';
                 to   = name+'From';
             }
-            $('#'+from).children().appendTo('#'+to)
+            $('#'+from).children().appendTo('#'+to);
+
+            $('#cinemaHall').html('');
+            $('#selectCinemaTo div').children('input[type=hidden]').each(function(){
+                var cinemaNo = $(this).val();
+                chooseHall(totalHall[cinemaNo],totalCinema[cinemaNo],cinemaNo);
+                selectCinema[cinemaNo]  = 1;
+                selectHall[cinemaNo]    = totalHall[cinemaNo];
+            })
         })
 
         //搜索影院信息
@@ -315,7 +328,6 @@
                 selectFilm[cinemaNo]  = 1;
                 dest = 'selectMovieTo';
             }
-            console.log(selectFilm);
             $('#'+dest).append($(this));
         });
         //全选checkbox

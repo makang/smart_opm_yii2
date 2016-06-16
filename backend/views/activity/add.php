@@ -13,11 +13,16 @@ use yii\widgets\ActiveForm;
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
 <script src="/assets_ace/js/jquery.slimscroll.min.js"></script>
 
-<script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
-
+<script src="/assets_ace/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="/assets_ace/css/chosen.css" />
+
+
 <link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
+
+<link rel="stylesheet" href="/assets_ace/css/bootstrap-datetimepicker.min.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
 
 <div class="page-content">
     <div class="page-header">
@@ -30,7 +35,7 @@ use yii\widgets\ActiveForm;
         </h1>
     </div><!-- /.page-header -->
 
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" role="form" id="form">
     <div class="row">
         <div class="col-xs-12">
 
@@ -41,10 +46,10 @@ use yii\widgets\ActiveForm;
                     <div class="tabbable">
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
                             <li class="li-new-mail pull-right">
-                                <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail">
+                                <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail" id="submit">
                                     <span class="btn bt1n-small btn-purple no-border">
                                         <i class=" icon-envelope bigger-130"></i>
-                                        <span class="bigger-110">发布活动</span>
+                                        <span class="bigger-110 submit" >发布活动</span>
                                     </span>
                                 </a>
                             </li><!-- ./li-new-mail -->
@@ -114,7 +119,6 @@ use yii\widgets\ActiveForm;
 
 
 
-<script src="/assets_ace/js/bootstrap.min.js"></script>
 
 
 

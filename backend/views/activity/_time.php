@@ -13,12 +13,12 @@
     <div class="message-list-container" style="padding-top:10px">
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次优惠日期 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>场次优惠日期 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="datepickersTs" name="start_date" class="search-query datepicker" placeholder="开始日期" value=""/>
+                <input type="text" id="" name="ticketStartTime" class="search-query datepicker" placeholder="开始日期" value=""/>
                 --
-                <input type="text" id="datepickereTe" name="start_date" class="search-query datepicker" placeholder="结束日期" value=""/>
+                <input type="text" id="" name="ticketEndTime" class="search-query datepicker" placeholder="结束日期" value=""/>
 
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="space-4"></div>
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次优惠时段 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>场次优惠时段 </label>
 
             <div class="col-sm-9">
                 <div class="input-group bootstrap-timepicker col-sm-2 ">
@@ -63,10 +63,12 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 排除优惠时间 </label>
 
             <div class="col-sm-9">
-                <input type="text"  name="start_date" class="search-query datepicker" placeholder="开始日期" value=""/>
-                <button class="btn btn-info btn-sm" type="button" id="addDay">
-                    <i class="icon-plus bigger-110"></i>
-                </button>
+                <div class="input-group bootstrap-timepicker col-sm-4 ">
+                    <input type="text"  name="" class="datepicker">
+                    <button class="btn btn-info btn-sm" type="button" id="addDay">
+                        <i class="icon-plus bigger-110"></i>
+                    </button>
+                </div>
             </div>
 
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1">  </label>
@@ -80,7 +82,7 @@
 
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 影厅 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>影厅 </label>
 
             <div class="col-sm-9">
                 <label class="col-xs-2 rl">
@@ -115,28 +117,7 @@
 
                                 <ul class="item-list ui-sortable" id="cinemaHall">
 
-                                    <li class="item-blue clearfix" >
-                                        <label class="inline checkbox-all">
-                                            <input type="checkbox" class="ace " value="0">
-                                            <span class="lbl"> 全选（xxxxx影院）</span>
-                                        </label>
 
-                                        <label class="inline">
-                                            <input type="checkbox" class="ace">
-                                            <span class="lbl"> 格瓦拉厅</span>
-                                        </label>
-
-                                    </li>
-
-
-                                    <li class="item-blue clearfix" >
-                                        <label class="inline checkbox-all" >
-                                            <input type="checkbox" class="ace ">
-                                            <span class="lbl"> 全选（xxxxx影院）</span>
-                                        </label>
-
-
-                                    </li>
                                 </ul>
 
                             </div>
@@ -167,11 +148,11 @@
             $('#cinemaHall').html('');
             for(prv in halls){
 
-                chooseHall(halls[prv],totalCinema[prv]);
+                chooseHall(halls[prv],totalCinema[prv],prv);
             }
         }
 
-        function chooseHall(hall,cinema){
+        function chooseHall(hall,cinema,cinemaNo){
             //var hall = data['hall'];
             var hallstr = '';
 
@@ -182,8 +163,8 @@
             hallstr   += '</label>';
             for(pt in hall)
             {
-                hallstr   += '<label class="inline checkbox-all pointer">';
-                hallstr   += '<input type="checkbox" class="ace " value="'+hall[pt]['hall_no']+'">';
+                hallstr   += '<label class="inline pointer">';
+                hallstr   += '<input type="checkbox" name="halls[]" class="ace " value="'+hall[pt]['hall_no']+'">';
                 hallstr   += '<span class="lbl"> '+hall[pt]['hall_name']+'</span>';
                 hallstr   += '</label>';
             }

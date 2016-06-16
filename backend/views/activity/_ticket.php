@@ -16,19 +16,19 @@
 
 
         <div class="form-group">
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 售卖价 </label>
+            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>每人限购 </label>
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="people" checked>
+                    <input class="" type="radio" name="ticketlimit" value="0" checked>
 
-                    <span class="label pointer label-warning"> 不变</span>
+                    <span class="label pointer label-warning"> 不限</span>
                 </label>
 
                 <label class="rl">
-                    <input class="" type="radio" name="people">
-                    <span class="label pointer"> 新用户&nbsp;</span>
-                    <input type="text" class="input-small" disabled>&nbsp;张
+                    <input class="" type="radio" name="ticketlimit" value="1">
+                    <span class="label pointer"> 限购&nbsp;</span>
+                    <input type="text" class="input-small" disabled name="one_use_max">&nbsp;张
                 </label>
 
 
@@ -43,52 +43,52 @@
 
             <div class="col-sm-9 ">
                 <label class="inline checkbox-all">
-                    <input class="ace " type="checkbox" name="form-field-checkbox">
+                    <input class="ace " type="checkbox" name="version">
                     <span class="lbl pointer">全部</span>
                 </label >
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="2D">
                     <span class="lbl pointer"> 2d</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="3D">
                     <span class="lbl pointer"> 3d</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="IMAX2D">
                     <span class="lbl pointer"> IMAX2D</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="IMAX3D">
                     <span class="lbl pointer">  IMAX3D </span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="versionx" value="IMAX">
                     <span class="lbl pointer"> IMAX</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="DMAX">
                     <span class="lbl pointer"> DMAX</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="DMAX3D">
                     <span class="lbl pointer"> DMAX3D</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="中国巨幕">
                     <span class="lbl pointer"> 中国巨幕</span>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="form-field-checkbox">
+                    <input class="ace" type="checkbox" name="version" value="4D">
                     <span class="lbl pointer"> 4D</span>
                 </label>
 
