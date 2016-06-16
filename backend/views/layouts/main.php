@@ -18,7 +18,8 @@ AppAsset::register($this);
     <!-- basic styles -->
     <link href="/assets_ace/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets_ace/css/font-awesome.min.css" />
-
+    <?= Html::csrfMetaTags() ?>
+    <?php $this->head() ?>
     <!--[if IE 7]>
     <link rel="stylesheet" href="/assets_ace/css/font-awesome-ie7.min.css" />
     <![endif]-->
@@ -34,7 +35,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/assets_ace/css/ace.min.css" />
     <link rel="stylesheet" href="/assets_ace/css/ace-rtl.min.css" />
     <link rel="stylesheet" href="/assets_ace/css/ace-skins.min.css" />
-
+    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets_ace/css/ace-ie.min.css" />
     <![endif]-->
@@ -44,7 +45,7 @@ AppAsset::register($this);
     <!-- ace settings handler -->
 
     <script src="/assets_ace/js/ace-extra.min.js"></script>
-
+<!--    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!--[if lt IE 9]>
@@ -54,6 +55,7 @@ AppAsset::register($this);
 </head>
 
 <body>
+<?php $this->beginBody() ?>
 <div class="navbar navbar-default" id="navbar">
     <script type="text/javascript">
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
@@ -272,7 +274,8 @@ AppAsset::register($this);
 <script src="/assets_ace/js/ace-elements.min.js"></script>
 <script src="/assets_ace/js/ace.min.js"></script>
 
-
+<?php $this->endBody() ?>
 </body>
 </html>
+<?php $this->endPage() ?>
 

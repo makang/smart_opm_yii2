@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model backend\models\Article */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => '文章', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '公告详情', 'url' => ['list']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-view">
@@ -30,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'area',
-            'publish_time',
-            'has_question',
-            'answers',
-            'created_at',
-            'created_by',
-            'updated_at',
-            'updated_by',
+            'url',
+            'status',
+            'creatTime',
+            'upTime',
+            'uid',
+            'uname',
+            'upuid',
+            'upuname',
         ],
     ]) ?>
 

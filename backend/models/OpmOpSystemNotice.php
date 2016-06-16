@@ -49,16 +49,16 @@ class OpmOpSystemNotice extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', '公告ID'),
             'title' => Yii::t('app', '公告标题'),
             'url' => Yii::t('app', '公告URL'),
-            'status' => Yii::t('app', ' 0:未发布  1: 已发布  2 删除 3 已结束'),
-            'creatTime' => Yii::t('app', 'Creat Time'),
+            'status' => Yii::t('app', '状态'),//0:未发布  1:已发布 2:删除 3:已结束
+            'creatTime' => Yii::t('app', '创建时间'),
             'uid' => Yii::t('app', '创建人ID'),
             'uname' => Yii::t('app', '创建人'),
-            'upTime' => Yii::t('app', 'Up Time'),
-            'upuid' => Yii::t('app', '修改人ID'),
-            'upuname' => Yii::t('app', '修改人'),
+            'upTime' => Yii::t('app', '更新时间'),
+            'upuid' => Yii::t('app', '更新用户ID'),
+            'upuname' => Yii::t('app', '更改用户名称'),
         ];
     }
 
