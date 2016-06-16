@@ -28,37 +28,20 @@ class SmartHall extends \yii\db\ActiveRecord
      * @return array
      */
     public function aGetHallByCinemaNos($cinemaNos){
+        $bizCinemaNos = OpenBaseCinemaMapping::model()->aGetMappingByCinemas($cinemaNos);
 
         $ret = array();
         $list = $this::find()->select('cinema_no,hall_no,hall_name')->where(['cinema_no'=>$cinemaNos])->asArray()
             ->all();
+
         foreach($list as $v){
+
+            //var_dump($v['cinema_no']);
+            $v['hall_no'] = $bizCinemaNos[$v['cinema_no']].'_'.$v['hall_no'];
             $ret[$v['cinema_no']][] = $v;
         }
         return $ret;
     }
 
-
-
-
-
-
-
-    /**对象转化成数组
-     * @param $criteria
-     * @return mixed|static[]
-     */
-    private function _toArray($criteria){
-        $ret = $this->findAll($criteria);
-        $ret = json_decode(CJSON::encode($ret),true);
-        if($criteria->select !='*'){
-            $field = explode(',',$criteria->select);
-            $field = array_flip($field);
-            foreach($ret as $k => $v){
-                $ret[$k] = array_intersect_key($v,$field);
-            }
-        }
-        return $ret;
-    }
 }
 ?>
