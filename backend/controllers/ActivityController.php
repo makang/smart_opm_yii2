@@ -11,6 +11,7 @@ use backend\models\SmartCinema;
 use backend\models\SmartFilm;
 use backend\models\SmartHall;
 use backend\models\SmartPriceCut;
+use backend\models\SmartPriceDiscount;
 use Yii;
 use backend\controllers\CommonController;
 use backend\models\OpenBasePublicsignal;
@@ -23,6 +24,7 @@ class ActivityController  extends CommonController{
 
     public function init(){
     	parent::init();
+        $this->enableCsrfValidation = false;
     	// 检查操作员是否有对本功能操作的权限
     	
     }
@@ -93,10 +95,26 @@ class ActivityController  extends CommonController{
     }
 
 
+    /*
+    * 暂停活动
+    *
+    */
+    public function actionSave(){
+        $postData = Yii::$app->request->post();
+        $res = SmartPriceDiscount::model()->saveDiscount($postData);
+        if($res){
+            $this->AjaxError('保存成功',$this->_CODE['SUC']);
+        }else{
+            $this->AjaxError('保存失败',$this->_CODE['FAILED']);
+        }
+
+    }
+
+
     public function actionAjaxGetCinema(){
         $keyword = Yii::$app->request->get('key');
         if(!$keyword){
-            $this->AjaxError('请输入关键字',$this->_ERROR_CODE['NOPARAM']);
+            $this->AjaxError('请输入关键字',$this->_CODE['NOPARAM']);
         }
         $cinema['cinema']   = SmartCinema::model()->aGetCinemaNoByName($keyword);
         $cinema['hall']     = SmartHall::model()->aGetHallByCinemaNos(array_keys($cinema['cinema']));
@@ -107,7 +125,7 @@ class ActivityController  extends CommonController{
     public function actionAjaxGetFilm(){
         $keyword = Yii::$app->request->get('key');
         if(!$keyword){
-            $this->AjaxError('请输入关键字',$this->_ERROR_CODE['NOPARAM']);
+            $this->AjaxError('请输入关键字',$this->_CODE['NOPARAM']);
         }
         $film['film']   = SmartFilm::model()->aGetFilmsByName($keyword);
         $this->output($film);
