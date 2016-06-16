@@ -6,8 +6,10 @@ class CommonController extends \yii\web\Controller
 {
 
 
-    public $_ERROR_CODE = array(
-        'NOPARAM'   =>'100'                     //错误code,100代表没有参数
+    public $_CODE = array(
+        'NOPARAM'   =>'100',                     //错误code,100代表没有参数
+        'FAILED'    =>'101',                     //错误code,101代表保存失败
+        'SUC'       =>'200'                      //正确code，代表成功
     );
 
     public function init(){
