@@ -29,7 +29,7 @@ class Article extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'article';
+        return 'smart_opm_article';
     }
 
     public function behaviors()

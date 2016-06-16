@@ -18,7 +18,7 @@ class ArticleTags extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'article_tags';
+        return 'smart_opm_article_tags';
     }
 
     /**

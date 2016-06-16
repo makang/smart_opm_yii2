@@ -18,9 +18,9 @@ class OpmOpSystemNoticeSearch extends OpmOpSystemNotice
     public function rules()
     {
         return [
-            [['url'], 'required'],
+           // [['url'], 'required'],
             [['url'], 'string'],
-            [['status', 'uid', 'upuid'], 'integer'],
+            [['status', 'id','uid', 'upuid'], 'integer'],
             [['creatTime', 'upTime'], 'safe'],
             [['title'], 'string', 'max' => 150],
             [['uname', 'upuname'], 'string', 'max' => 50],
@@ -64,16 +64,16 @@ class OpmOpSystemNoticeSearch extends OpmOpSystemNotice
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'title' => $this->title,
+            'upTime' => $this->upTime,
             'url' => $this->url,
             'status' => $this->status,
             'creatTime' => $this->creatTime,
             'uid' => $this->uid,
+            'upuid'=>$this->upuid,
         ]);
 
         $query->andFilterWhere(['like', 'uname', $this->uname])
-            ->andFilterWhere(['like', 'upTime', $this->upTime])
-            ->andFilterWhere(['like', 'upuid', $this->upuid])
+            ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'upuname', $this->upuname]);
 
         return $dataProvider;
