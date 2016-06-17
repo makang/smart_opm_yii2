@@ -8,7 +8,6 @@
  */
 namespace backend\models;
 use Yii;
-use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
 
 class SmartCinema extends \yii\db\ActiveRecord
@@ -37,7 +36,23 @@ class SmartCinema extends \yii\db\ActiveRecord
         }
         return $ret;
     }
+    public function oSearch($params){
+        $query = SmartCinema::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        $query->select('CinemaNo,CinemaName,TicketSaleSystem');
+        if(isset($params['cinema_no']))
+        $query->where('CinemaName like "%'.$params['cinema_no'].'%" or CinemaNo="'.$params['cinema_no'].'"');
+        $query->groupBy('CinemaNo');
+        return $dataProvider;
+    }
 
 }
 ?>

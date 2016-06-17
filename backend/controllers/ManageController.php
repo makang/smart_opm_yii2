@@ -16,8 +16,6 @@ use backend\models\SmartPublicSignal;
 use Yii;
 use backend\controllers\CommonController;
 use backend\models\OpenBasePublicsignal;
-use backend\models\Article;
-use backend\models\ArticleSearch;
 
 
 class ManageController  extends CommonController{

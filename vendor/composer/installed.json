@@ -10,7 +10,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-composer/e882cc327a6935a41f2e8665b9ef0317f6852d4d.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/e882cc327a6935a41f2e8665b9ef0317f6852d4d",
             "reference": "e882cc327a6935a41f2e8665b9ef0317f6852d4d",
             "shasum": ""
         },
@@ -265,7 +265,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/cebe/markdown/e2a490ceec590bf5bfd1b43bd424fb9dceceb7c5.zip",
+            "url": "https://api.github.com/repos/cebe/markdown/zipball/e2a490ceec590bf5bfd1b43bd424fb9dceceb7c5",
             "reference": "e2a490ceec590bf5bfd1b43bd424fb9dceceb7c5",
             "shasum": ""
         },
@@ -327,7 +327,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-framework/d329c5089c8044ab9c1de6a6a68a3c9458e9881c.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/d329c5089c8044ab9c1de6a6a68a3c9458e9881c",
             "reference": "d329c5089c8044ab9c1de6a6a68a3c9458e9881c",
             "shasum": ""
         },
@@ -474,7 +474,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-bootstrap/61ff14445779b225baa8e60cf4eddbc46cc14504.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-bootstrap/zipball/61ff14445779b225baa8e60cf4eddbc46cc14504",
             "reference": "61ff14445779b225baa8e60cf4eddbc46cc14504",
             "shasum": ""
         },
@@ -555,7 +555,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/fzaninotto/Faker/c6533b0a70d2236cf1f7ce21bfaa3cd12e287019.zip",
+            "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/c6533b0a70d2236cf1f7ce21bfaa3cd12e287019",
             "reference": "c6533b0a70d2236cf1f7ce21bfaa3cd12e287019",
             "shasum": ""
         },
@@ -607,7 +607,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/mdmsoft/yii2-admin/f1711779ea3c19e334d9774d223a9682e693b31e.zip",
+            "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/f1711779ea3c19e334d9774d223a9682e693b31e",
             "reference": "f1711779ea3c19e334d9774d223a9682e693b31e",
             "shasum": ""
         },
@@ -814,7 +814,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/smarty-php/smarty/b46a9a8dbd610323cb04c4a567405147d12dc570.zip",
+            "url": "https://api.github.com/repos/smarty-php/smarty/zipball/b46a9a8dbd610323cb04c4a567405147d12dc570",
             "reference": "b46a9a8dbd610323cb04c4a567405147d12dc570",
             "shasum": ""
         },
@@ -871,7 +871,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-smarty/e8e68e19aad81d6baf43e5f754112a22c2fefb53.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-smarty/zipball/e8e68e19aad81d6baf43e5f754112a22c2fefb53",
             "reference": "e8e68e19aad81d6baf43e5f754112a22c2fefb53",
             "shasum": ""
         },
@@ -924,7 +924,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/1460e98b53d2f916f1b4123069c96c90844a1a4d.zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/1460e98b53d2f916f1b4123069c96c90844a1a4d",
             "reference": "1460e98b53d2f916f1b4123069c96c90844a1a4d",
             "shasum": ""
         },
@@ -979,7 +979,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-swiftmailer/163b9c6273e133c43a596aef46a9f5b1537731f9.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/163b9c6273e133c43a596aef46a9f5b1537731f9",
             "reference": "163b9c6273e133c43a596aef46a9f5b1537731f9",
             "shasum": ""
         },
@@ -1031,7 +1031,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-codeception/572a6d46d942cc5733c45931fdbd1d60228f3c89.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-codeception/zipball/572a6d46d942cc5733c45931fdbd1d60228f3c89",
             "reference": "572a6d46d942cc5733c45931fdbd1d60228f3c89",
             "shasum": ""
         },
@@ -1078,7 +1078,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-debug/e26905af4bc1ca5ecbababac112c7f7f722cabd2.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/e26905af4bc1ca5ecbababac112c7f7f722cabd2",
             "reference": "e26905af4bc1ca5ecbababac112c7f7f722cabd2",
             "shasum": ""
         },
@@ -1127,7 +1127,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/phpspec/php-diff/0464787bfa7cd13576c5a1e318709768798bec6a.zip",
+            "url": "https://api.github.com/repos/phpspec/php-diff/zipball/0464787bfa7cd13576c5a1e318709768798bec6a",
             "reference": "0464787bfa7cd13576c5a1e318709768798bec6a",
             "shasum": ""
         },
@@ -1167,7 +1167,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-gii/ad215b7f8c679e11e70ff3dc29c7306f28cef576.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/ad215b7f8c679e11e70ff3dc29c7306f28cef576",
             "reference": "ad215b7f8c679e11e70ff3dc29c7306f28cef576",
             "shasum": ""
         },
@@ -1222,7 +1222,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/yiisoft/yii2-faker/6e6eb430809e3f9c05e367303909a05a4912d4c0.zip",
+            "url": "https://api.github.com/repos/yiisoft/yii2-faker/zipball/6e6eb430809e3f9c05e367303909a05a4912d4c0",
             "reference": "6e6eb430809e3f9c05e367303909a05a4912d4c0",
             "shasum": ""
         },
@@ -1271,7 +1271,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://packagist.phpcomposer.com/files/kartik-v/yii2-krajee-base/473fb568ff1144dc49bdb74f40a5d7f025fc72e4.zip",
+            "url": "https://api.github.com/repos/kartik-v/yii2-krajee-base/zipball/473fb568ff1144dc49bdb74f40a5d7f025fc72e4",
             "reference": "473fb568ff1144dc49bdb74f40a5d7f025fc72e4",
             "shasum": ""
         },
@@ -1310,6 +1310,51 @@
             "foundation",
             "krajee",
             "widget",
+            "yii2"
+        ]
+    },
+    {
+        "name": "linslin/yii2-curl",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/linslin/Yii2-Curl.git",
+            "reference": "9bf2af281fba4e4f0923a055ee673ac2db955513"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/linslin/Yii2-Curl/zipball/9bf2af281fba4e4f0923a055ee673ac2db955513",
+            "reference": "9bf2af281fba4e4f0923a055ee673ac2db955513",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "yiisoft/yii2": "*"
+        },
+        "time": "2016-04-20 14:14:59",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "linslin\\yii2\\curl\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nils Gajsek",
+                "email": "info@linslin.org"
+            }
+        ],
+        "description": "Easy and nice cURL extension with RESTful support for Yii2",
+        "keywords": [
+            " curl",
+            "extension",
+            "restful",
             "yii2"
         ]
     }

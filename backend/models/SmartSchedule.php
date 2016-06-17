@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use linslin\yii2\curl;
 use Yii;
 
 /**
@@ -158,7 +159,7 @@ class SmartSchedule extends \yii\db\ActiveRecord
 
     }
 
-    public static function array_unique_schedule($array2D)
+    private static function array_unique_schedule($array2D)
     {//二维数组去掉重复值
         foreach ($array2D as $k => $v) {
             $v = implode(",", $v);  //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
@@ -173,5 +174,87 @@ class SmartSchedule extends \yii\db\ActiveRecord
             $temp2[$k]["total_num"] = $array[3];
         }
         return $temp2;
+    }
+
+    public static function getScheduleInfo($params)
+    {
+
+        $cinema_no = isset($params['cinema_no'])?$params['cinema_no']:'1013943';
+        $cinema_name = isset($params['cinema_name'])?$params['cinema_name']:'金逸电影';
+
+        $schedule_url = 'http://10.66.166.163/api/schedulePrice/getList?baseCinemaNo=' . $cinema_no;
+        $curl = new curl\Curl();
+        $return = json_decode($curl->get($schedule_url),true);
+        $schedules = array();
+        $show_date = array();
+        $movie_list = array();
+//         echo '<pre>';
+//        print_r($return);die;
+        $schedule_list = array();
+        if ($return && $return['ret'] == 0 && is_array($return['data'])) {
+            foreach ($return['data'] as $sche) {
+
+                if ($sche[0]['tpId'] == -1) {
+                    $schedule_list[] = $sche[0];
+                    $cinema_no = $sche[0]['cinemaNo'];
+                    $movie_list[] = $sche[0]['movieName'];
+                    $show_date[] = substr($sche[0]['showDate'], 0, -3);
+
+                }
+            }
+
+            if (!empty($schedule_list))
+                $schedule_list = self::SortByTime($schedule_list);
+            $movie_list = array_values(array_flip(array_flip($movie_list)));
+            $show_date = array_values(array_flip(array_flip($show_date)));
+            usort($show_date, function ($a, $b) {
+                if ($a == $b) return 0;
+                return ($a < $b) ? -1 : 1;
+            });
+            $movie_name = isset($params['movie_name'])?$params['movie_name']: (isset($movie_list[0]) ? $movie_list[0] : '');
+            $key = 0;
+            foreach ($show_date as $date) {
+
+                foreach ($schedule_list as $schedule) {
+                    if ($date == substr($schedule['showDate'], 0, -3)) {
+                        if ($schedule['movieName'] == $movie_name) {
+                            $movie_sches[] = $schedule;
+                        }
+
+                    }
+                }
+                $schedules[$key] = isset($movie_sches) ? $movie_sches : array();
+
+                if (!empty($schedules[$key])) {
+                    $day[] = date('Y-m-d', $date);
+                    $key++;
+                }
+                unset($movie_sches);
+
+            }
+        }
+        return  [
+            'cinema_no'  => $cinema_no,
+            'cinema_name' => $cinema_name,
+            'schedule' => isset($schedules)?$schedules:array(),
+            'movie_list' => $movie_list,
+            'show_date' => isset($day)?$day:array(),
+            'movie_name'=>isset($movie_name)?$movie_name:''
+        ];
+    }
+
+    private static function SortByTime($schedule)
+    {
+
+        $showDates = $baseScheduleIds = array();
+
+        foreach ($schedule as $key => $row) {
+
+            $time[$key] = $row['showTime'];
+            $baseScheduleIds[$key] = $row['baseScheduleId'];
+        }
+        array_multisort($time, SORT_NUMERIC, SORT_ASC, $baseScheduleIds, SORT_NUMERIC, SORT_ASC, $schedule);
+
+        return $schedule;
     }
 }

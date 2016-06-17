@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use backend\models\Article;
 use backend\models\SmartCinema;
 use yii\widgets\ActiveForm;
 ?>

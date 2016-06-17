@@ -7,9 +7,6 @@ use backend\models\Article;
 use backend\models\SmartCinema;
 use yii\widgets\ActiveForm;
 ?>
-
-
-
 <link rel="stylesheet" href="/assets_ace/css/chosen.css" />
 <div class="row">
     <div class="col-xs-12">

@@ -28,6 +28,10 @@ class ComposerStaticInit1ed4ecae6d3de7188e1e82f6c23f6c48
         array (
             'mdm\\admin\\' => 10,
         ),
+        'l' => 
+        array (
+            'linslin\\yii2\\curl\\' => 18,
+        ),
         'k' => 
         array (
             'kartik\\sidenav\\' => 15,
@@ -87,6 +91,10 @@ class ComposerStaticInit1ed4ecae6d3de7188e1e82f6c23f6c48
         'mdm\\admin\\' => 
         array (
             0 => __DIR__ . '/..' . '/mdmsoft/yii2-admin',
+        ),
+        'linslin\\yii2\\curl\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/linslin/yii2-curl',
         ),
         'kartik\\sidenav\\' => 
         array (
@@ -265,11 +273,15 @@ class ComposerStaticInit1ed4ecae6d3de7188e1e82f6c23f6c48
         'Smarty_Internal_Runtime_FilterHandler' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_filterhandler.php',
         'Smarty_Internal_Runtime_Foreach' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_foreach.php',
         'Smarty_Internal_Runtime_GetIncludePath' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_getincludepath.php',
+        'Smarty_Internal_Runtime_Hhvm' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_hhvm.php',
         'Smarty_Internal_Runtime_Inheritance' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_inheritance.php',
         'Smarty_Internal_Runtime_Make_Nocache' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_make_nocache.php',
+        'Smarty_Internal_Runtime_SubTemplate' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_subtemplate.php',
         'Smarty_Internal_Runtime_TplFunction' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_tplfunction.php',
         'Smarty_Internal_Runtime_UpdateCache' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_updatecache.php',
         'Smarty_Internal_Runtime_UpdateScope' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_updatescope.php',
+        'Smarty_Internal_Runtime_ValidateCompiled' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_validatecompiled.php',
+        'Smarty_Internal_Runtime_Var' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_var.php',
         'Smarty_Internal_Runtime_WriteFile' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_runtime_writefile.php',
         'Smarty_Internal_SmartyTemplateCompiler' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_smartytemplatecompiler.php',
         'Smarty_Internal_Template' => __DIR__ . '/..' . '/smarty/smarty/libs/sysplugins/smarty_internal_template.php',
