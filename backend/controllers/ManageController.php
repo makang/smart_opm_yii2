@@ -13,6 +13,7 @@ use backend\models\SmartHall;
 use backend\models\SmartPriceCut;
 use backend\models\SmartPriceDiscount;
 use backend\models\SmartPublicSignal;
+use backend\models\SmartPublicSignalCinema;
 use Yii;
 use backend\controllers\CommonController;
 use backend\models\OpenBasePublicsignal;
@@ -32,6 +33,52 @@ class ManageController  extends CommonController{
     }
 
 
+
+
+
+    //绑定/解绑
+    public function actionBind(){
+        $id = Yii::$app->request->get('id');
+        $param['publicSignal'] = SmartPublicSignal::model()->oGet($id);
+        $param['PublicSignalCinemas'] = SmartPublicSignalCinema::model()->aGetCinemasByPid($param['publicSignal']->Id);
+        return $this->render('bind',$param);
+    }
+
+
+    //解除影院绑定
+    public function actionUnbindCinema(){
+
+        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
+        $jumpUrl    =   'manage/bind?'.$params;
+
+        $cinemaNo   = Yii::$app->request->get('cinemaNo');
+        $pid        = Yii::$app->request->get('pid');
+        $ret        = SmartPublicSignalCinema::model()->bUpdateCancel($pid,$cinemaNo);
+        if($ret){
+            $this->jump($jumpUrl);
+        }
+
+    }
+
+    //影院绑定
+    public function actionBindCinema(){
+
+        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
+        $jumpUrl    =   'manage/bind?'.$params;
+
+        $cinemaNo   = Yii::$app->request->get('cinemaNo');
+        $pid        = Yii::$app->request->get('pid');
+        $ret        = SmartPublicSignalCinema::model()->bUpdateBind($pid,$cinemaNo);
+        if($ret){
+            $this->jump($jumpUrl);
+        }
+
+    }
+
+
+
+
+    //列表页条件查询
     public function _map(){
         $where = '';
         if(Yii::$app->request->get('PublicSignalTheme')){
