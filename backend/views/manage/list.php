@@ -27,7 +27,12 @@ use yii\widgets\ActiveForm;
                                <?php
 
                                foreach($theme as $k=>$v){
-                                   echo '<option value="'.$k.'">'.$v.'</option>';
+                                   if(isset($_REQUEST['PublicSignalTheme']) && $_REQUEST['PublicSignalTheme'] == $k){
+                                       echo '<option value="'.$k.'" selected>'.$v.'</option>';
+                                   }else{
+                                       echo '<option value="'.$k.'">'.$v.'</option>';
+                                   }
+
                                }
                                ?>
 
@@ -39,7 +44,11 @@ use yii\widgets\ActiveForm;
                                <?php
 
                                foreach($coor as $k=>$v){
-                                   echo '<option value="'.$k.'">'.$v.'</option>';
+                                   if(isset($_REQUEST['CooperationStatus']) && $_REQUEST['CooperationStatus'] == $k){
+                                       echo '<option value="'.$k.'" selected>'.$v.'</option>';
+                                   }else{
+                                       echo '<option value="'.$k.'">'.$v.'</option>';
+                                   }
                                }
                                ?>
 
@@ -97,11 +106,34 @@ use yii\widgets\ActiveForm;
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header' => '操作',
-                        'template' => '{detail} ',
-                        'headerOptions' => ['width' => '170'],
+                        'template' => '{edit} {bind} {stop}',
+                        'headerOptions' => ['width' => '270'],
                         'buttons' => [
-                            'detail' => function($url, $row, $key){
+                            'edit' => function($url, $row, $key){
+                                return Html::a('编辑公众号',
+                                    ['edit', 'id'=> $row->pid],
+                                    [
+                                        'class' => 'btn btn-xs btn-success',
+                                    ]
+                                );
 
+                            },
+                            'bind' => function($url, $row, $key){
+                                return Html::a('绑定/解绑',
+                                    ['bind', 'id'=> $row->pid],
+                                    [
+                                        'class' => 'btn btn-xs btn-primary',
+                                    ]
+                                );
+
+                            },
+                            'stop' => function($url, $row, $key){
+                                return Html::a('终止合作',
+                                    ['stop', 'id'=> $row->pid],
+                                    [
+                                        'class' => 'btn btn-xs btn-warning',
+                                    ]
+                                );
 
                             }
                         ],
