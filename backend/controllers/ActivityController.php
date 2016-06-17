@@ -96,7 +96,7 @@ class ActivityController  extends CommonController{
 
 
     /*
-    * 暂停活动
+    * 保存活动
     *
     */
     public function actionSave(){
@@ -108,6 +108,16 @@ class ActivityController  extends CommonController{
             $this->AjaxError('保存失败',$this->_CODE['FAILED']);
         }
 
+    }
+
+    /*
+    * 保存活动
+    *
+    */
+    public function actionDetails(){
+        $pdId = Yii::$app->request->get('id');
+        $res = SmartPriceDiscount::model()->aGet($pdId);
+        return $this->render('detail');
     }
 
 

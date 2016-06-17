@@ -1,10 +1,14 @@
 <?php
 
 namespace backend\controllers;
+use backend\models\CommonModel;
 use Yii;
 class CommonController extends \yii\web\Controller
 {
-
+    protected $mo       =   '';                 //设置动态模型
+    protected $orderBy  =   '';                 //设置模型的排序
+    protected $param    = array();              //附带参数
+    protected $map      = '';              //查询参数
 
     public $_CODE = array(
         'NOPARAM'   =>'100',                     //错误code,100代表没有参数
@@ -17,6 +21,25 @@ class CommonController extends \yii\web\Controller
         // 检查操作员是否有对本功能操作的权限
 
     }
+
+    //查询条件
+    public function _map(){}
+    public function actionList(){
+        $model       = $this->mo ?$this->mo:$this->id;
+        $map = $this->_map();
+        $searchModel = new CommonModel();
+        $dataProvider   = $searchModel->oSearch($map,$model,$this->orderBy);
+        $this->param['dataProvider'] = $dataProvider;
+        return $this->render('list', $this->param);
+    }
+
+
+
+
+
+
+
+
 
     /**跳转
      * @param $url
