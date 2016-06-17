@@ -44,6 +44,18 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         return new $className;
     }
 
+    /**返回卖品信息
+     * @param $pdId
+     * @return array|null|ActiveRecord
+     */
+    public function aGet($pdId)
+    {
+        return $this::find()->where(['pd_id'=>$pdId])->asArray()->one();
+    }
+    /**保存新增活动数据
+     * @param $data
+     * @return bool
+     */
     public function saveDiscount($data){
 
         $data = $this->_mapDiscountField($data);
