@@ -44,6 +44,12 @@ class SmartPublicSignal extends \yii\db\ActiveRecord
         return new $className;
     }
 
+
+    public function oGet($pid){
+        return $this::findOne(['pid'=>$pid]);
+    }
+
+
     public function sGetCoorStatus($status){
         if(!array_key_exists($status,self::$_COOR_DESC)){
             return '未开始';
