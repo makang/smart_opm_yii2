@@ -41,7 +41,8 @@ class SmartCinema extends \yii\db\ActiveRecord
         }
         return $ret;
     }
-    public function oSearch($params){
+    public function oSearch($params)
+    {
         $query = SmartCinema::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -51,14 +52,12 @@ class SmartCinema extends \yii\db\ActiveRecord
         if (!$this->validate()) {
             return $dataProvider;
         }
-
-<<<<<<< HEAD
         $query->select('CinemaNo,CinemaName,TicketSaleSystem');
-        if(isset($params['cinema_no']))
-        $query->where('CinemaName like "%'.$params['cinema_no'].'%" or CinemaNo="'.$params['cinema_no'].'"');
+        if (isset($params['cinema_no']))
+            $query->where('CinemaName like "%' . $params['cinema_no'] . '%" or CinemaNo="' . $params['cinema_no'] . '"');
         $query->groupBy('CinemaNo');
         return $dataProvider;
-=======
+    }
     /**根据影院ids获取影院信息
      * @param $ids
      * @return array|\yii\db\ActiveRecord[]
@@ -67,7 +66,6 @@ class SmartCinema extends \yii\db\ActiveRecord
         $list = $this::find()->where(['Id'=>$ids])->asArray()
             ->all();
         return $list;
->>>>>>> origin/master
     }
 
 }
