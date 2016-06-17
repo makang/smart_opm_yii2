@@ -41,7 +41,14 @@ class SmartPublicSignalCinema extends \yii\db\ActiveRecord
         return $cinemas;
     }
 
-
+     public static function getAllCinemaIds(){
+         $cinemaIds=[];
+         $ids=self::find()->select('CinemaId')->where(['Status'=>self::$_STATUS_BINDED])->groupBy('CinemaId')->asArray()->all();
+         foreach ($ids as $value){
+             $cinemaIds[]=$value['CinemaId'];
+         }
+         return $cinemaIds;
+     }
 
 
     /**取消绑定影院（smart库和openbase库都需要重新变更）

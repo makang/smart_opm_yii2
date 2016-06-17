@@ -2,13 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
-use backend\models\SmartCinema;
 use yii\widgets\ActiveForm;
 ?>
-
-
-
 <link rel="stylesheet" href="/assets_ace/css/chosen.css" />
 <div class="row">
     <div class="col-xs-12">

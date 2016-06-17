@@ -55,6 +55,8 @@ class SmartCinema extends \yii\db\ActiveRecord
         $query->select('CinemaNo,CinemaName,TicketSaleSystem');
         if (isset($params['cinema_no']))
             $query->where('CinemaName like "%' . $params['cinema_no'] . '%" or CinemaNo="' . $params['cinema_no'] . '"');
+        $cinemaIds=SmartPublicSignalCinema::getAllCinemaIds();
+        $query->andFilterWhere(['Id'=>$cinemaIds]);
         $query->groupBy('CinemaNo');
         return $dataProvider;
     }
