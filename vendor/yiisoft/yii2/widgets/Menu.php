@@ -345,6 +345,11 @@ class Menu extends Widget
             if ($route[0] !== '/' && Yii::$app->controller) {
                 $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
             }
+            //by cyt
+            $cytRoute = explode('/',$this->route);
+            if(strstr(ltrim($route, '/'),$cytRoute[0].'/'))return true;
+
+            //by cyt
             if (ltrim($route, '/') !== $this->route) {
                 return false;
             }
