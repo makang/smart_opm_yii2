@@ -131,7 +131,7 @@ use yii\widgets\ActiveForm;
                                 return Html::a('终止合作',
                                     ['stop', 'id'=> $row->pid],
                                     [
-                                        'class' => 'btn btn-xs btn-warning',
+                                        'class' => 'btn btn-xs btn-warning confirm',
                                     ]
                                 );
 
@@ -158,7 +158,10 @@ use yii\widgets\ActiveForm;
 
 <script type="text/javascript">
     jQuery(function($) {
-
+        $(document).on('click','.confirm',function(){
+            var res = confirm('确定吗？亲');
+            return res;
+        });
 
     });
 
