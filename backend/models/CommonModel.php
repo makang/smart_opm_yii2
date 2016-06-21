@@ -43,5 +43,41 @@ class CommonModel extends \yii\db\ActiveRecord{
         return $dataProvider;
     }
 
+
+    /**获取edit传过来的obj
+     * @param $model
+     * @param $id
+     * @return mixed
+     */
+    public function oGet($model,$id){
+        $model='backend\models\\'.$model;
+        $childModel=new $model();
+
+        $primaryKey = $childModel->primaryKey();
+        $row = $childModel::find()->where([$primaryKey[0]=>$id])->one();
+        return $row;
+    }
+
+
+    /**针对单表的修改存储
+     * @param $model
+     * @param $data
+     * @return bool
+     */
+    public function bSave($model,$data){
+        $model='backend\models\\'.$model;
+        $primaryKey = $model::primaryKey();
+        $columns = $model::getTableSchema()->getColumnNames();
+        foreach($data as $k=>$v){
+            if(!in_array($k,$columns)){unset($data[$k]);continue;};
+        }
+        $t = $model::findOne([$primaryKey[0]=>$data[$primaryKey[0]]]);
+        $t->setAttributes($data,false);
+        return $t->save();
+    }
+
+
+
+
 }
 ?>
