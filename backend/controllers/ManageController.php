@@ -26,8 +26,11 @@ class ManageController  extends CommonController{
     	parent::init();
         $this->enableCsrfValidation = false;
     	// 检查操作员是否有对本功能操作的权限
-        $this->param['theme'] = SmartPublicSignal::$_THEME_DESC;
-        $this->param['coor'] = SmartPublicSignal::$_COOR_DESC;
+        $this->param['theme']   = SmartPublicSignal::$_THEME_DESC;
+        $this->param['coor']    = SmartPublicSignal::$_COOR_DESC;
+        $this->param['type']    = SmartPublicSignal::$_TYPE_DESC;
+        $this->param['accept']  = SmartPublicSignal::$_ACCEPT_DESC;
+        $this->param['child']   = SmartPublicSignal::$_CACCOUNT_DESC;
     }
 
 
@@ -70,7 +73,17 @@ class ManageController  extends CommonController{
         if($ret){
             $this->jump($jumpUrl);
         }
+    }
 
+    public function actionStop(){
+        $jumpUrl    =   'manage/list';
+        $pid = Yii::$app->request->get('id');
+        if(intval($pid)){
+            $res = SmartPublicSignal::model()->bUpdateStopCoor($pid);
+            if($res)$this->jump($jumpUrl);
+        }else{
+            $this->jump($jumpUrl);
+        }
     }
 
 
