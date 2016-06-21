@@ -7,6 +7,7 @@
  * @since 1.0
  */
 namespace backend\controllers;
+use backend\models\SmartChildAccount;
 use backend\models\SmartCinema;
 use backend\models\SmartFilm;
 use backend\models\SmartHall;
@@ -75,6 +76,7 @@ class ManageController  extends CommonController{
         }
     }
 
+    //公众号停止合作
     public function actionStop(){
         $jumpUrl    =   'manage/list';
         $pid = Yii::$app->request->get('id');
@@ -84,6 +86,26 @@ class ManageController  extends CommonController{
         }else{
             $this->jump($jumpUrl);
         }
+    }
+
+    //查看子公众号
+    public function actionView(){
+        $pid        = Yii::$app->request->get('pid');
+        $cinemaNo   = Yii::$app->request->get('cinemeNo');
+        $childAccount   = SmartChildAccount::model()->oGet($cinemaNo);
+        return $this->render('view',['row'=>$childAccount]);
+    }
+
+    //保存子公众号
+    public function actionCsave(){
+
+        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
+        $jumpUrl    =   'manage/view?'.$params;
+
+        $data       = Yii::$app->request->Post();
+        $cinemaNo   = Yii::$app->request->post('cinemaNo');
+        $res   = SmartChildAccount::model()->bSave($cinemaNo,$data);
+        if($res) $this->jump($jumpUrl);
     }
 
 
