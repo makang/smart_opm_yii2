@@ -9,28 +9,27 @@
 namespace backend\models;
 use yii\base\Model;
 use Yii;
+use yii\helpers\Html;
 use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
-use yii\data\ArrayDataProvider;
-use yii\helpers\Html;
+use backend\models\SmartPriceDiscountOrder;
 
 class SmartPriceDiscount extends \yii\db\ActiveRecord
 {
-    protected STATIC $_STATUS_DELETED       = 0;        //已删除
-    protected STATIC $_STATUS_UNSTART       = 1;        //未开始
-    protected STATIC $_STATUS_STARTING      = 2;        //进行中
-    protected STATIC $_STATUS_FINISHED      = 3;        //已结束
-    protected STATIC $_STATUS_STOP          = 4;        //暂停
+    protected STATIC $_STATUS_UNSTART       = 0;        //未开始
+    protected STATIC $_STATUS_STARTING      = 1;        //生效中
+    protected STATIC $_STATUS_CLOSED        = 3;        //已关闭
+    protected STATIC $_STATUS_FINISHED      = 4;        //已结束
+    protected STATIC $_STATUS_STOCKOUT      = 5;        //库存不足
 
 
     public STATIC $_STATUS_SHOW = array(
         ''=>'全部',
-        0=>'已删除',
-        1=>'未开始',
-        2=>'进行中',
+        0=>'未开始',
+        1=>'生效中',
         3=>'已结束',
-        4=>'暂停'
-
+        4=>'已结束',
+        5=>'库存不足'
     );
 
 
@@ -117,7 +116,98 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         }
         return  json_encode($ret,JSON_UNESCAPED_UNICODE);
     }
+    /**gridview 条件筛选table
+     * @param $params
+     * @return ActiveDataProvider
+     */
+    public function oSearch($params){
+        $query = SmartPriceDiscount::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        !empty($params['pd_id'])?$query->andFilterWhere(['pd_id'=>$params['pd_id']]):'';
+        !empty($params['name'])?$query->andFilterWhere(['like','name',$params['name']]):'';
+        isset($params['status']) && $params['status']!=='' ?$query->andFilterWhere(['status'=>$params['status']]):'';
+        $query->addOrderBy('pd_id desc');
+
+        $opOrders = array();
+        foreach($dataProvider->getModels() as $v){
+            $modelArray = $v->toArray();
+            $ticketNum   =   SmartPriceDiscountOrder::model()->iGetConsmeTicket($v->pd_id);
+            $modelArray['ticket_num'] = $ticketNum;
+            $sendMoney   =   SmartPriceDiscountOrder::model()->iGetSendMoney($v->pd_id);
+            $modelArray['send_money'] = $sendMoney;
+
+            $opOrders[] = $modelArray;
+        }
+
+        $dataProvider->setModels($opOrders);
+        return $dataProvider;
+    }
+    /**返回活动的状态
+     * @param $status
+     */
+    public function sGetStatus($status){
+        switch ($status) {
+            case self::$_STATUS_UNSTART:
+                return '<span class="label label-sm label-info arrowed arrowed-righ">未开始</span>';
+                break;
+            case self::$_STATUS_STARTING:
+                return '<span class="label label-sm label-success">生效中</span>';
+                break;
+            case self::$_STATUS_CLOSED:
+                return '<span class="label label-sm label-important">已关闭</span>';
+                break;
+            case self::$_STATUS_FINISHED:
+                return '<span class="label label-sm label-warning">已结束</span>';
+                break;
+            case self::$_STATUS_STOCKOUT:
+                return '<span class="label label-sm label-danger">库存不足</span>';
+                break;
+
+        }
+    }
+
+    /**根据活动状态返回对应操作
+     * @param $row
+     * @return string
+     */
+    public function sGetAction($row){
+        $delOption = [
+            'class'         =>  'btn btn-xs btn-warning',
+            'data-confirm'  =>  '确定要删除'
+        ];
+        switch ($row['status']) {
+            case self::$_STATUS_UNSTART:
+                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
+                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+
+                break;
+            case self::$_STATUS_STARTING:
+                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
+                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+                break;
+            case self::$_STATUS_FINISHED:
+                return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+                break;
+            case self::$_STATUS_STOCKOUT:
+                return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+                break;
+            case self::$_STATUS_CLOSED:
+                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
+                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('开始', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+                break;
+        }
+    }
 
 }
 ?>

@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
 
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="pc_id" class="search-query" placeholder="活动编号" value="<?= !empty($_REQUEST['pc_id'])?$_REQUEST['pc_id']:'' ?>"/>
+                            <input type="text" name="pc_id" class="search-query" placeholder="活动编号" value="<?= !empty($_REQUEST['pd_id'])?$_REQUEST['pd_id']:'' ?>"/>
                         </span>
 
 
@@ -69,38 +69,46 @@ use yii\widgets\ActiveForm;
                 ],
                 'columns' => [
 
-                    ['label'=>'活动id','value'=>'pc_id'],
+                    ['label'=>'活动id','value'=>'pd_id'],
                     ['label'=>'活动名称','value'=>'name'],
-
+                    ['label'=>'创建平台','value'=>function($row){
+                        return ($row['operate_platform']== 1) ? 'op' : 'opm';
+                    }],
                     [
-                        'label'=>'开始时间',
+                        'label'=>'创建时间',
                         'value'=>function($row){
-                            $row = json_decode($row['days'],true);
-                            return $row[0]['start'];
+
+                            return date('Y-m-d H:i:s',$row['create_time']);
                         }
                     ],
 
                     [
-                        'label'=>'结束时间',
+                        'label'=>'有效期',
                         'value'=>function($row){
-                            $row = json_decode($row['days'],true);
-                            return $row[0]['end'];
+                            return date('Y-m-d H:i:s',$row['start_time']) .' 至 '.  date('Y-m-d H:i:s',$row['end_time']);
                         }
                     ],
 
-                    ['label'=>'已售立减票','value'=>'ticket_num'],
+                    ['label'=>'已售优惠票/补贴总票数','value'=>function($row){
+                        $spend_tickets = $row['ticket_num'] ? $row['ticket_num'] : 0 ;
+                        $total_tickets = (!$row['allowance_type'])  ? $row['allowance_tickets']  : '--';
+                          return  $spend_tickets.'/'.$total_tickets;
+                    }],
 
-                    ['label'=>'已减金额','value'=>'send_money'],
-
-                    ['label'=>'立减总额','value'=>'sum_amount'],
+                    ['label'=>'已减金额','value'=>function($row){
+                        $spend_money = $row['send_money']  ? $row['send_money']/100 : 0 ;
+                        if($row['allowance_type']==1)
+                            $allowance_money = $row['allowance_money'] /100;
+                        else
+                            $allowance_money = $row['allowance_money'] ? $row['allowance_money'] /100 : '--';
+                        return  $spend_money  .'/'.$allowance_money;
+                    }],
                     [
                         'label'=>'活动状态',
                         'format'=>'html',
                         'value'=>function($row){
-                            return \backend\models\SmartPriceCut::model()->sGetStatus($row['status']);
+                            return \backend\models\SmartPriceDiscount::model()->sGetStatus($row['status']);
                         }],
-
-
                     [
                         'class' => 'yii\grid\ActionColumn',
                         'header' => '操作',
@@ -108,7 +116,7 @@ use yii\widgets\ActiveForm;
                         'headerOptions' => ['width' => '170'],
                         'buttons' => [
                             'detail' => function($url, $row, $key){
-                                return \backend\models\SmartPriceCut::model()->sGetAction($row);
+                                return \backend\models\SmartPriceDiscount::model()->sGetAction($row);
 
                             }
                         ],
