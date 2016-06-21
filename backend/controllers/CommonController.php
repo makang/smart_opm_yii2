@@ -34,7 +34,26 @@ class CommonController extends \yii\web\Controller
     }
 
 
+    public function actionEdit(){
+        $model      = $this->mo?$this->mo:$this->id;
+        $id         = Yii::$app->request->get('id');
+        $searchModel = new CommonModel();
+        $row        = $searchModel->oGet($model,$id);
+        $this->param['row'] = $row;
+        return $this->render('edit',$this->param);
+    }
 
+
+    public function actionSave(){
+        $data       = Yii::$app->request->post();
+        $model      = $this->mo?$this->mo:$this->id;
+        $searchModel    = new CommonModel();
+        $ret        =   $searchModel->bSave($model,$data);
+
+        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
+
+        if($ret)$this->jump($this->id.'/edit?'.$params);
+    }
 
 
 
