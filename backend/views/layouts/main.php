@@ -80,7 +80,7 @@ AppAsset::register($this);
                         <img class="nav-user-photo" src="../../../assets_ace/avatars/user.jpg" alt="Jason's Photo" />
                                                     <span class="user-info">
                                                         <small>欢迎光临,</small>
-                                                        <?=Yii::$app->user->identity->username;?>
+                                                        <?=Yii::$app->user->identity->username?>
                                                     </span>
                         <i class="icon-caret-down"></i>
                     </a>
