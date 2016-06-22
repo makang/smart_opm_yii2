@@ -37,6 +37,7 @@ class SmartPriceCutLog extends \yii\db\ActiveRecord
        $ret =  $this::find()->select('sum(ticket_num) ticket_num')->where('pc_id='.$pcId.' and `status`=1')->asArray()->one();
        return $ret['ticket_num']+0;
     }
+    
 
 }
 ?>

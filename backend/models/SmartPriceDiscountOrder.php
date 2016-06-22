@@ -2,9 +2,11 @@
 
 namespace backend\models;
 
+
 use Yii;
 use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "smart_price_discount_order".
  *
@@ -31,10 +33,12 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
     {
         return 'smart_price_discount_order';
     }
-    public static function model($className=__CLASS__)
+
+    public static function model($className = __CLASS__)
     {
         return new $className;
     }
+
     /**
      * @inheritdoc
      */
@@ -68,19 +72,69 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
             'update_time' => Yii::t('app', 'Update Time'),
         ];
     }
+
+    public function getsmart_orders()
+    {
+        return $this->hasOne(SmartOrders::className(), ['orderid' => 'orderid']);
+    }
+
     /*
      * 获取已使用票数
      */
-    public function  iGetConsmeTicket($pd_id){
-        $ret =  $this::find()->select('sum(ticket_num) ticket_num')->where('pd_id='.$pd_id.' and `status`=1')->asArray()->one();
-        return $ret['ticket_num']+0;
+    public function iGetConsmeTicket($pd_id)
+    {
+        $ret = $this::find()->select('sum(ticket_num) ticket_num')->where('pd_id=' . $pd_id . ' and `status`=1')->asArray()->one();
+        return $ret['ticket_num'] + 0;
 
     }
+
     /*
      * 获取已使用掉的活动金额
      */
-    public function iGetSendMoney($pd_id){
-        $ret = $this->find()->select('sum(discount_money) as send_money ')->where('pd_id='.$pd_id)->asArray()->one();
-        return $ret['send_money']+0;
+    public function iGetSendMoney($pd_id)
+    {
+        $ret = $this->find()->select('sum(discount_money) as send_money ')->where('pd_id=' . $pd_id)->asArray()->one();
+        return $ret['send_money'] + 0;
+    }
+
+    /**gridview 条件筛选table
+     * @param $params
+     * @return ActiveDataProvider
+     */
+    public function oSearch($params)
+    {
+        $query = SmartPriceDiscountOrder::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->joinWith('smart_orders.smart_schedule');
+      
+        if (isset($params['start_date']) || isset($params['end_date'])) {
+            if ($params['start_date'] && $params['end_date']) {
+                $query->where("smart_price_discount_order.create_time between '" .strtotime( $params['start_date']) . "' and '" . strtotime($params['end_date']) . "'");
+            } elseif ($params['start_date']) {
+                $query->where("smart_price_discount_order.create_time>='" .strtotime( $params['start_date']) . "'");
+            } elseif ($params['end_date']) {
+                $query->where("smart_price_discount_order.create_time<='" .strtotime( $params['end_date']) . "'");
+            }
+        }
+        $query->andwhere(['smart_price_discount_order.status' => 1]);
+        $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : '';
+        if($cinema_name){
+            $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
+        }
+        
+        if ($order_status) {
+            $query->andWhere(['smart_orders.status' => $order_status]);
+        }
+
+        $query->OrderBy('create_time desc')->asArray()->all();
+        return $dataProvider;
     }
 }
