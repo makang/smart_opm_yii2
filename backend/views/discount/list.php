@@ -25,7 +25,9 @@ use yii\widgets\ActiveForm;
                             <select name="status" style="width: 100px">
                                 <?php
                                     foreach($dataStatus as $k=>$v){
+                                        
                                         echo '<option value="'.$k.'">'.$v.'</option>';
+
                                     }
                                 ?>
 
