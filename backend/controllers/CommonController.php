@@ -55,6 +55,19 @@ class CommonController extends \yii\web\Controller
         if($ret)$this->jump($this->id.'/edit?'.$params);
     }
 
+    public function actionDetail(){
+        $model      = $this->mo?$this->mo:$this->id;
+        $id         = Yii::$app->request->get('id');
+        $searchModel = new CommonModel();
+        $row        = $searchModel->oGet($model,$id);
+        $this->param['row'] = $row;
+        return $this->render('detail',$this->param);
+    }
+
+    public function actionAdd(){
+        return $this->render('add',$this->param);
+    }
+
 
 
 
