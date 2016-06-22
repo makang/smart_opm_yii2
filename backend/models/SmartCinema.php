@@ -70,5 +70,21 @@ class SmartCinema extends \yii\db\ActiveRecord
         return $list;
     }
 
+    /**根据影院no获取公众号信息
+     * @param $cinemaNo
+     * @return array
+     */
+    public function aGetPsByCinemaNo($cinemaNo){
+        $ps = array();
+        $map = $this::findOne(['CinemaNo'=>$cinemaNo]);
+        $pm  = SmartPublicSignalCinema::findOne(['CinemaId'=>$map->Id]);
+        if($pm){
+            $ps  = SmartPublicSignal::findOne(['Id'=>$pm->PublicSignalId]);
+
+        }
+
+        return $ps;
+    }
+
 }
 ?>
