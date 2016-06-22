@@ -1,8 +1,9 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "smart_member_card".
@@ -31,7 +32,13 @@ class SmartMemberCard extends \yii\db\ActiveRecord
     {
         return 'smart_member_card';
     }
-
+    public static function model($className = __CLASS__)
+    {
+        return new $className;
+    }
+    public function getsmart_member_card(){
+        return $this->hasOne(SmartMemberOrder::className(),['card_id'=>'card_id']);
+    }
     /**
      * @inheritdoc
      */

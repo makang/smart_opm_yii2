@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models;
+namespace backend\models;
 
 use Yii;
-
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "smart_member_order".
  *
@@ -39,7 +39,17 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
     {
         return 'smart_member_order';
     }
-
+    public static function model($className = __CLASS__)
+    {
+        return new $className;
+    }
+    public function getsmart_orders()
+    {
+        return $this->hasOne(SmartOrders::className(), ['orderid' => 'order_id']);
+    }
+    public function getsmart_member_card(){
+        return $this->hasOne(SmartMemberCard::className(),['card_id'=>'card_id']);
+    }
     /**
      * @inheritdoc
      */
@@ -88,5 +98,46 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
             'cumulation_marking' => Yii::t('app', '会员卡累计积分'),
             'edit_time' => Yii::t('app', '最后修改时间'),
         ];
+    }
+
+
+    /**gridview 条件筛选table
+     * @param $params
+     * @return ActiveDataProvider
+     */
+    public function oSearch($params)
+    {
+        $query = SmartMemberOrder::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->joinWith('smart_orders.smart_schedule');
+
+        if (isset($params['start_date']) || isset($params['end_date'])) {
+            if ($params['start_date'] && $params['end_date']) {
+                $query->where("smart_member_order.pay_time between '" .strtotime( $params['start_date']) . "' and '" . strtotime($params['end_date']) . "'");
+            } elseif ($params['start_date']) {
+                $query->where("smart_member_order.pay_time>='" .strtotime( $params['start_date']) . "'");
+            } elseif ($params['end_date']) {
+                $query->where("smart_member_order.pay_time<='" .strtotime( $params['end_date']) . "'");
+            }
+        }
+        $query->andwhere(['smart_price_discount_order.status' => 1]);
+        $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : '';
+        if($cinema_name){
+            $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
+        }
+        if ($order_status) {
+            $query->andWhere(['smart_orders.status' => $order_status]);
+        }
+
+        $query->OrderBy('smart_member_order.pay_time desc')->asArray()->all();
+        return $dataProvider;
     }
 }
