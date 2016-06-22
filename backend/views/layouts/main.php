@@ -8,6 +8,8 @@ use yii\helpers\Html;
 use mdm\admin\components\MenuHelper;
 AppAsset::register($this);
 ?>
+
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -15,11 +17,14 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>" />
     <title><?= Html::encode($this->title) ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <?= Html::csrfMetaTags() ?>
+    <?php $this->head() ?>
+
+
     <!-- basic styles -->
     <link href="/assets_ace/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets_ace/css/font-awesome.min.css" />
-    <?= Html::csrfMetaTags() ?>
-    <?php $this->head() ?>
+
     <!--[if IE 7]>
     <link rel="stylesheet" href="/assets_ace/css/font-awesome-ie7.min.css" />
     <![endif]-->
@@ -27,7 +32,7 @@ AppAsset::register($this);
     <!-- page specific plugin styles -->
 
     <!-- fonts -->
-    <link rel="stylesheet" href="/assets_ace/css/jquery-ui-1.10.3.full.min.css" />
+
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
     <!-- ace styles -->
@@ -35,7 +40,7 @@ AppAsset::register($this);
     <link rel="stylesheet" href="/assets_ace/css/ace.min.css" />
     <link rel="stylesheet" href="/assets_ace/css/ace-rtl.min.css" />
     <link rel="stylesheet" href="/assets_ace/css/ace-skins.min.css" />
-    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
+
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="/assets_ace/css/ace-ie.min.css" />
     <![endif]-->
@@ -45,7 +50,7 @@ AppAsset::register($this);
     <!-- ace settings handler -->
 
     <script src="/assets_ace/js/ace-extra.min.js"></script>
-<!--    <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>-->
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
     <!--[if lt IE 9]>
@@ -77,13 +82,15 @@ AppAsset::register($this);
 
                 <li class="light-blue">
                     <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                        <img class="nav-user-photo" src="../../../assets_ace/avatars/user.jpg" alt="Jason's Photo" />
-                                                    <span class="user-info">
-                                                        <small>欢迎光临,</small>
-                                                        <?=Yii::$app->user->identity->username?>
-                                                    </span>
+                        <img class="nav-user-photo" src="/assets_ace/avatars/user.jpg" alt="Jason's Photo" />
+                                                <span class="user-info">
+                                                    <small>欢迎光临,</small>
+                                                    <?=Yii::$app->user->identity->username?>
+                                                </span>
+
                         <i class="icon-caret-down"></i>
                     </a>
+
                     <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                         <li>
                             <a href="#">
@@ -91,15 +98,18 @@ AppAsset::register($this);
                                 设置
                             </a>
                         </li>
+
                         <li>
                             <a href="#">
                                 <i class="icon-user"></i>
                                 个人资料
                             </a>
                         </li>
+
                         <li class="divider"></li>
+
                         <li>
-                            <a href="/site/logout">
+                            <a href="#">
                                 <i class="icon-off"></i>
                                 退出
                             </a>
@@ -112,153 +122,157 @@ AppAsset::register($this);
 </div>
 
 <div class="main-container" id="main-container">
+<script type="text/javascript">
+    try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+</script>
+
+<div class="main-container-inner">
+<a class="menu-toggler" id="menu-toggler" href="#">
+    <span class="menu-text"></span>
+</a>
+
+<div class="sidebar" id="sidebar">
+<script type="text/javascript">
+    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+</script>
+
+<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+        <button class="btn btn-success">
+            <i class="icon-signal"></i>
+        </button>
+
+        <button class="btn btn-info">
+            <i class="icon-pencil"></i>
+        </button>
+
+        <button class="btn btn-warning">
+            <i class="icon-group"></i>
+        </button>
+
+        <button class="btn btn-danger">
+            <i class="icon-cogs"></i>
+        </button>
+    </div>
+
+    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+        <span class="btn btn-success"></span>
+
+        <span class="btn btn-info"></span>
+
+        <span class="btn btn-warning"></span>
+
+        <span class="btn btn-danger"></span>
+    </div>
+</div><!-- #sidebar-shortcuts -->
+
+    <?php
+    $type=SideNav::TYPE_DEFAULT;
+    $heading='';
+    $item='';
+    echo SideNav::widget([
+        'type' => $type,
+        'encodeLabels' => false,
+        'heading' => $heading,
+        'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
+    ]);
+    ?>
+
+
+<!-- /.nav-list -->
+
+    <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+    </div>
+
     <script type="text/javascript">
-        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+        try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
     </script>
+</div>
 
-    <div class="main-container-inner">
-        <a class="menu-toggler" id="menu-toggler" href="#">
-            <span class="menu-text"></span>
-        </a>
+<div class="main-content">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+        </script>
 
-        <div class="sidebar" id="sidebar">
-            <script type="text/javascript">
-                try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-            </script>
+        <ul class="breadcrumb">
 
-            <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                    <button class="btn btn-success">
-                        <i class="icon-signal"></i>
-                    </button>
+        </ul><!-- .breadcrumb -->
 
-                    <button class="btn btn-info">
-                        <i class="icon-pencil"></i>
-                    </button>
 
-                    <button class="btn btn-warning">
-                        <i class="icon-group"></i>
-                    </button>
+    </div>
 
-                    <button class="btn btn-danger">
-                        <i class="icon-cogs"></i>
-                    </button>
-                </div>
 
-                <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                    <span class="btn btn-success"></span>
+    <div class="page-content">
+        <?php echo $content;?>
+    </div>
+</div><!-- /.main-content -->
 
-                    <span class="btn btn-info"></span>
+<div class="ace-settings-container" id="ace-settings-container">
+    <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+        <i class="icon-cog bigger-150"></i>
+    </div>
 
-                    <span class="btn btn-warning"></span>
-
-                    <span class="btn btn-danger"></span>
-                </div>
-            </div><!-- #sidebar-shortcuts -->
-
-            <?php
-            $type=SideNav::TYPE_DEFAULT;
-            $heading='';
-            $item='';
-            echo SideNav::widget([
-                'type' => $type,
-                'encodeLabels' => false,
-                'heading' => $heading,
-                'items' => MenuHelper::getAssignedMenu(Yii::$app->user->id)
-            ]);
-            ?>
-
-            <div class="sidebar-collapse" id="sidebar-collapse">
-                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+    <div class="ace-settings-box" id="ace-settings-box">
+        <div>
+            <div class="pull-left">
+                <select id="skin-colorpicker" class="hide">
+                    <option data-skin="default" value="#438EB9">#438EB9</option>
+                    <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                    <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                    <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                </select>
             </div>
-
-            <script type="text/javascript">
-                try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-            </script>
+            <span>&nbsp; 选择皮肤</span>
         </div>
 
-        <div class="main-content">
-            <div class="breadcrumbs" id="breadcrumbs">
-                <script type="text/javascript">
-                    try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-                </script>
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+            <label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+        </div>
 
-                <ul class="breadcrumb">
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+            <label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+        </div>
 
-                </ul><!-- .breadcrumb -->
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+            <label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+        </div>
 
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+            <label class="lbl" for="ace-settings-rtl">切换到左边</label>
+        </div>
 
-            </div>
+        <div>
+            <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+            <label class="lbl" for="ace-settings-add-container">
+                切换窄屏
+                <b></b>
+            </label>
+        </div>
+    </div>
+</div><!-- /#ace-settings-container -->
+</div><!-- /.main-container-inner -->
 
-            <div class="page-content" ng-app="zhyy" ng-controller="myCtrl">
-                <?php echo $content;?>
-
-
-            </div><!-- /.page-content -->
-        </div><!-- /.main-content -->
-
-        <div class="ace-settings-container" id="ace-settings-container">
-            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
-                <i class="icon-cog bigger-150"></i>
-            </div>
-
-            <div class="ace-settings-box" id="ace-settings-box">
-                <div>
-                    <div class="pull-left">
-                        <select id="skin-colorpicker" class="hide">
-                            <option data-skin="default" value="#438EB9">#438EB9</option>
-                            <option data-skin="skin-1" value="#222A2D">#222A2D</option>
-                            <option data-skin="skin-2" value="#C6487E">#C6487E</option>
-                            <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-                        </select>
-                    </div>
-                    <span>&nbsp; 选择皮肤</span>
-                </div>
-
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-                    <label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-                    <label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-                    <label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-                    <label class="lbl" for="ace-settings-rtl">切换到左边</label>
-                </div>
-
-                <div>
-                    <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-                    <label class="lbl" for="ace-settings-add-container">
-                        切换窄屏
-                        <b></b>
-                    </label>
-                </div>
-            </div>
-        </div><!-- /#ace-settings-container -->
-    </div><!-- /.main-container-inner -->
-
-    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-        <i class="icon-double-angle-up icon-only bigger-110"></i>
-    </a>
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+</a>
 </div><!-- /.main-container -->
 
 <!-- basic scripts -->
 
+<!--[if !IE]> -->
 
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>"+"<"+"script>");
 </script>
+
 
 
 
@@ -267,6 +281,7 @@ AppAsset::register($this);
 
 
 <script src="/assets_ace/js/chosen.jquery.min.js"></script>
+<!-- page specific plugin scripts -->
 
 
 <!-- ace scripts -->
@@ -274,8 +289,17 @@ AppAsset::register($this);
 <script src="/assets_ace/js/ace-elements.min.js"></script>
 <script src="/assets_ace/js/ace.min.js"></script>
 
-<?php $this->endBody() ?>
+<!-- inline scripts related to this page -->
+
 </body>
 </html>
 <?php $this->endPage() ?>
+
+
+
+
+
+
+
+
 
