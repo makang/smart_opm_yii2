@@ -53,4 +53,15 @@ class OrderController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionMovie(){
+        $searchModel = new SmartOrders();
+        $dataProvider = $searchModel->oSearch(Yii::$app->request->queryParams);
+        $orderStatus = SmartOrders::getStatus();
+        $discountType= SmartOrders::getDiscountType();
+        return $this->render('movie', [
+            'dataStatus'   => $orderStatus,
+            'dataProvider' => $dataProvider,
+            'discountType' => $discountType
+        ]);
+    }
 }

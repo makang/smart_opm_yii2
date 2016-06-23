@@ -3,7 +3,7 @@
 namespace backend\models;
 
 use Yii;
-
+use yii\data\ActiveDataProvider;
 /**
  * This is the model class for table "smart_orders".
  *
@@ -65,7 +65,17 @@ class SmartOrders extends \yii\db\ActiveRecord
             15 => '退款失败',
         );
     }
-
+    public static function getDiscountType(){
+        return array(//折扣类型,0:无折扣 1:储值会员卡 2:立减 3:代金券 4:权益卡 5:虚拟会员卡
+            ''=>'',
+            0 => '无折扣',
+            1 => '储值会员卡',
+            2 => '立减',
+            3 => '代金券',
+            4 => '权益卡',
+            5 => '虚拟会员卡'
+        );
+    }
     /**
      * @inheritdoc
      */
@@ -135,5 +145,47 @@ class SmartOrders extends \yii\db\ActiveRecord
             'qrcode_url' => Yii::t('app', '二维码地址'),
             'update_time' => Yii::t('app', '记录产生时间'),
         ];
+    }
+    /**gridview 条件筛选table
+     * @param $params
+     * @return ActiveDataProvider
+     */
+    public function oSearch($params)
+    {
+        $query = SmartOrders::find();
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        $query->joinWith('smart_schedule');
+
+        if (isset($params['start_date']) || isset($params['end_date'])) {
+            if ($params['start_date'] && $params['end_date']) {
+                $query->where("smart_orders.dateline between '" .strtotime( $params['start_date']) . "' and '" . strtotime($params['end_date']) . "'");
+            } elseif ($params['start_date']) {
+                $query->where("smart_orders.dateline >='" .strtotime( $params['start_date']) . "'");
+            } elseif ($params['end_date']) {
+                $query->where("smart_orders.dateline<='" .strtotime( $params['end_date']) . "'");
+            }
+        }
+        $query->andwhere(['NOT IN','smart_orders.status',[0,11]]);
+        $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
+        !empty($params['order_id'])?$query->andWhere(['smart_orders.orderid'=>$params['order_id']]):'';
+        !empty($params['discount_type'])?$query->andWhere(['smart_orders.discount_type'=>$params['discount_type']]):'';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : '';
+        if($cinema_name){
+            $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
+        }
+
+        if ($order_status) {
+            $query->andWhere(['smart_orders.status' => $order_status]);
+        }
+
+        $query->OrderBy('smart_orders.dateline desc');
+        return $dataProvider;
     }
 }
