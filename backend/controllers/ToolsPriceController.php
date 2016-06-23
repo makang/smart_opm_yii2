@@ -70,10 +70,7 @@ class ToolsPriceController  extends CommonController{
             }
         }
 
-
-
-
-       return $this->render('index',['msg'=>$errorMsg,'output'=>$outPut]);
+        return $this->render('index',['msg'=>$errorMsg,'output'=>$outPut]);
     }
 }
  

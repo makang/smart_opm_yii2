@@ -5,7 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use backend\models\SmartSuits;
 use backend\models\SmartSuitOrder;
-$this->title = Yii::t('app', '会员订单');
+
+$this->title = Yii::t('app', '电影订单');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div id="sample-table-2_length" class="dataTables_length">
 
                         <?php $form = ActiveForm::begin([
-                            'action' => ['activity'],
+                            'action' => ['order'],
                             'method' => 'get',
                         ]); ?>
                         <span class="input-icon align-middle">
@@ -36,16 +37,32 @@ $this->params['breadcrumbs'][] = $this->title;
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="order_id" class="search-query" placeholder="请输入卖品订单编号"
+                            <input type="text" name="suit_id" class="search-query" placeholder="请输入订单编号"
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 200px">
 
-                            <select class="width-100 chosen-select" name="status">
-                                  <option value="" >全部状态</option>
+                            <select class="width-100" name="status">
+                                  <option value="all" >全部状态</option>
                                 <?php
                                 foreach($dataStatus as $k=>$v){
-                                    echo '<option value="'.$k.'" '.((isset($_REQUEST['status']) && $_REQUEST['status']==$k)?'selected':'').'>'.$v.'</option>';                                 }
+                                    $k = $k."";
+                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                                }
+                                ?>
+                            </select>
+                        </span>
+                        <span class="input-icon align-middle" style="width: 200px">
+
+                            <select class="width-100 chosen-select" name="discountType">
+                                  <option value="">使用优惠</option>
+                                <?php
+                                foreach ($discountType as $k => $v) {
+                                    $k = $k."";
+                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                                }
                                 ?>
                             </select>
                         </span>
@@ -69,22 +86,39 @@ $this->params['breadcrumbs'][] = $this->title;
                     'lastPageLabel' => '最后一页',
                 ],
                 'columns' => [
-                    ['label' => '卖品订单号', 'value' => 'id'],
-                    ['label' => '影院名称', 'value' => function($row){
-                        return SmartSuits::getName($row['suit_id'],'cinema_name');
+                    ['label' => '订单号', 'value' => 'orderid'],
+                    ['label' => '影院名称', 'value' => function ($row) {
+                        return $row['smart_schedule']['cinema_name'];
                     }],
-                    ['label' => '购买时间', 'value' => function($row){
-                        return  date('Y-m-d H:i:s ',$row['create_time']);
+                    ['label' => '商品信息', 'value' => function ($row) {
+                        return "《" . $row['smart_schedule']['movie_name'] . "》 " . $row['ticket_num'] . '张';
                     }],
-                    ['label' => '套餐名称', 'value' => function($row){
-                        return  SmartSuits::getName($row['suit_id'],'suit_name');
+                    ['label' => '购买时间', 'value' => function ($row) {
+                        return date('Y-m-d H:i:s', $row['dateline']);
                     }],
-                    ['label' => '支付金额', 'value' => function($row){
-                        return $row['fee']/100;
-                    } ],
-                    ['label' => '订单状态', 'value' => function($row){
-                        return SmartSuitOrder::getStatus()[$row['status']];
-                    }]
+//                    ['label' => '卖品', 'value' => function ($row) {
+//                        return $row['isSuit'] ? '是' : '无';
+//                    }],
+                    ['label' => '原价', 'value' => function ($row) {
+                        return $row['total_money'] / 100;
+                    }],
+                    ['label' => '优惠类型', 'value' => function ($row) {
+                        $discountType = $row['discount_type'];
+                        return \backend\models\SmartOrders::getDiscountType()[$discountType];
+                    }],
+//                    ['label' => '优惠金额', 'value' => 'discount_money'],
+                    ['label' => '实际支付', 'value' => function ($row) {
+                        return $row['pay_money'] / 100;;
+                    }],
+//                    ['label' => '支付方式', 'value' => function ($row) {
+//                        if ($row['pay_type'] == 2)
+//                            return '会员卡';
+//                        else
+//                            return '微信支付';
+//                    }],
+                    ['label' => '订单状态', 'value' => function ($row) {
+                        return \backend\models\SmartOrders::getStatus()[$row['status']];
+                    }],
                 ],
             ]); ?>
 
