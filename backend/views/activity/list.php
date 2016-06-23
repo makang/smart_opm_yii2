@@ -101,18 +101,18 @@ use yii\widgets\ActiveForm;
                         }],
 
 
-                    [
-                        'class' => 'yii\grid\ActionColumn',
-                        'header' => '操作',
-                        'template' => '{detail} ',
-                        'headerOptions' => ['width' => '170'],
-                        'buttons' => [
-                            'detail' => function($url, $row, $key){
-                                return \backend\models\SmartPriceCut::model()->sGetAction($row);
-
-                            }
-                        ],
-                    ]
+//                    [
+//                        'class' => 'yii\grid\ActionColumn',
+//                        'header' => '操作',
+//                        'template' => '{detail} ',
+//                        'headerOptions' => ['width' => '170'],
+//                        'buttons' => [
+//                            'detail' => function($url, $row, $key){
+//                                return \backend\models\SmartPriceCut::model()->sGetAction($row);
+//
+//                            }
+//                        ],
+//                    ]
 
                 ],
             ]); ?>

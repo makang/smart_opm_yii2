@@ -19,7 +19,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次价格保护 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="scenes_price_protection" maxlength="14" placeholder="" class="col-xs-10 col-sm-5" />
+                <input type="text" id="" value="<?php echo $discountInfo['protect_price'];?>" name="scenes_price_protection" maxlength="14" placeholder="" class="col-xs-10 col-sm-5" />
                 <span class="red"> 场次原价格高于此价格，则不参加本次活动(包含手续费) </span>
             </div>
         </div>
@@ -33,15 +33,15 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="report_price_type" checked value="0">
-                    <span class="label pointer label-warning"> 不变</span>
+                    <input class="" type="radio" name="report_price_type"  <?php if($discountInfo['report_price_type']==0) echo 'checked';?> value="0">
+                    <span class="label pointer <?php if($discountInfo['report_price_type']==0) echo 'label-warning';?>"> 不变</span>
                 </label>
 
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="report_price_type" value="1">
-                    <span class="label pointer"> 调整为</span>
-                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" />&nbsp;元
-                    <i class="icon-question-sign red bigger-120" data-content="Hello Everybody<br />Test(br)!" data-placement="right"
+                    <input class="" type="radio" name="report_price_type" value="1"  <?php if($discountInfo['report_price_type']==1) echo 'checked';?> >
+                    <span class="label pointer <?php if($discountInfo['report_price_type']==1) echo 'label-warning';?>"> 调整为</span>
+                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" <?php echo $discountInfo['set_report_price'];?>/>&nbsp;元
+                    <i class="icon-question-sign red bigger-120" data-content="" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
 
@@ -73,14 +73,14 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="discount_price_type" value="0" checked>
+                    <input class="" type="radio" name="discount_price_type" value="0" selected>
 
                     <span class="label pointer label-warning"> 原价基础上减&nbsp;</span>
-                    <input type="text" name="discountprice" class="input-small">&nbsp;元
+                    <input type="text" name="discountprice" class="input-small"value="<?php echo $discountInfo['discount_price']/100;?>">&nbsp;元
                 </label>
 
                 <label class="rl">
-                    <input class="" type="radio" name="discount_price_type" value="1">
+                    <input class="" type="radio" name="discount_price_type" value="1" <?php if($discountInfo['discount_price_type']==1)echo 'checked';?>>
                     <span class="label pointer"> 固定价格&nbsp;</span>
                     <input type="text" class="input-small" name="discount_price" disabled>&nbsp;元
                 </label>
@@ -97,14 +97,14 @@
                 <label class="col-xs-4 rl">
                     <input class="" type="radio" name="allowance_type" value="0" checked>
 
-                    <span class="label pointer label-warning"> 补贴票数&nbsp;</span>
-                    <input type="text" class="input-small" name="allowance_tickets">&nbsp;张
+                    <span class="label pointer "> 补贴票数&nbsp;</span>
+                    <input type="text" class="input-small" name="allowance_tickets" value="<?php echo $discountInfo['allowance_tickets'];?>">&nbsp;张
                 </label>
 
                 <label class="rl">
-                    <input class="" type="radio" name="allowance_type" value="1">
-                    <span class="label pointer"> 预算金额&nbsp;</span>
-                    <input type="text" class="input-small" disable name="allowance_money">&nbsp;元
+                    <input class="" type="radio" name="allowance_type" value="1"<?php if($discountInfo['allowance_type']==1) echo 'checked';?>>
+                    <span class="label pointer label-warning"> 预算金额&nbsp;</span>
+                    <input type="text" class="input-small" disable name="allowance_money" value="<?php echo $discountInfo['allowance_money'];?>">&nbsp;元
                 </label>
             </div>
         </div>
@@ -116,13 +116,13 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="filmLmit" value="0" id="filmLimit" checked>
-                    <span class="label pointer label-warning"> 全部</span>
+                    <input class="" type="radio" name="filmLmit" value="0" id="filmLimit" <?php if(!$discountInfo['join_movies']) echo 'checked';?>>
+                    <span class="label pointer <?php if(!$discountInfo['join_movies']) echo 'label-warning';?>"> 全部</span>
                 </label>
 
                 <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="filmLmit" value="1">
-                    <span class="label pointer"> 选择影片</span>
+                    <input class="" type="radio" name="filmLmit" value="1" <?php if($discountInfo['join_movies']) echo 'checked';?>>
+                    <span class="label pointer <?php if($discountInfo['join_movies']) echo 'label-warning';?>"> 选择影片</span>
 
                 </label>
 
@@ -180,7 +180,20 @@
                     <div class="widget-body">
                         <div class="widget-main no-padding">
                             <div class="dialogs" id="selectMovieTo">
-
+                                <?php
+                                 if($discountInfo['join_movies']) {
+                                     $movieNos = json_decode($discountInfo['join_movies'], true);
+                                     foreach ($movieNos as $movie_no) {
+                                         $movie_name = \backend\models\SmartFilm::model()->sGetFilmNameByNo($movie_no);
+                                         echo '<div class="infobox infobox-green infobox-small infobox-dark switch">
+                                    <input type="hidden" value="' . $movie_no . '" name="films[]">' . $movie_name . '</div>';
+                                     }
+                                 }
+                                ?>
+                                <div class="infobox infobox-green infobox-small infobox-dark switch">
+                                    <input type="hidden" value="1636" name="films[]">
+                                    洛克王国3：圣龙的守护
+                                </div>
 
 
                             </div>

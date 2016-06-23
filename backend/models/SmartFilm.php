@@ -38,7 +38,15 @@ class SmartFilm extends \yii\db\ActiveRecord
         return $ret;
     }
 
+    public function sGetFilmNameByNo($movie_no){
+       $movie_name='';
+        if($movie_no) {
+            $movie_info = $this::find()->select('MovieNameChs')->where('MovieNo=' . $movie_no)->asArray()->one();
+            $movie_name = $movie_info['MovieNameChs'];
+        }
 
+        return $movie_name;
+    }
 
 }
 ?>
