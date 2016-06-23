@@ -42,4 +42,24 @@ class SmartSingleOrder extends \yii\db\ActiveRecord {
         }
     }
 
+
+
+    /**获取指定日期的订单统计数据
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
+    public function aGetTongjiTotalBySum($startDate,$endDate){
+        $select['n'] = "FROM_UNIXTIME(dateline,'%Y%m%d')";
+        $select['pay_money'] = "sum(pay_money)/100";
+        $select['num'] = "count(*)";
+        $select['per'] = "sum(pay_money)/100/count(*)";
+
+        $total = $this->find()->select($select)->where(['status'=>self::$_STATUS_PAYED])->andWhere(['between','dateline',$startDate,$endDate])
+        ->groupBy('n')->asArray()->all();
+
+        return $total;
+    }
+
+
 }
