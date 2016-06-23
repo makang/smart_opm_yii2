@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\SmartSingleOrder;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -27,7 +28,13 @@ class SiteController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->render("index");
+
+            $startDate = strtotime('-1 month');
+            $endDate   = time();
+
+            $total = SmartSingleOrder::model()->aGetTongjiTotalBySum($startDate,$endDate);
+
+            return $this->render("index",['total'=>json_encode($total)]);
         } else {
             $this->redirect("/site/login");
         }
