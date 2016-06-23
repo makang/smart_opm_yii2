@@ -47,9 +47,9 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>起止时间 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="startDatetime" readonly class="search-query datepicker" placeholder="开始日期" value=""/>
+                <input type="text" id="a" name="startDatetime" readonly class="search-query datetimepicker" placeholder="开始日期" value=""/>
                 --
-                <input type="text" id="" name="endDatetime" readonly class="search-query datepicker" placeholder="结束日期" value=""/>
+                <input type="text" id="" name="endDatetime" readonly class="search-query datetimepicker" placeholder="结束日期" value=""/>
 
             </div>
         </div>
@@ -77,22 +77,22 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>用户人群 </label>
 
-            <div>
-                <label class="col-xs-1 rl">
+            <div class="col-sm-9">
+                <label class=" rl">
                     <input class="" type="radio" name="userLimit" checked value="0">
                     <span class="label label-warning pointer"> 不限</span>
                 </label>
 
-                <label class="col-xs-1 rl">
+                <label class="rl">
                     <input class="" type="radio" name="userLimit" value="1">
                     <span class="label  pointer"> 新用户</span>
                 </label>
 
-                <label class="col-xs-1 rl">
+                <label class="rl">
                     <input class="" type="radio" name="userLimit" value="2">
                     <span class="label pointer"> 老用户</span>
                 </label>
-                <label class="col-xs-1 rl">
+                <label class="rl">
                     <input class="" type="radio" name="userLimit" value="3">
                     <span class="label pointer"> 会员</span>
                 </label>
@@ -104,23 +104,23 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>参与影院 </label>
 
-            <div >
-                <label class="col-xs-1 rl">
+            <div class="col-sm-9">
+                <label class=" rl">
                     <input class="" type="radio" name="cinemaLimit" checked value="0" id="cinemaLimit">
                     <span class="label label-warning pointer"> 全国</span>
                 </label>
 
-                <label class="col-xs-2 rl">
+                <label class=" rl">
                     <input class="" type="radio" name="cinemaLimit" value="1">
                     <span class="label pointer"> 手动选择</span>
                 </label>
 
-                <label class="col-xs-2 rl">
+                <label class=" rl">
                     <input class="" type="radio" name="cinemaLimit" value="2">
                     <span class="label pointer"> 排除影院</span>
                 </label>
 
-                <label class="col-xs-3">
+                <label class="">
                     <div class="input-icon">
                         <input id="cinemaKeyword" type="text" placeholder="输入影院关键字">
                         <i class="icon-search blue"></i>
@@ -208,13 +208,23 @@
     var selectFilm   = {};              //选择上的影院
     var totalFilm    = {};              //全部的影厅
     jQuery(function($) {
-        //日历选择
+
+        $('.datetimepicker').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1
+        });
+
+//        //日历选择
         $(".datepicker").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
         })
         //滚动轴
         $('.dialogs').slimScroll({height: '300px'});
