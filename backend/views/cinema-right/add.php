@@ -24,7 +24,7 @@ use yii\widgets\ActiveForm;
                     <a href="#modal-form" role="button" class="blue" data-toggle="modal">
                         选择电影院
                     </a>
-
+                    <span class="red" id="cinemaNote"></span>
                 </div>
             </div>
 
@@ -259,7 +259,14 @@ use yii\widgets\ActiveForm;
 
         if(keyword == ''){alert('请输入影院关键字');return false;};
         $.getJSON('/activity/ajax-get-cinema',{'key':keyword},function(data){
-            $('#cinemaBody').html('');
+            $('#cinemaBody').children('tr').each(function(){
+                if($(this).attr('class')=='choose'){
+                    $(this).remove();
+                }
+            });
+
+
+
             var cinema      = data['cinema'];
             for(prv in cinema){
 
@@ -281,7 +288,7 @@ use yii\widgets\ActiveForm;
            $('#cinemaBody').children('tr').attr('class','choose red');
        }else{
            $('#selected').html(0);
-           $('#cinemaBody').children('tr').attr('class','choose black');
+           $('#cinemaBody').children('tr').attr('class','choose');
        }
     })
     jQuery(function($) {
@@ -289,7 +296,7 @@ use yii\widgets\ActiveForm;
         $(document).on('click', '.choose', function () {
             if($(this).attr('class') == 'choose red'){
                 var selected = $('#selected').html();
-                $(this).attr('class','choose black')
+                $(this).attr('class','choose')
 
                 $('#selected').html(--selected);
             }else{
@@ -303,10 +310,13 @@ use yii\widgets\ActiveForm;
 
     $('.save').on('click',function(){
         $('#selectedCinema').html('');
+        var total = 0;
         $('#cinemaBody .red a').each(function(){
             $('<input type="hidden" name="cinema_no[]" value="'+ $(this).attr('data-value')+'" />').appendTo('#selectedCinema');
-
+            total++;
         });
+        $('#cinemaNote').html('共选择'+total+'家影院');
+
 
     })
 
