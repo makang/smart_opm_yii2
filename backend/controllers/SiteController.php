@@ -56,13 +56,6 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function actionTest(){
-
-
-        $this->assign('aa','bb');
-        $this->display('site/test.tpl');
-   
-    }
 
 
 }
