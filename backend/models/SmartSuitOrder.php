@@ -101,7 +101,7 @@ class SmartSuitOrder extends \yii\db\ActiveRecord
         if ($order_status !='all') {
             $query->andWhere(['status' => $order_status]);
         }
-        if($params['suit_id']){
+        if(isset($params['suit_id'])&&$params['suit_id']){
             $query->andWhere(['id'=>$params['suit_id']]);
         }
 
