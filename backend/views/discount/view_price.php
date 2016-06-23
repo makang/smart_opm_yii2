@@ -73,16 +73,16 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="discount_price_type" value="0" selected>
+                    <input class="" type="radio" name="discount_price_type" value="0" <?php if(!$discountInfo['discount_price_type'])echo 'checked';?>>
 
-                    <span class="label pointer label-warning"> 原价基础上减&nbsp;</span>
-                    <input type="text" name="discountprice" class="input-small"value="<?php echo $discountInfo['discount_price']/100;?>">&nbsp;元
+                    <span class="label pointer <?php if(!$discountInfo['discount_price_type'])echo 'label-warning';?>"> 原价基础上减&nbsp;</span>
+                    <input type="text" name="discountprice" class="input-small"value="<?php if(!$discountInfo['discount_price_type']) echo $discountInfo['discount_price']/100;?>">&nbsp;元
                 </label>
 
                 <label class="rl">
                     <input class="" type="radio" name="discount_price_type" value="1" <?php if($discountInfo['discount_price_type']==1)echo 'checked';?>>
-                    <span class="label pointer"> 固定价格&nbsp;</span>
-                    <input type="text" class="input-small" name="discount_price" disabled>&nbsp;元
+                    <span class="label pointer <?php if($discountInfo['discount_price_type']==1) echo 'label-warning';?>"> 固定价格&nbsp;</span>
+                    <input type="text" class="input-small" name="discount_price" value="<?php if($discountInfo['discount_price_type']==1) echo $discountInfo['discount_price']/100;?>" >&nbsp;元
                 </label>
                     <i class="icon-question-sign red bigger-120" data-content="原售卖价”指（上传售票系统的价格+服务费）。<br/>此处设置的固定价格包含服务费，示例：固定价格设置为9.9元，<br/>即用户实际购买价为9.9元，9.9元中包含每张票相应的服务费。" data-placement="right"
                        data-rel="popover" ></i>
@@ -95,16 +95,16 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="allowance_type" value="0" checked>
+                    <input class="" type="radio" name="allowance_type" value="0"  <?php if(!$discountInfo['allowance_type']) echo 'checked';?>>
 
-                    <span class="label pointer "> 补贴票数&nbsp;</span>
-                    <input type="text" class="input-small" name="allowance_tickets" value="<?php echo $discountInfo['allowance_tickets'];?>">&nbsp;张
+                    <span class="label pointer  <?php if(!$discountInfo['allowance_type']) echo 'label-warning';?> "> 补贴票数&nbsp;</span>
+                    <input type="text" class="input-small" name="allowance_tickets" value="<?php if(!$discountInfo['allowance_type']) echo $discountInfo['allowance_tickets'];?>">&nbsp;张
                 </label>
 
                 <label class="rl">
                     <input class="" type="radio" name="allowance_type" value="1"<?php if($discountInfo['allowance_type']==1) echo 'checked';?>>
-                    <span class="label pointer label-warning"> 预算金额&nbsp;</span>
-                    <input type="text" class="input-small" disable name="allowance_money" value="<?php echo $discountInfo['allowance_money'];?>">&nbsp;元
+                    <span class="label pointer  <?php if($discountInfo['allowance_type']) echo 'label-warning';?>"> 预算金额&nbsp;</span>
+                    <input type="text" class="input-small" disable name="allowance_money" value="<?php if($discountInfo['allowance_type'])echo $discountInfo['allowance_money'];?>">&nbsp;元
                 </label>
             </div>
         </div>
