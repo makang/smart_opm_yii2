@@ -134,7 +134,7 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
             $query->andWhere(['smart_orders.status' => $order_status]);
         }
 
-        $query->OrderBy('create_time desc')->asArray()->all();
+        $query->OrderBy('create_time desc');
         return $dataProvider;
     }
 }

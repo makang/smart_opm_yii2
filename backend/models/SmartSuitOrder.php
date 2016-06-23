@@ -88,9 +88,6 @@ class SmartSuitOrder extends \yii\db\ActiveRecord
         ]);
 
         $this->load($params);
-        if (!$this->validate()) {
-            return $dataProvider;
-        }
         if (isset($params['start_date']) || isset($params['end_date'])) {
             if ($params['start_date'] && $params['end_date']) {
                 $query->where("create_time between '" .strtotime( $params['start_date']) . "' and '" . strtotime($params['end_date']) . "'");
@@ -100,9 +97,13 @@ class SmartSuitOrder extends \yii\db\ActiveRecord
                 $query->where("create_time<='" .strtotime( $params['end_date']) . "'");
             }
         }
-        !empty($params['status'])?$query->andWhere(['status'=>$params['status']]):'';
-        !empty($params['suit_id'])?$query->andWhere(['suit_id'=>$params['suit_id']]):'';
-        !empty($params['order_id'])?$query->andWhere(['order_id'=>$params['order_id']]):'';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
+        if ($order_status !='all') {
+            $query->andWhere(['status' => $order_status]);
+        }
+        if($params['suit_id']){
+            $query->andWhere(['id'=>$params['suit_id']]);
+        }
 
         $query->OrderBy('create_time desc');
         return $dataProvider;

@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use backend\models\SmartSuits;
 use backend\models\SmartSuitOrder;
-$this->title = Yii::t('app', '会员订单');
+$this->title = Yii::t('app', '卖品订单');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div id="sample-table-2_length" class="dataTables_length">
 
                         <?php $form = ActiveForm::begin([
-                            'action' => ['activity'],
+                            'action' => ['order'],
                             'method' => 'get',
                         ]); ?>
                         <span class="input-icon align-middle">
@@ -36,16 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="order_id" class="search-query" placeholder="请输入卖品订单编号"
+                            <input type="text" name="suit_id" class="search-query" placeholder="请输入卖品订单编号"
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 200px">
 
-                            <select class="width-100 chosen-select" name="status">
-                                  <option value="" >全部状态</option>
+                            <select class="width-100" name="status">
+                                  <option value="all" >全部状态</option>
                                 <?php
                                 foreach($dataStatus as $k=>$v){
-                                    echo '<option value="'.$k.'" '.((isset($_REQUEST['status']) && $_REQUEST['status']==$k)?'selected':'').'>'.$v.'</option>';                                 }
+                                    $k = $k."";
+                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
+                                }
                                 ?>
                             </select>
                         </span>

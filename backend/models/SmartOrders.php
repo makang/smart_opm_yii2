@@ -58,6 +58,7 @@ class SmartOrders extends \yii\db\ActiveRecord
             3 => '已发码',
             4 => '退款中',
             5 => '已退款',
+
             11 => '支付失败',
             12 => '出票失败',
             13 => '发码失败',
@@ -73,7 +74,8 @@ class SmartOrders extends \yii\db\ActiveRecord
             2 => '立减',
             3 => '代金券',
             4 => '权益卡',
-            5 => '虚拟会员卡'
+            5 => '虚拟会员卡',
+            6 => '',
         );
     }
     /**
@@ -158,9 +160,6 @@ class SmartOrders extends \yii\db\ActiveRecord
         ]);
 
         $this->load($params);
-        if (!$this->validate()) {
-            return $dataProvider;
-        }
         $query->joinWith('smart_schedule');
 
         if (isset($params['start_date']) || isset($params['end_date'])) {
@@ -176,15 +175,14 @@ class SmartOrders extends \yii\db\ActiveRecord
         $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
         !empty($params['order_id'])?$query->andWhere(['smart_orders.orderid'=>$params['order_id']]):'';
         !empty($params['discount_type'])?$query->andWhere(['smart_orders.discount_type'=>$params['discount_type']]):'';
-        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : '';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
         if($cinema_name){
             $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
         }
 
-        if ($order_status) {
+        if ($order_status!='all') {
             $query->andWhere(['smart_orders.status' => $order_status]);
         }
-
         $query->OrderBy('smart_orders.dateline desc');
         return $dataProvider;
     }

@@ -20,17 +20,18 @@ class NoticeController extends \yii\web\Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    //'delete' => ['POST'],
                 ],
             ],
         ];
     }
     public function actionList()
     {
+        //$this->layout='base';
         $searchModel = new OpmOpSystemNoticeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
-            'searchModel' => $searchModel,
+           // 'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

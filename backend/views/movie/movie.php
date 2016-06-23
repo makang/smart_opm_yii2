@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div id="sample-table-2_length" class="dataTables_length">
 
                         <?php $form = ActiveForm::begin([
-                            'action' => ['movie'],
+                            'action' => ['order'],
                             'method' => 'get',
                         ]); ?>
                         <span class="input-icon align-middle">
@@ -37,16 +37,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="order_id" class="search-query" placeholder="请输入卖品订单编号"
+                            <input type="text" name="suit_id" class="search-query" placeholder="请输入订单编号"
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 200px">
 
-                            <select class="width-100 chosen-select" name="status">
-                                  <option value="">全部状态</option>
+                            <select class="width-100" name="status">
+                                  <option value="all" >全部状态</option>
                                 <?php
-                                foreach ($dataStatus as $k => $v) {
-                                    echo '<option value="' . $k . '" ' . ((isset($_REQUEST['status']) && $_REQUEST['status'] == $k) ? 'selected' : '') . '>' . $v . '</option>';
+                                foreach($dataStatus as $k=>$v){
+                                    $k = $k."";
+                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                 }
                                 ?>
                             </select>
@@ -57,7 +59,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                   <option value="">使用优惠</option>
                                 <?php
                                 foreach ($discountType as $k => $v) {
-                                    echo '<option value="' . $k . '" ' . ((isset($_REQUEST['status']) && $_REQUEST['status'] == $k) ? 'selected' : '') . '>' . $v . '</option>';
+                                    $k = $k."";
+                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                 }
                                 ?>
                             </select>
