@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
-$this->title = Yii::t('app', '优惠活动订单');
+$this->title = Yii::t('app', '会员订单');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <h1><?= Html::encode($this->title) ?></h1>
@@ -41,10 +41,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <select class="width-100 chosen-select" name="status">
                                   <option value="" >全部状态</option>
-                                 <?php
-                                 foreach($dataStatus as $k=>$v){
-                                     echo '<option value="'.$k.'" '.((isset($_REQUEST['status']) && $_REQUEST['status']==$k)?'selected':'').'>'.$v.'</option>';                                 }
-                                 ?>
+                                <?php
+                                foreach($dataStatus as $k=>$v){
+                                    echo '<option value="'.$k.'" '.((isset($_REQUEST['status']) && $_REQUEST['status']==$k)?'selected':'').'>'.$v.'</option>';                                 }
+                                ?>
                             </select>
                         </span>
                         <?= Html::submitButton('搜索', ['class' => 'btn btn-sm btn-primary']) ?>
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'lastPageLabel' => '最后一页',
                 ],
                 'columns' => [
-                    ['label' => '购买日期', 'value' => 'update_time'],
+                    ['label' => '购买日期', 'value' => 'pay_time'],
                     ['label' => '影院名称', 'value' => function($row){
                         return $row['smart_orders']['smart_schedule']['cinema_name'];
                     }],
@@ -77,10 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //                    }],
                     ['label' => '商品详情', 'value' => function($row){
 
-                       return  "《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name']."  ".$row['smart_orders']['seat_info'];
+                        return  "《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name']."  ".$row['smart_orders']['seat_info'];
 
                     }],
-                    ['label' => '订单ID', 'value' => 'orderid'],
+                    ['label' => '订单ID', 'value' => 'order_id'],
                     ['label' => '购票数目', 'value' => 'smart_orders.ticket_num'],
                     ['label' => '订单价格', 'value' => function($row){
 
@@ -91,12 +91,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $row['smart_orders']['pay_money']/100;
                     }],
                     ['label' => '立减金额', 'value' => function($row){
-                        return $row['discount_money']/100;
+                        return $row['price'];
                     }],
                     ['label' => '订单状态', 'value' => function($row){
                         return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
                     }],
-                    ['label' => '立减活动ID', 'value' => 'pd_id']
+                    ['label' => '会员卡号', 'value' =>function($row){
+                        return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
+                    }]
                 ],
             ]); ?>
 
