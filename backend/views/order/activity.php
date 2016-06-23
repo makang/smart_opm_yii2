@@ -39,11 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         </span>
                         <span class="input-icon align-middle" style="width: 200px">
 
-                            <select class="width-100 chosen-select" name="status">
-                                  <option value="" >全部状态</option>
+                            <select class="width-100" name="status">
+                                  <option value="all" >全部状态</option>
                                  <?php
                                  foreach($dataStatus as $k=>$v){
-                                     echo '<option value="'.$k.'" '.((isset($_REQUEST['status']) && $_REQUEST['status']==$k)?'selected':'').'>'.$v.'</option>';                                 }
+                                     $k = $k."";
+                                     var_dump( $_REQUEST['status']===$k);
+                                     echo '<option value="'.$k.'" '.( $_REQUEST['status']==$k?'selected':'').'>'.$v.'</option>';                                 }
                                  ?>
                             </select>
                         </span>
