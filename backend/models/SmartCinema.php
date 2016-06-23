@@ -69,7 +69,20 @@ class SmartCinema extends \yii\db\ActiveRecord
             ->all();
         return $list;
     }
+    /*
+     * 根据影院编号获取影院名称
+     */
+    public static function getCinemaNameByCinemaNo($cinema_no){
+        $cinema_name='';
+        if($cinema_no) {
+            $cinemaInfo = SmartCinema::findOne(['CinemaNo' => $cinema_no]);
+            if($cinemaInfo){
+                $cinema_name=$cinemaInfo['CinemaName'];
+            }
+        }
 
+        return $cinema_name;
+    }
     /**根据影院no获取公众号信息
      * @param $cinemaNo
      * @return array

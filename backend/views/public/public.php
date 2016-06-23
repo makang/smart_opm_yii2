@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div id="sample-table-2_length" class="dataTables_length">
 
                         <?php $form = ActiveForm::begin([
-                            'action' => ['public'],
+                            'action' => ['statistic'],
                             'method' => 'get',
                         ]); ?>
                         <span class="input-icon align-middle">

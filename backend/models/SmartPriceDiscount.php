@@ -208,6 +208,13 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
                 break;
         }
     }
+    public static function agetDiscountInfoById($param){
+        $discountInfo=array();
+        if(isset($param['id'])&&$param['id']){
+           $discountInfo=SmartPriceDiscount::find()->where('pd_id='.$param['id'])->asArray()->one();
+         }
 
+        return $discountInfo;
+    }
 }
 ?>

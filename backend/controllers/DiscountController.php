@@ -29,7 +29,15 @@ class DiscountController extends \yii\web\Controller
     public function actionAdd(){
         return $this->render('add');
     }
+    public function actionEdit(){
+        $discountInfo=SmartPriceDiscount::agetDiscountInfoById(Yii::$app->request->queryParams);
 
+        if(!$discountInfo){
+            echo "<script> alert('无此活动信息'); history.go(-1);</script>";
+        }
+        //var_dump($discountInfo);exit;
+        return $this->render('edit',['discountInfo'=>$discountInfo]);
+    }
     /*
     * 删除活动列表
     *
