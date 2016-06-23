@@ -191,13 +191,13 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         switch ($row['status']) {
             case self::$_STATUS_UNSTART:
                 return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+               // Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
                 Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
 
                 break;
             case self::$_STATUS_STARTING:
                 return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                //Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
                 Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
                 break;
             case self::$_STATUS_FINISHED:
@@ -208,7 +208,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
                 break;
             case self::$_STATUS_CLOSED:
                 return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                //Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
                 Html::a('开始', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
                 break;
         }
@@ -220,6 +220,24 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
          }
 
         return $discountInfo;
+    }
+    public function bStopDiscount($id){
+          $model=SmartPriceDiscount::findOne($id);
+          $model->status=3;
+       // $this->setAttributes($data,false);
+        return $model->save();
+    }
+    public function bStartDiscount($id){
+        $model=SmartPriceDiscount::findOne($id);
+        $model->status=1;
+        // $this->setAttributes($data,false);
+        return $model->save();
+    }
+    public function bDeleteDiscount($id){
+        $model=SmartPriceDiscount::findOne($id);
+        $model->status=1;
+        // $this->setAttributes($data,false);
+        return $model->save();
     }
 }
 ?>

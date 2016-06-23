@@ -43,14 +43,14 @@ class DiscountController extends \yii\web\Controller
     *
     */
     public function actionDelete(){
-        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
-        $jumpUrl    =   'activity/list?'.$params;
         $pc_id = Yii::$app->request->get('id');
         if(intval($pc_id)){
-            $res = SmartPriceCut::model()->bDelActivity($pc_id);
-            if($res)$this->jump($jumpUrl);
+            $res = SmartPriceDiscount::model()->bDeleteDiscount($pc_id);
+            if($res)
+                return $this->redirect(['discount/list']);
+
         }else{
-            $this->jump($jumpUrl);
+            return $this->redirect(['discount/list']);
         }
     }
 
@@ -60,14 +60,15 @@ class DiscountController extends \yii\web\Controller
     *
     */
     public function actionStart(){
-        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
-        $jumpUrl    =   'activity/list?'.$params;
+
         $pc_id = Yii::$app->request->get('id');
         if(intval($pc_id)){
-            $res = SmartPriceCut::model()->bStartActivity($pc_id);
-            if($res)$this->jump($jumpUrl);
+            $res = SmartPriceDiscount::model()->bStartDiscount($pc_id);
+            if($res)
+                return $this->redirect(['discount/list']);
+
         }else{
-            $this->jump($jumpUrl);
+            return $this->redirect(['discount/list']);
         }
     }
 
@@ -76,15 +77,15 @@ class DiscountController extends \yii\web\Controller
     *
     */
     public function actionStop(){
-        $params     =   $this->sGetUrlParam(Yii::$app->request->getReferrer());
-        $jumpUrl    =   'activity/list?'.$params;
+
         $pc_id = Yii::$app->request->get('id');
         if(intval($pc_id)){
-            $res = SmartPriceCut::model()->bStopActivity($pc_id);
-            if($res)$this->jump($jumpUrl);
+            $res = SmartPriceDiscount::model()->bStopDiscount($pc_id);
+            if($res)
+                return $this->redirect(['discount/list']);
 
         }else{
-            $this->jump($jumpUrl);
+            return $this->redirect(['discount/list']);
         }
     }
 
@@ -110,8 +111,8 @@ class DiscountController extends \yii\web\Controller
     */
     public function actionDetails(){
         $pdId = Yii::$app->request->get('id');
-        $res = SmartPriceDiscount::model()->aGet($pdId);
-        return $this->render('detail');
+        $discountInfo = SmartPriceDiscount::model()->aGet($pdId);
+        return $this->render('view',['discountInfo'=>$discountInfo]);
     }
 
 

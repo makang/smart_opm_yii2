@@ -44,7 +44,7 @@
              $movieType=array();
               if($discountInfo['movie_type']){
                   $movieType=json_decode($discountInfo['movie_type'],true);
-
+                  //var_dump($movieType);
               }
              ?>
             <div class="col-sm-9 ">
@@ -55,12 +55,12 @@
 
                 <label>
                     <input class="ace" type="checkbox" name="version" value="2D" <?php if(in_array("2D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 2D</span>
+                    <span class="lbl pointer"> 2d</span>
                 </label>
 
                 <label>
                     <input class="ace" type="checkbox" name="version" value="3D" <?php if(in_array("3D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 3D</span>
+                    <span class="lbl pointer"> 3d</span>
                 </label>
 
                 <label>
