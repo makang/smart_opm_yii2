@@ -125,12 +125,12 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
         }
         $query->andwhere(['smart_price_discount_order.status' => 1]);
         $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
-        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : '';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
         if($cinema_name){
             $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
         }
         
-        if ($order_status) {
+        if ($order_status !='all') {
             $query->andWhere(['smart_orders.status' => $order_status]);
         }
 
