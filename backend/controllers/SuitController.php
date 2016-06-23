@@ -2,13 +2,12 @@
 
 namespace backend\controllers;
 
-use backend\models\SmartOrders;
-use backend\models\SmartPriceDiscountOrder;
+use backend\models\SmartSuitOrder;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 
-class OrderController extends Controller
+class SuitController extends Controller
 {
     public function behaviors()
     {
@@ -21,15 +20,14 @@ class OrderController extends Controller
             ],
         ];
     }
-    public function actionActivity()
-    {
-        $searchModel = new SmartPriceDiscountOrder();
+
+    public function actionOrder(){
+        $searchModel = new SmartSuitOrder();
         $dataProvider = $searchModel->oSearch(Yii::$app->request->queryParams);
-        $orderStatus = SmartOrders::getStatus();
-        return $this->render('activity', [
+        $orderStatus = SmartSuitOrder::getStatus();
+        return $this->render('suit', [
             'dataStatus'   => $orderStatus,
             'dataProvider' => $dataProvider,
-
         ]);
     }
 
