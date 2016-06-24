@@ -77,4 +77,16 @@ class SmartMemberCard extends \yii\db\ActiveRecord
             'score' => Yii::t('app', '积分'),
         ];
     }
+    public static function sGetCardNo($card_id){
+        $card_no='';
+        if($card_id){
+            $cardInfo=SmartMemberCard::findOne($card_id);
+           
+            if($cardInfo){
+                $card_no=$cardInfo['card_no'];
+            }
+        }
+
+        return $card_no;
+    }
 }
