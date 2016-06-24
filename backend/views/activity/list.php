@@ -49,7 +49,6 @@ use yii\widgets\ActiveForm;
                             </div>
                             <span></span>
                             <?= Html::submitButton('搜索', ['class' => 'btn btn-sm btn-primary']) ?>
-                            <?= Html::a('新增',['add'], ['class' => 'btn btn-sm btn-info']) ?>
                         <?php ActiveForm::end(); ?>
                     </div>
                 </div>
