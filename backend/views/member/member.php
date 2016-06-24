@@ -86,20 +86,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '购票数目', 'value' => 'smart_orders.ticket_num'],
                     ['label' => '订单价格', 'value' => function($row){
 
-                        return $row['smart_orders']['total_money']/100;
+                        return $row['smart_orders']['pay_money']/100+$row['price'];
                     }],
                     ['label' => '实际支付', 'value' => function($row){
 
                         return $row['smart_orders']['pay_money']/100;
                     }],
-                    ['label' => '立减金额', 'value' => function($row){
+                    ['label' => '优惠金额', 'value' => function($row){
                         return $row['price'];
                     }],
                     ['label' => '订单状态', 'value' => function($row){
                         return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
                     }],
                     ['label' => '会员卡号', 'value' =>function($row){
-                        return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
+                        //var_dump($row);exit();
+                        ///return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
                     }]
                 ],
             ]); ?>
