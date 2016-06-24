@@ -3,9 +3,13 @@
 namespace backend\controllers;
 
 use backend\models\SmartPriceDiscount;
+use backend\models\SmartCinema;
+use backend\models\SmartFilm;
+use backend\models\SmartHall;
+use backend\controllers\CommonController;
 use Yii;
 
-class DiscountController extends \yii\web\Controller
+class DiscountController extends CommonController
 {
 
     public function init(){
@@ -88,8 +92,18 @@ class DiscountController extends \yii\web\Controller
             return $this->redirect(['discount/list']);
         }
     }
-
-
+    /*
+     * 编辑活动
+     */
+    public function actionUpdate(){
+        $postData = Yii::$app->request->post();
+        $res = SmartPriceDiscount::model()->updateDiscount($postData);
+        if($res){
+            $this->AjaxError('保存成功',$this->_CODE['SUC']);
+        }else{
+            $this->AjaxError('保存失败',$this->_CODE['FAILED']);
+        }
+    }
     /*
     * 保存活动
     *
@@ -102,7 +116,6 @@ class DiscountController extends \yii\web\Controller
         }else{
             $this->AjaxError('保存失败',$this->_CODE['FAILED']);
         }
-
     }
 
     /*

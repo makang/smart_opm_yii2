@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
-use backend\models\Article;
 use backend\models\SmartCinema;
 use yii\widgets\ActiveForm;
 ?>
@@ -21,8 +20,15 @@ use yii\widgets\ActiveForm;
 <link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
 <script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
 
-<link rel="stylesheet" href="/assets_ace/css/bootstrap-datetimepicker.min.css" />
-<script src="/assets_ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="/assets_ace/css/date-time/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+
 
 <div class="page-content">
     <div class="page-header">

@@ -14,7 +14,10 @@ use yii\data\ActiveDataProvider;
 class SmartFilm extends \yii\db\ActiveRecord
 {
 
-
+    public static function getDb()
+    {
+        return Yii::$app->db_opensystem;
+    }
     public static function tableName(){
         return "open_base_movie";
     }

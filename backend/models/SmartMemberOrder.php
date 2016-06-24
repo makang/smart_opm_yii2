@@ -113,9 +113,6 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
         ]);
 
         $this->load($params);
-        if (!$this->validate()) {
-            return $dataProvider;
-        }
         $query->joinWith('smart_orders.smart_schedule');
 
         if (isset($params['start_date']) || isset($params['end_date'])) {
@@ -127,7 +124,7 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
                 $query->where("smart_member_order.pay_time<='" .strtotime( $params['end_date']) . "'");
             }
         }
-        $query->andwhere(['smart_price_discount_order.status' => 1]);
+        //$query->andwhere(['smart_member_order.status' => 1]);
         $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
         $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
         if($cinema_name){
@@ -137,7 +134,9 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
             $query->andWhere(['smart_orders.status' => $order_status]);
         }
 
-        $query->OrderBy('smart_member_order.pay_time desc');
+        $query->OrderBy(['smart_member_order.pay_time'=> SORT_DESC]);
+       // echo $query->createCommand()->getRawSql();
+       // die;
         return $dataProvider;
     }
 }

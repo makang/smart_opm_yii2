@@ -21,8 +21,14 @@ use yii\widgets\ActiveForm;
 <link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
 <script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
 
-<link rel="stylesheet" href="/assets_ace/css/bootstrap-datetimepicker.min.css" />
-<script src="/assets_ace/js/date-time/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="/assets_ace/css/date-time/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 <div class="page-content">
     <div class="page-header">
@@ -45,17 +51,7 @@ use yii\widgets\ActiveForm;
                 <div class="col-xs-12">
                     <div class="tabbable">
                         <ul id="inbox-tabs" class="inbox-tabs nav nav-tabs padding-16 tab-size-bigger tab-space-1">
-<!--                            <li class="li-new-mail pull-right">-->
-<!--                                <a data-toggle="tab" href="#write" data-target="write" class="btn-new-mail" id="submit">-->
-<!--                                    <span class="btn bt1n-small btn-purple no-border">-->
-<!--                                        <i class=" icon-envelope bigger-130"></i>-->
-<!--                                        <span class="bigger-110 submit" >发布活动</span>-->
-<!--                                    </span>-->
-<!--                                </a>-->
-<!--                            </li><!-- ./li-new-mail -->
-
-
-                            <li class="active" >
+                                <li class="active" >
                                 <a data-toggle="tab" href="#info">
                                     <i class="blue icon-inbox bigger-130"></i>
                                     <span class="bigger-110">创建营销活动</span>

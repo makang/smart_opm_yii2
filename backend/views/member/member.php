@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query"
+                            <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
                                    placeholder="开始日期"
                                    value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ""; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query"
+                            <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
                                    placeholder="结束日期"
                                    value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ""; ?>"/>
                         </span>
@@ -86,20 +86,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '购票数目', 'value' => 'smart_orders.ticket_num'],
                     ['label' => '订单价格', 'value' => function($row){
 
-                        return $row['smart_orders']['total_money']/100;
+                        return $row['smart_orders']['pay_money']/100+$row['price'];
                     }],
                     ['label' => '实际支付', 'value' => function($row){
 
                         return $row['smart_orders']['pay_money']/100;
                     }],
-                    ['label' => '立减金额', 'value' => function($row){
+                    ['label' => '优惠金额', 'value' => function($row){
                         return $row['price'];
                     }],
                     ['label' => '订单状态', 'value' => function($row){
                         return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
                     }],
                     ['label' => '会员卡号', 'value' =>function($row){
-                        return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
+                        //var_dump($row);exit();
+                        ///return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
                     }]
                 ],
             ]); ?>
@@ -114,52 +115,38 @@ $this->params['breadcrumbs'][] = $this->title;
     window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
 </script>
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
+<link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
+
+
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="/assets_ace/css/date-time/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
-    jQuery(function ($) {
-        $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd 00:00:00",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        })
-        $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd 00:00:00",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        });
 
-
-        $(".chosen-select").chosen();
+    $('.datetimepicker').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        forceParse: 0,
+        showMeridian: 1
     });
 
+    //        //日历选择
+    $(".datepicker").datepicker({
+        format: "yyyy-mm-dd",
+        language:  'zh-CN',
+        autoclose:'true'
+    })
 
 </script>
-<script type="text/javascript">
-    jQuery(function ($) {
-        $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd 00:00:00",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        })
-        $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd 00:00:00",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        });
-
-
-        $(".chosen-select").chosen();
-    });
-
-
-</script>
-
 
