@@ -313,7 +313,8 @@
                 postData['Selecthalls'] = v;
 
             }
-            $.post("/activity/save", postData, function(data){
+            postData['pd_id']=<?php echo $_REQUEST['id'];?>;
+            $.post("/discount/update", postData, function(data){
                 var ret = eval('(' + data + ')');
                 if(ret.code!='200'){alert(ret.msg)}else{
                     location = '/discount/list';

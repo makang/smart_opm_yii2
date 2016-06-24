@@ -62,11 +62,14 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
 
         return $this->save();
     }
-    public function updateDiscount($data,$id){
-        $data = $this->_mapDiscountField($data);
-        $this->setAttributes($data,false);
+    public function updateDiscount($data){
+       // var_dump($data);exit();
+        $model=SmartPriceDiscount::findOne($data['pd_id']);
 
-        return $this->update();
+        $data = $this->_mapDiscountField($data);
+        $model->setAttributes($data,false);
+
+        return $model->update();
     }
 
     /**格式化那个复杂的活动新增数据
