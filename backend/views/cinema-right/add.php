@@ -271,7 +271,7 @@ use yii\widgets\ActiveForm;
             for(prv in cinema){
 
                 $('<tr class="choose"><td>'+prv+'</td><td>'+cinema[prv]+'</td><td>' +
-                ' <a  href="" data-value="'+prv+'">选择</a></td></tr>').
+                ' <a  href="" data-value="'+prv+'">未选中</a></td></tr>').
                     appendTo('#cinemaBody')
 
             }
@@ -297,11 +297,12 @@ use yii\widgets\ActiveForm;
             if($(this).attr('class') == 'choose red'){
                 var selected = $('#selected').html();
                 $(this).attr('class','choose')
-
+                $(this).find("a").html('未选中');
                 $('#selected').html(--selected);
             }else{
                 var selected = $('#selected').html();
                 $(this).attr('class','choose red');
+                $(this).find("a").html('选中');
                 $('#selected').html(++selected);
             }
             return false;
