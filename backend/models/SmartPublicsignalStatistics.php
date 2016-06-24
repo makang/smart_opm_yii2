@@ -4,6 +4,7 @@ namespace backend\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+
 /**
  * This is the model class for table "smart_publicsignal_statistics".
  *
@@ -78,7 +79,7 @@ class SmartPublicsignalStatistics extends \yii\db\ActiveRecord
             return $dataProvider;
         }
         $query->select('id , publicsignalname, sum(new_user) new_user,sum(cancel_user) cancel_user,sum(increase_user) increase_user,max(cumulate_user) cumulate_user,sum(total_orders) total_orders,sum(total_sales) total_sales,sum(suits_order_totals) suits_order_totals,sum(suits_order_money_totals) suits_order_money_totals ');
-        if(isset($params['start_date'])||isset($params['end_date'])) {
+        if (isset($params['start_date']) || isset($params['end_date'])) {
             if ($params['start_date'] && $params['end_date']) {
                 $query->where("create_time between '" . $params['start_date'] . "' and '" . $params['end_date'] . "'");
             } elseif ($params['start_date']) {
@@ -87,12 +88,14 @@ class SmartPublicsignalStatistics extends \yii\db\ActiveRecord
                 $query->where("create_time<='" . $params['end_date'] . "'");
             }
         }
-        if(isset($params['publicsignalname'])){
+        if (isset($params['publicsignalname'])) {
             $query->andFilterWhere(['like', 'publicsignalname', $params['publicsignalname']]);
         }
+        $sort = (isset($params['sort']) && $params['sort']) ? $params['sort'] : 'create_time';
+
         $query->groupBy('publicsignalshort');
-        $sort=isset($params['sort'])?$params['sort']:'total_orders';
-        $query->orderBy(["$sort" => SORT_DESC])->asArray()->all();
+        $query->orderBy([$sort => SORT_DESC]);
+        
         return $dataProvider;
     }
 }

@@ -40,11 +40,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="input-icon align-middle" style="width: 200px">
 
                             <select class="width-100 chosen-select" name="sort" data-placeholder="选择排序">
-                                <option value="total_sales">销售额</option>
-                                <option value="total_orders">订单数</option>
-                                <option value="new_user">新增粉丝数</option>
-                                <option value="cumulate_user">累计粉丝数</option>
-                                <option value="publicsignalshort">公众号</option>
+                                <option value="" <?php echo empty($_REQUEST['sort']) ? 'selected' : '' ?>>默认排序</option>
+                                <option value="total_sales" <?php echo (!empty($_REQUEST['sort'])&&$_REQUEST['sort']=='total_sales') ? 'selected' : '' ?>>销售额</option>
+                                <option value="total_orders" <?php echo (!empty($_REQUEST['sort'])&&$_REQUEST['sort']=='total_orders') ? 'selected' : '' ?>>订单数</option>
+                                <option value="new_user" <?php echo (!empty($_REQUEST['sort'])&&$_REQUEST['sort']=='new_user') ? 'selected' : '' ?>>新增粉丝数</option>
+                                <option value="cumulate_user" <?php echo (!empty($_REQUEST['sort'])&&$_REQUEST['sort']=='cumulate_user') ? 'selected' : '' ?>>累计粉丝数</option>
+                                <option value="publicsignalshort" <?php echo (!empty($_REQUEST['sort'])&&$_REQUEST['sort']=='publicsignalshort') ? 'selected' : '' ?>>公众号</option>
                             </select>
                         </span>
                         <?= Html::submitButton('搜索', ['class' => 'btn btn-sm btn-primary']) ?>
