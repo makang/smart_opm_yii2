@@ -40,7 +40,7 @@
                 <label class="col-xs-4 rl">
                     <input class="" type="radio" name="report_price_type" value="1"  <?php if($discountInfo['report_price_type']==1) echo 'checked';?> >
                     <span class="label pointer <?php if($discountInfo['report_price_type']==1) echo 'label-warning';?>"> 调整为</span>
-                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" <?php echo $discountInfo['set_report_price'];?>/>&nbsp;元
+                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" value="<?php echo $discountInfo['set_report_price'];?>" />&nbsp;元
                     <i class="icon-question-sign red bigger-120" data-content="" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
@@ -73,19 +73,19 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="discount_price_type" value="0" selected>
+                    <input class="" type="radio" name="discount_price_type" value="0" <?php if(!$discountInfo['discount_price_type'])echo 'checked';?>>
 
-                    <span class="label pointer label-warning"> 原价基础上减&nbsp;</span>
-                    <input type="text" name="discountprice" class="input-small"value="<?php echo $discountInfo['discount_price']/100;?>">&nbsp;元
+                    <span class="label pointer <?php if(!$discountInfo['discount_price_type'])echo 'label-warning';?>"> 原价基础上减&nbsp;</span>
+                    <input type="text" name="discountprice" class="input-small"value="<?php if(!$discountInfo['discount_price_type']) echo $discountInfo['discount_price']/100;?>">&nbsp;元
                 </label>
 
                 <label class="rl">
                     <input class="" type="radio" name="discount_price_type" value="1" <?php if($discountInfo['discount_price_type']==1)echo 'checked';?>>
-                    <span class="label pointer"> 固定价格&nbsp;</span>
-                    <input type="text" class="input-small" name="discount_price" disabled>&nbsp;元
+                    <span class="label pointer <?php if($discountInfo['discount_price_type']==1) echo 'label-warning';?>"> 固定价格&nbsp;</span>
+                    <input type="text" class="input-small" name="discount_price" value="<?php if($discountInfo['discount_price_type']==1) echo $discountInfo['discount_price']/100;?>" >&nbsp;元
                 </label>
-                    <i class="icon-question-sign red bigger-120" data-content="原售卖价”指（上传售票系统的价格+服务费）。<br/>此处设置的固定价格包含服务费，示例：固定价格设置为9.9元，<br/>即用户实际购买价为9.9元，9.9元中包含每张票相应的服务费。" data-placement="right"
-                       data-rel="popover" ></i>
+                <i class="icon-question-sign red bigger-120" data-content="原售卖价”指（上传售票系统的价格+服务费）。<br/>此处设置的固定价格包含服务费，示例：固定价格设置为9.9元，<br/>即用户实际购买价为9.9元，9.9元中包含每张票相应的服务费。" data-placement="right"
+                   data-rel="popover" ></i>
 
             </div>
         </div>
@@ -95,16 +95,16 @@
 
             <div class="col-sm-9">
                 <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="allowance_type" value="0" checked>
+                    <input class="" type="radio" name="allowance_type" value="0"  <?php if(!$discountInfo['allowance_type']) echo 'checked';?>>
 
-                    <span class="label pointer "> 补贴票数&nbsp;</span>
-                    <input type="text" class="input-small" name="allowance_tickets" value="<?php echo $discountInfo['allowance_tickets'];?>">&nbsp;张
+                    <span class="label pointer  <?php if(!$discountInfo['allowance_type']) echo 'label-warning';?> "> 补贴票数&nbsp;</span>
+                    <input type="text" class="input-small" name="allowance_tickets" value="<?php if(!$discountInfo['allowance_type']) echo $discountInfo['allowance_tickets'];?>">&nbsp;张
                 </label>
 
                 <label class="rl">
                     <input class="" type="radio" name="allowance_type" value="1"<?php if($discountInfo['allowance_type']==1) echo 'checked';?>>
-                    <span class="label pointer label-warning"> 预算金额&nbsp;</span>
-                    <input type="text" class="input-small" disable name="allowance_money" value="<?php echo $discountInfo['allowance_money'];?>">&nbsp;元
+                    <span class="label pointer  <?php if($discountInfo['allowance_type']) echo 'label-warning';?>"> 预算金额&nbsp;</span>
+                    <input type="text" class="input-small" disable name="allowance_money" value="<?php if($discountInfo['allowance_type'])echo $discountInfo['allowance_money'];?>">&nbsp;元
                 </label>
             </div>
         </div>
@@ -127,13 +127,13 @@
                 </label>
 
                 <label>
-                     <div class="input-icon">
+                    <div class="input-icon">
                         <input id="filmKeyword" type="text">
                         <i class="icon-search blue"></i>
-                         <button class="btn btn-purple btn-sm searchFilm" type="button">
-                             搜索
-                             <i class="icon-search icon-on-right bigger-110"></i>
-                         </button>
+                        <button class="btn btn-purple btn-sm searchFilm" type="button">
+                            搜索
+                            <i class="icon-search icon-on-right bigger-110"></i>
+                        </button>
                     </div>
                 </label>
             </div>
@@ -181,21 +181,15 @@
                         <div class="widget-main no-padding">
                             <div class="dialogs" id="selectMovieTo">
                                 <?php
-                                 if($discountInfo['join_movies']) {
-                                     $movieNos = json_decode($discountInfo['join_movies'], true);
-                                     foreach ($movieNos as $movie_no) {
-                                         $movie_name = \backend\models\SmartFilm::model()->sGetFilmNameByNo($movie_no);
-                                         echo '<div class="infobox infobox-green infobox-small infobox-dark switch">
+                                if($discountInfo['join_movies']) {
+                                    $movieNos = json_decode($discountInfo['join_movies'], true);
+                                    foreach ($movieNos as $movie_no) {
+                                        $movie_name = \backend\models\SmartFilm::model()->sGetFilmNameByNo($movie_no);
+                                        echo '<div class="infobox infobox-green infobox-small infobox-dark switch">
                                     <input type="hidden" value="' . $movie_no . '" name="films[]">' . $movie_name . '</div>';
-                                     }
-                                 }
+                                    }
+                                }
                                 ?>
-                                <div class="infobox infobox-green infobox-small infobox-dark switch">
-                                    <input type="hidden" value="1636" name="films[]">
-                                    洛克王国3：圣龙的守护
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -233,7 +227,7 @@
                 for(prv in film){
                     if(!selectFilm[prv]==1){
                         $('<div class="infobox infobox-green infobox-small infobox-dark switch">' +
-                        '<input type="hidden" name="films[]" value="'+prv+'">'+film[prv]+' </div>')
+                            '<input type="hidden" name="films[]" value="'+prv+'">'+film[prv]+' </div>')
                             .appendTo('#selectMovieFrom')
                     }
                 }
@@ -257,14 +251,14 @@
             'Selecthalls':              {'type':'radio',  'error':"请选择影厅",          require:1},
             'scenes_price_protection':  {'type':'text',  'error':"",                        require:0},
             'report_price_type':        {'type':'radio',  'error':"请设置上报票房价格",        require:1,
-                                        sub:{1:'set_report_price'}},
+                sub:{1:'set_report_price'}},
             'discount_price_type':      {'type':'radio',  'error':"请设置售卖价",              require:1,
-                                        sub:{0:'discountprice',      1:'discount_price'}},
+                sub:{0:'discountprice',      1:'discount_price'}},
             'allowance_type':           {'type':'radio',  'error':"请设置补贴方式",              require:1,
-                                        sub:{0:'allowance_tickets',  1:'allowance_money'}},
+                sub:{0:'allowance_tickets',  1:'allowance_money'}},
             'filmLmit':                 {'type':'radio',  'error':"请设置影片",              require:1},
             'ticketlimit':              {'type':'radio',  'error':"请设置用户限购",              require:1,
-                                        sub:{1:'one_use_max'}},
+                sub:{1:'one_use_max'}},
             'version':                  {'type':'check',  'error':"电影版本",              require:0}
         }
 

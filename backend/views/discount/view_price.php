@@ -190,12 +190,6 @@
                                      }
                                  }
                                 ?>
-                                <div class="infobox infobox-green infobox-small infobox-dark switch">
-                                    <input type="hidden" value="1636" name="films[]">
-                                    洛克王国3：圣龙的守护
-                                </div>
-
-
                             </div>
                         </div>
                     </div>
