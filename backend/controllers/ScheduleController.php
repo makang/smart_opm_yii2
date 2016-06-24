@@ -1,6 +1,7 @@
 <?php
 
 namespace backend\controllers;
+use backend\models\SmartPullSchedule;
 use Yii;
 use backend\models;
 use backend\models\SmartCinema;
@@ -36,5 +37,19 @@ class ScheduleController extends \yii\web\Controller
             'show_date' => $schedule['show_date'],
             'movie_name'=> $schedule['movie_name']
         ]);
+    }
+    public function actionSchedulepull(){
+        $return=SmartPullSchedule::insertPullSchedule(Yii::$app->request->queryParams);
+        if($return>0){
+            echo "<script>alert('拉取成功');
+                  history.go(-1);
+                  exit;
+                  </script>";
+        }else{
+            echo "<script>alert('拉取失败');
+                  history.go(-1);
+                  exit;
+                  </script>";
+        }
     }
 }

@@ -257,4 +257,10 @@ class SmartSchedule extends \yii\db\ActiveRecord
 
         return $schedule;
     }
+    /*
+     * 根据影院编号拉取排期
+     */
+    public static  function  pullSchedule(){
+
+    }
 }
