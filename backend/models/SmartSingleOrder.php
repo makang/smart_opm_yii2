@@ -7,9 +7,9 @@ use yii\data\ActiveDataProvider;
 
 class SmartSingleOrder extends \yii\db\ActiveRecord {
 
-    protected static $_STATUS_PAYED    = 1;
-    protected static $_STATUS_UNPAYED  = 0;
-    protected static $_STATUS_REFUND   = 2;
+    public static $_STATUS_PAYED    = 1;
+    public static $_STATUS_UNPAYED  = 0;
+    public static $_STATUS_REFUND   = 2;
 
 
     protected $_ORDER_TYPE_ENCHARGE = 1;        //充值
@@ -35,9 +35,9 @@ class SmartSingleOrder extends \yii\db\ActiveRecord {
 
     public function sOrderStatus($status){
         switch($status){
-            case $this->_STATUS_UNPAYED:return '<span class="text-primary">未支付</span>';break;
-            case $this->_STATUS_PAYED:return '<span class="text-danger">已支付</span>';break;
-            case $this->_STATUS_REFUND:return '<span class="text-success">已退款</span>';break;
+            case self::$_STATUS_UNPAYED:return '<span class="text-primary">未支付</span>';break;
+            case self::$_STATUS_PAYED:return '<span class="text-danger">已支付</span>';break;
+            case self::$_STATUS_REFUND:return '<span class="text-success">已退款</span>';break;
             default :return '<span class="text-primary">未支付</span>';
         }
     }
