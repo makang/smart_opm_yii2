@@ -91,11 +91,11 @@ class SmartPublicsignalStatistics extends \yii\db\ActiveRecord
         if (isset($params['publicsignalname'])) {
             $query->andFilterWhere(['like', 'publicsignalname', $params['publicsignalname']]);
         }
-        $sort = (isset($params['sort']) && $params['sort']) ? $params['sort'] : 'create_time';
+        $sort = (isset($params['orderby']) && $params['orderby']) ? $params['orderby'] : 'create_time';
 
         $query->groupBy('publicsignalshort');
         $query->orderBy([$sort => SORT_DESC]);
-        
+
         return $dataProvider;
     }
 }
