@@ -117,11 +117,11 @@ class SmartMemberOrder extends \yii\db\ActiveRecord
 
         if (isset($params['start_date']) || isset($params['end_date'])) {
             if ($params['start_date'] && $params['end_date']) {
-                $query->where("smart_member_order.pay_time between '" .strtotime( $params['start_date']) . "' and '" . strtotime($params['end_date']) . "'");
+                $query->where("smart_member_order.pay_time between '" .( $params['start_date']) . "' and '" . ($params['end_date']) . "'");
             } elseif ($params['start_date']) {
-                $query->where("smart_member_order.pay_time>='" .strtotime( $params['start_date']) . "'");
+                $query->where("smart_member_order.pay_time>='" .( $params['start_date']) . "'");
             } elseif ($params['end_date']) {
-                $query->where("smart_member_order.pay_time<='" .strtotime( $params['end_date']) . "'");
+                $query->where("smart_member_order.pay_time<='" .( $params['end_date']) . "'");
             }
         }
         $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
