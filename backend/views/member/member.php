@@ -99,8 +99,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
                     }],
                     ['label' => '会员卡号', 'value' =>function($row){
-                        //var_dump($row);exit();
-                        ///return $row['smart_orders']['smart_schdule']['smart_member_card']['card_no'];
+                        return \backend\models\SmartMemberCard::sGetCardNo($row['card_id']);
                     }]
                 ],
             ]); ?>

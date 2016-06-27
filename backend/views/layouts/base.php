@@ -19,7 +19,7 @@ AppAsset::register($this);
     <?php $this->head() ?>
     <script type="text/javascript" src="/js/jquery-1.8.3.min.js"></script>
 </head>
-<body style="background-color: rgba(75, 80, 102, 0.92)">
+<body style="background-color: #281f66">
     <?php $this->beginBody() ?>
     <?= $content ?>
     <?php $this->endBody() ?>
