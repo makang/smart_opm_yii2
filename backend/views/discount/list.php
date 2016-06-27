@@ -98,11 +98,11 @@ use yii\widgets\ActiveForm;
                     }],
 
                     ['label'=>'已减金额','value'=>function($row){
-                        $spend_money = $row['send_money']  ? $row['send_money']/100 : 0 ;
+                        $spend_money = $row['send_money']  ? ($row['send_money']/100) : 0 ;
                         if($row['allowance_type']==1)
                             $allowance_money = $row['allowance_money'] /100;
                         else
-                            $allowance_money = $row['allowance_money'] ? $row['allowance_money'] /100 : '--';
+                            $allowance_money = $row['allowance_money'] ? ($row['allowance_money'] /100 ): '--';
                         return  $spend_money  .'/'.$allowance_money;
                     }],
                     [

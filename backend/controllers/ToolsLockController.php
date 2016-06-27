@@ -31,11 +31,7 @@ class ToolsLockController  extends CommonController{
     }
 
     public function actionIndex(){
-
-
-
-
-       return $this->render('index',['output'=>'123']);
+        return $this->render('index',['output'=>'']);
     }
 }
  

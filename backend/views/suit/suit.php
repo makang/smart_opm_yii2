@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php $form = ActiveForm::begin([
                             'action' => ['order'],
                             'method' => 'get',
+                            'id'     =>  'searchform'
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
@@ -134,5 +135,4 @@ $this->params['breadcrumbs'][] = $this->title;
         language:  'zh-CN',
         autoclose:'true'
     })
-
 </script>
