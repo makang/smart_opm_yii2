@@ -19,7 +19,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 场次价格保护 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="scenes_price_protection" maxlength="14" placeholder="" class="col-xs-10 col-sm-5" />
+                <input type="text" id="" name="scenes_price_protection" maxlength="14" placeholder="" class="col-xs-10 col-sm-1" />
                 <span class="red"> 场次原价格高于此价格，则不参加本次活动(包含手续费) </span>
             </div>
         </div>
@@ -37,11 +37,28 @@
                     <span class="label pointer label-warning"> 不变</span>
                 </label>
 
-                <label class="col-xs-4 rl">
+                <label class="col-xs-10 rl">
                     <input class="" type="radio" name="report_price_type" value="1">
                     <span class="label pointer"> 调整为</span>
                     <input type="text" name="set_report_price" disabled placeholder="" class="input-small" />&nbsp;元
-                    <i class="icon-question-sign red bigger-120" data-content="Hello Everybody<br />Test(br)!" data-placement="right"
+                    <i class="icon-question-sign red bigger-120" data-content="
+
+1.上报票房价格不变指本次活动上传给售票系统的价格为正常的结算价。<br/>
+
+2.手动设置上报票房价格为上传给售票系统的价格。<br/>
+
+3.如果要设置多影片最低发行价上报票务系统时：<br/>
+
+①当各影片最低发行价一致时，填写最低发行价即可；<br/>
+
+②当各影院最低发行价不一致时；填写各影片中最低的那部影片的<br/>
+
+发行价即可；（只限于使用鼎鑫、辰星、火烈鸟三家系统的影院或院线）<br/>
+
+③如果其他售票系统影院设置活动，请将最低发行价相同的影片/影院放在<br/>
+
+同一个活动里设置。如有问题，请联系智慧影院运营。<br/>
+" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
 
@@ -57,10 +74,10 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>价格保护 </label>
 
             <div class="col-sm-9">
-                <label class="col-xs-5">
+                <label class="col-xs-8">
                     <input class="ace" type="checkbox" disabled="" checked name="form-field-checkbox">
                     <span class="lbl"> 上报票房价格不得低于最低发行价</span>
-                    <i class="icon-question-sign red bigger-120" data-content="该选项不可取消，且只适用于使用鼎鑫、火凤凰、火烈鸟三家系统的影院。" data-placement="right"
+                    <i class="icon-question-sign red bigger-120" data-content="该选项不可取消，且只适用于使用鼎鑫、辰星、火烈鸟三家系统的影院。" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
             </div>
