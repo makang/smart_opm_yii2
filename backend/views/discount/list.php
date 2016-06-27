@@ -25,13 +25,9 @@ use yii\widgets\ActiveForm;
                             <select name="status" style="width: 100px">
                                 <?php
                                     foreach($dataStatus as $k=>$v){
-                                        if($_REQUEST['status']==$k){
-                                            echo '<option value="'.$k.'" selected>'.$v.'</option>';
-                                        }else{
-                                            echo '<option value="'.$k.'">'.$v.'</option>';
-                                        }
-
-
+                                        $k = $k."";
+                                        $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                        echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                     }
                                 ?>
 
@@ -42,7 +38,6 @@ use yii\widgets\ActiveForm;
                             <i class="icon-search"></i>
                             <input type="text" name="name" class="search-query" placeholder="活动名称" value="<?= !empty($_REQUEST['name'])?$_REQUEST['name']:'' ?>"/>
                         </span>
-
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
                             <input type="text" name="pd_id" class="search-query" placeholder="活动编号" value="<?= !empty($_REQUEST['pd_id'])?$_REQUEST['pd_id']:'' ?>"/>
