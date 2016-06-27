@@ -92,18 +92,18 @@ use yii\widgets\ActiveForm;
                     ],
 
                     ['label'=>'已售优惠票/补贴总票数','value'=>function($row){
-                        $spend_tickets = \backend\models\SmartPriceDiscountOrder::getTiketNum($row['pd_id']);
+                        $spend_tickets = \backend\models\SmartPriceDiscountOrder::getTiketNum($row['pd_id'])?\backend\models\SmartPriceDiscountOrder::getTiketNum($row['pd_id']):0;
                         $total_tickets = (!$row['allowance_type'])  ? $row['allowance_tickets']  : '--';
                           return  $spend_tickets.'/'.$total_tickets;
                     }],
 
                     ['label'=>'已减金额','value'=>function($row){
-                        $spend_money = $row['send_money']  ? ($row['send_money']/100) : 0 ;
+                        $spend_money = \backend\models\SmartPriceDiscountOrder::getDiscountMoney($row['pd_id'])  ? \backend\models\SmartPriceDiscountOrder::getDiscountMoney($row['pd_id']) : 0 ;
                         if($row['allowance_type']==1)
                             $allowance_money = $row['allowance_money'] /100;
                         else
                             $allowance_money = $row['allowance_money'] ? ($row['allowance_money'] /100 ): '--';
-                        return  $spend_money  .'/'.$allowance_money;
+                        return  round($spend_money,2)  .'/'.$allowance_money;
                     }],
                     [
                         'label'=>'活动状态',

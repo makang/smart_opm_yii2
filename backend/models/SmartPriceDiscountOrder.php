@@ -150,4 +150,17 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
         }
         return $num;
     }
+    /*
+     * 根据活动Id获取已售立减票
+     */
+    public static  function getDiscountMoney($pd_id){
+        $money='0';
+        if($pd_id){
+            $discountOrderInfo=SmartPriceDiscountOrder::find()->select('sum(discount_money/100) as num ')->where('status =1 and pd_id = '.$pd_id)->asArray()->one();
+            if($discountOrderInfo){
+                $money=$discountOrderInfo['num'];
+            }
+        }
+        return $money;
+    }
 }
