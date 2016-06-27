@@ -91,7 +91,7 @@ class SmartSuits extends \yii\db\ActiveRecord
         $suit_name='';
         $cinema_name='';
         if($suit_id) {
-            $suitInfo = SmartSuits::find($suit_id)->asArray()->one();
+            $suitInfo = SmartSuits::find()->where('sid='.$suit_id)->asArray()->one();
             if($suitInfo){
                 $suit_name=$suitInfo['suit_name'];
                 $cinema_name=$suitInfo['cinema_name'];
