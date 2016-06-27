@@ -24,13 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_start" name="start_date" class="search-query"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d ',time()-2*24*60*60); ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_end" name="end_date" class="search-query"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] :date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] :date('Y-m-d ',time()); ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
@@ -91,44 +91,23 @@ $this->params['breadcrumbs'][] = $this->title;
 </script>
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
 
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
+
+
+
 <script type="text/javascript">
     jQuery(function ($) {
         $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        })
-        $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        });
-
-
-        $(".chosen-select").chosen();
-    });
-
-
-</script>
-<script type="text/javascript">
-    jQuery(function ($) {
-        $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
         })
         $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
         });
 
 
