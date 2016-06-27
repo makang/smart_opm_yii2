@@ -24,7 +24,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
 
 
     public STATIC $_STATUS_SHOW = array(
-        ''=>'全部',
+        'all'=>'全部状态',
         0=>'未开始',
         1=>'生效中',
         3=>'已结束',
@@ -141,21 +141,12 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
 
         !empty($params['pd_id'])?$query->andFilterWhere(['pd_id'=>$params['pd_id']]):'';
         !empty($params['name'])?$query->andFilterWhere(['like','name',$params['name']]):'';
-        isset($params['status']) && $params['status']!=='' ?$query->andFilterWhere(['status'=>$params['status']]):'';
+        $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
+        if ($order_status !='all') {
+            $query->andWhere(['status' => $order_status]);
+        }
         $query->addOrderBy('pd_id desc');
 
-        $opOrders = array();
-        foreach($dataProvider->getModels() as $v){
-            $modelArray = $v->toArray();
-            $ticketNum   =   SmartPriceDiscountOrder::model()->iGetConsmeTicket($v->pd_id);
-            $modelArray['ticket_num'] = $ticketNum;
-            $sendMoney   =   SmartPriceDiscountOrder::model()->iGetSendMoney($v->pd_id);
-            $modelArray['send_money'] = $sendMoney;
-
-            $opOrders[] = $modelArray;
-        }
-
-        $dataProvider->setModels($opOrders);
         return $dataProvider;
     }
     /**返回活动的状态
