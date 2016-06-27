@@ -68,7 +68,7 @@ AppAsset::register($this);
 
     <div class="navbar-container" id="navbar-container">
         <div class="navbar-header pull-left">
-            <a href="#" class="navbar-brand">
+            <a href="/" class="navbar-brand">
                 <small>
                     <i class="icon-leaf"></i>
                     智慧影院管理后台
