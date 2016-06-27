@@ -78,8 +78,9 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        return ($row==1)?'op':'opm';
 //                    }],
                     ['label' => '商品详情', 'value' => function($row){
-
-                       return  "《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name']."  ".$row['smart_orders']['seat_info'];
+                        $goodInfo="《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name'];
+                        $goodInfo.="  ".\backend\models\SmartOrders::formatSeat($row['smart_orders']['seat_info']);
+                       return  $goodInfo;
 
                     }],
                     ['label' => '订单ID', 'value' => 'orderid'],

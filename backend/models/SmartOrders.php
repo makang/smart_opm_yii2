@@ -186,4 +186,16 @@ class SmartOrders extends \yii\db\ActiveRecord
         $query->OrderBy('smart_orders.dateline desc');
         return $dataProvider;
     }
+    public static function formatSeat($seatInfo) {
+        $return = ' ';
+        $seats  = explode('|', $seatInfo);
+        if ($seats) {
+            foreach ($seats as $seat) {
+                $tmp = explode(':', $seat);
+                $return .= $tmp[1] . '排' . $tmp[2] . '座   ';
+            }
+        }
+
+        return $return;
+    }
 }
