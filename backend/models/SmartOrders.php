@@ -51,7 +51,6 @@ class SmartOrders extends \yii\db\ActiveRecord
     public static function getStatus()
     {
         return array(
-            ''=>'',
             0 => '未支付',
             1 => '已支付',
             2 => '已出票',
