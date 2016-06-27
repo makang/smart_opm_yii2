@@ -75,6 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'columns' => [
                     ['label' => '卖品订单号', 'value' => 'id'],
                     ['label' => '影院名称', 'value' => function($row){
+                       // var_dump($row);exit();
                         return SmartSuits::getName($row['suit_id'],'cinema_name');
                     }],
                     ['label' => '购买时间', 'value' => function($row){
