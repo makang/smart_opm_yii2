@@ -92,7 +92,7 @@ use yii\widgets\ActiveForm;
                     ],
 
                     ['label'=>'已售优惠票/补贴总票数','value'=>function($row){
-                        $spend_tickets = $row['ticket_num'] ? $row['ticket_num'] : 0 ;
+                        $spend_tickets = \backend\models\SmartPriceDiscountOrder::getTiketNum($row['pd_id']);
                         $total_tickets = (!$row['allowance_type'])  ? $row['allowance_tickets']  : '--';
                           return  $spend_tickets.'/'.$total_tickets;
                     }],

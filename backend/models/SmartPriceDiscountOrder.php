@@ -137,4 +137,17 @@ class SmartPriceDiscountOrder extends \yii\db\ActiveRecord
         $query->OrderBy('create_time desc');
         return $dataProvider;
     }
+    /*
+     * 根据活动Id获取已售立减票
+     */
+    public static  function getTiketNum($pd_id){
+       $num='0';
+       if($pd_id){
+           $discountOrderInfo=SmartPriceDiscountOrder::find()->select('sum(ticket_num) as num ')->where('status =1 and pd_id = '.$pd_id)->asArray()->one();
+          if($discountOrderInfo){
+               $num=$discountOrderInfo['num'];
+           }
+        }
+        return $num;
+    }
 }
