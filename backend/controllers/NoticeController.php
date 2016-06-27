@@ -27,11 +27,9 @@ class NoticeController extends \yii\web\Controller
     }
     public function actionList()
     {
-        //$this->layout='base';
-        $searchModel = new OpmOpSystemNoticeSearch();
+        $searchModel = new OpmOpSystemNotice();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
-           // 'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

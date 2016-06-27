@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "opm_op_system_notice".
@@ -69,5 +70,47 @@ class OpmOpSystemNotice extends \yii\db\ActiveRecord
     public static function find()
     {
         return new OpmOpSystemNoticeQuery(get_called_class());
+    }
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function search($params)
+    {
+        $query = OpmOpSystemNotice::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'upTime' => $this->upTime,
+            'url' => $this->url,
+            'status' => $this->status,
+            'creatTime' => $this->creatTime,
+            'uid' => $this->uid,
+            'upuid'=>$this->upuid,
+        ]);
+
+        $query->andFilterWhere(['like', 'uname', $this->uname])
+            ->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'upuname', $this->upuname]);
+
+        return $dataProvider;
     }
 }
