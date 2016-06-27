@@ -29,17 +29,17 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>场次优惠时段 </label>
 
             <div class="col-sm-9">
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                <div class="input-group bootstrap-timepicker col-sm-2 " style="float:left;padding-right: 3px">
                     <input id="" type="text" class="form-control timepicker" />
 
                 </div>
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                <div class="input-group bootstrap-timepicker col-sm-2 " style="float:left;padding-right: 3px">
                     <input id="" type="text" class="form-control timepicker" />
                     <span class="input-group-addon">
                         <i class="icon-time bigger-110"></i>
                     </span>
                 </div>
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
+                <div class="input-group bootstrap-timepicker col-sm-2 " style="float:left;padding-right: 3px">
                     <button class="btn btn-info btn-sm" type="button" id="addTime">
                         <i class="icon-plus bigger-110"></i>
                     </button>
@@ -85,12 +85,12 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>影厅 </label>
 
             <div class="col-sm-9">
-                <label class="col-xs-2 rl">
+                <label class="col-xs-2 rl selectHall">
                     <input class="" type="radio" name="Selecthalls" checked value="0">
                     <span class="label pointer label-warning">全部</span>
                 </label>
 
-                <label class="col-xs-2 rl">
+                <label class="col-xs-2 rl selectHall">
                     <input class="" type="radio" name="Selecthalls" value="1">
                     <span class="label pointer"> 选择影厅</span>
                 </label>
@@ -100,7 +100,7 @@
         <div class="space-4"></div>
 
 
-        <div class="form-group">
+        <div class="form-group" id="halls" style="display:none">
             <label class="col-sm-1 control-label no-padding-right" for="form-field-1"> </label>
             <div class="col-sm-8">
                 <div class="widget-box ">
@@ -173,4 +173,10 @@
             $(hallstr).appendTo('#cinemaHall');
         }
 
+    $('.selectHall').on('click',function(){
+       var select =  $(this).children('input[name=Selecthalls]').val();
+       var show = select==1?"block":"none";
+        console.log(show);
+       $('#halls').css('display',show);
+    })
 </script>
