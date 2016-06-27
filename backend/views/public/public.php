@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query"
+                            <input type="text" id="datepickers_start" readonly name="start_date" class="search-query"
                                    placeholder="开始日期"
                                    value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d ',time()-2*24*60*60); ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query"
+                            <input type="text" id="datepickers_end" readonly name="end_date" class="search-query"
                                    placeholder="结束日期"
                                    value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] :date('Y-m-d ',time()); ?>"/>
                         </span>
