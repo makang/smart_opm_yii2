@@ -96,7 +96,7 @@ use yii\widgets\ActiveForm;
                           return  $spend_tickets.'/'.$total_tickets;
                     }],
 
-                    ['label'=>'已减金额','value'=>function($row){
+                    ['label'=>'已减金额/优惠总额','value'=>function($row){
                         $spend_money = \backend\models\SmartPriceDiscountOrder::getDiscountMoney($row['pd_id'])  ? \backend\models\SmartPriceDiscountOrder::getDiscountMoney($row['pd_id']) : 0 ;
                         if($row['allowance_type']==1)
                             $allowance_money = $row['allowance_money'] /100;
