@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="suit_id" class="search-query" placeholder="请输入订单编号"
+                            <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号"
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 130px">
