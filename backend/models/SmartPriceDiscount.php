@@ -235,5 +235,16 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         // $this->setAttributes($data,false);
         return $model->save();
     }
+    public static function iGetOperatePlatform($pd_id){
+        $discountInfo=array();
+        if($pd_id){
+            $discountInfo=SmartPriceDiscount::find()->where('pd_id='.$pd_id)->asArray()->one();
+            if(isset($discountInfo['operate_platform'])){
+                return $discountInfo['operate_platform'];
+            }
+        }
+
+        return $discountInfo;
+    }
 }
 ?>

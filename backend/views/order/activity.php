@@ -72,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '影院名称', 'value' => function($row){
                         return $row['smart_orders']['smart_schedule']['cinema_name'];
                     }],
-//                    ['label' => '创建平台', 'value' => function($row){
-//                        var_dump($row['smart_orders']['smart_schedule']['movie_name']);exit();
-//                        return ($row==1)?'op':'opm';
-//                    }],
+                    ['label' => '创建平台', 'value' => function($row){
+                        $operate_platform=\backend\models\SmartPriceDiscount::iGetOperatePlatform($row['pd_id']);
+                        return ($operate_platform==1)?'op':'opm';
+                    }],
                     ['label' => '商品详情', 'value' => function($row){
                         $goodInfo="《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name'];
                         $goodInfo.="  ".\backend\models\SmartOrders::formatSeat($row['smart_orders']['seat_info']);
