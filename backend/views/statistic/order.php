@@ -54,7 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'lastPageLabel' => '最后一页',
                 ],
                 'columns' => [
-                    ['label' => '日期', 'value' => 'order_day'],
+                    ['label' => '日期', 'format'=>'html', 'value' => function($row){
+                        return Html::a($row['order_day'],
+                            ['list', 'day'=> $row['order_day']],
+                            [
+                                'class' => 'btn btn-xs btn-warning confirm',
+                            ]
+                        );
+                    }],
                     ['label' => '出票数', 'value' => 'ticket_num'],
                     ['label' => '订单数', 'value' => 'order_num'],
                     ['label' => '订单额', 'value' => function ($row) {
