@@ -78,7 +78,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>用户人群 </label>
 
-            <div>
+            <div class="col-sm-9">
                 <label class="rl">
                     <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==0) echo 'checked';?> value="0">
                     <span class="label  <?php if($discountInfo['user_limit']==0) echo 'label-warning'; ?> pointer"> 不限</span>
@@ -105,7 +105,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>参与影院 </label>
 
-            <div >
+            <div class="col-sm-9" >
                 <label class="rl">
                     <input class="" type="radio" name="cinemaLimit" <?php if($discountInfo['join_cinema_type']==0) echo 'checked';?> value="0" id="cinemaLimit">
                     <span class="label  <?php if($discountInfo['join_cinema_type']==0) echo 'label-warning'; ?>  pointer"> 全国</span>
