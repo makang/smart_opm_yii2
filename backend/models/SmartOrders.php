@@ -191,6 +191,7 @@ class SmartOrders extends \yii\db\ActiveRecord
         if ($seats) {
             foreach ($seats as $seat) {
                 $tmp = explode(':', $seat);
+                if(isset($tmp[1]))
                 $return .= $tmp[1] . '排' . $tmp[2] . '座   ';
             }
         }
