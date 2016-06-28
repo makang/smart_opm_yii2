@@ -25,13 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_start" name="start_date"  readonly class="search-query datetimepicker"
                                    placeholder="开始日期"
                                    value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_end" name="end_date" readonly class="search-query datetimepicker"
                                    placeholder="结束日期"
                                    value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
@@ -118,21 +118,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <script type="text/javascript">
 
-    $('.datetimepicker').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
-    });
+    jQuery(function ($) {
+        $("#datepickers_start").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        })
+        $("#datepickers_end").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        });
 
-    //        //日历选择
-    $(".datepicker").datepicker({
-        format: "yyyy-mm-dd",
-        language:  'zh-CN',
-        autoclose:'true'
-    })
+
+        $(".chosen-select").chosen();
+    });
 </script>
