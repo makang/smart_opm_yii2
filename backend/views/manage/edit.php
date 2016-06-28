@@ -347,6 +347,10 @@ use yii\widgets\ActiveForm;
                         }
                     }
                     ?>
+
+
+
+                    <span class="red"> *如果是分账号,请到公众号绑定页面设置证书信息</span>
                 </div>
 
 
