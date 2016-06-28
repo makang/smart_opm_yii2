@@ -85,12 +85,12 @@
                 </label>
 
                 <label class="rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==1) echo 'checked';?>value="1">
+                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==1) echo 'checked';?> value="1">
                     <span class="label  <?php if($discountInfo['user_limit']==1) echo 'label-warning'; ?> pointer"> 新用户</span>
                 </label>
 
                 <label class=" rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==2) echo 'checked';?>value="2">
+                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==2) echo 'checked';?> value="2">
                     <span class="label <?php if($discountInfo['user_limit']==2) echo 'label-warning'; ?> pointer"> 老用户</span>
                 </label>
                 <label class="rl">
