@@ -40,7 +40,7 @@
                 <label class="col-xs-4 rl">
                     <input class="" type="radio" name="report_price_type" value="1"  <?php if($discountInfo['report_price_type']==1) echo 'checked';?> >
                     <span class="label pointer <?php if($discountInfo['report_price_type']==1) echo 'label-warning';?>"> 调整为</span>
-                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" value="<?php echo $discountInfo['set_report_price'];?>" />&nbsp;元
+                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" value="<?php echo $discountInfo['set_report_price']/100;?>" />&nbsp;元
                     <i class="icon-question-sign red bigger-120" data-content="" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
@@ -60,7 +60,7 @@
                 <label class="col-xs-5">
                     <input class="ace" type="checkbox" disabled="" checked name="form-field-checkbox">
                     <span class="lbl"> 上报票房价格不得低于最低发行价</span>
-                    <i class="icon-question-sign red bigger-120" data-content="该选项不可取消，且只适用于使用鼎鑫、火凤凰、火烈鸟三家系统的影院。" data-placement="right"
+                    <i class="icon-question-sign red bigger-120" data-content="该选项不可取消，且只适用于使用鼎鑫、辰星、火烈鸟三家系统的影院。" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
             </div>
@@ -104,7 +104,7 @@
                 <label class="rl">
                     <input class="" type="radio" name="allowance_type" value="1"<?php if($discountInfo['allowance_type']==1) echo 'checked';?>>
                     <span class="label pointer  <?php if($discountInfo['allowance_type']) echo 'label-warning';?>"> 预算金额&nbsp;</span>
-                    <input type="text" class="input-small" disable name="allowance_money" value="<?php if($discountInfo['allowance_type'])echo $discountInfo['allowance_money'];?>">&nbsp;元
+                    <input type="text" class="input-small" disable name="allowance_money" value="<?php if($discountInfo['allowance_type'])echo $discountInfo['allowance_money']/100;?>">&nbsp;元
                 </label>
             </div>
         </div>
