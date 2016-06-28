@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <input type="text" name="cinema_name" class="search-query" placeholder="请输入影院名称"
                                    value="<?= !empty($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : '' ?>"/>
                         </span>
-                        <span class="input-icon align-middle" style="width: 200px">
+                        <span class="input-icon align-middle" style="width: 15qa0px">
 
                             <select class="width-100" name="status">
                                   <option value="all" >全部状态</option>
