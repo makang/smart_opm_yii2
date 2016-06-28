@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
             <div class="widget-header widget-header-large">
                 <h3 class="grey lighter pull-left position-relative">
                     <i class="icon-leaf green"></i>
-                    公众号影院绑定
+                    公众号影院绑定<a href="#" onclick="javascript:history.go(-1)"><button class="btn btn-success">返回</button></a>
                 </h3>
 
 
