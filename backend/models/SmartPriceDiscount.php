@@ -187,14 +187,15 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         switch ($row['status']) {
             case self::$_STATUS_UNSTART:
                 return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-               // Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
-                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+               // Html::a('关闭', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('开启', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
 
                 break;
             case self::$_STATUS_STARTING:
-                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                //Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
-                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+                return  //Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
+                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
             case self::$_STATUS_FINISHED:
                 return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
@@ -203,9 +204,8 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
                 return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
             case self::$_STATUS_CLOSED:
-                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                //Html::a('删除', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
-                Html::a('开始', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]);
+                return  Html::a('开始', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
         }
     }
@@ -231,7 +231,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
     }
     public function bDeleteDiscount($id){
         $model=SmartPriceDiscount::findOne($id);
-        $model->status=1;
+        $model->status=3;
         // $this->setAttributes($data,false);
         return $model->save();
     }
