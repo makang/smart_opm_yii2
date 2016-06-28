@@ -40,7 +40,7 @@
                 <label class="col-xs-4 rl">
                     <input class="" type="radio" name="report_price_type" value="1"  <?php if($discountInfo['report_price_type']==1) echo 'checked';?> >
                     <span class="label pointer <?php if($discountInfo['report_price_type']==1) echo 'label-warning';?>"> 调整为</span>
-                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" <?php echo $discountInfo['set_report_price'];?>/>&nbsp;元
+                    <input type="text" name="set_report_price" disabled placeholder="" class="input-small" value="<?php echo $discountInfo['set_report_price']/100;?>"/>&nbsp;元
                     <i class="icon-question-sign red bigger-120" data-content="" data-placement="right"
                        data-rel="popover" ></i>
                 </label>
