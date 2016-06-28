@@ -111,7 +111,7 @@ class SmartSchedule extends \yii\db\ActiveRecord
 
     public static function getStatistic()
     {
-        $today = strtotime(date('Y-m-d', time()));
+        $today = strtotime(date('Y-m-d', time()))."";
         do {
             $num = SmartSchedule::find()->where(['show_date' => $today])->count();
             $stop_num = SmartSchedule::find()->where('status=1 or  schedule_status=9')->andWhere(['show_date' => $today])->count();
@@ -122,12 +122,11 @@ class SmartSchedule extends \yii\db\ActiveRecord
                 'stop_num' => $stop_num
             );
 
-            $today = strtotime(date('Y-m-d H:i:s', $today) . '+1 day');
+            $today = strtotime(date('Y-m-d H:i:s', $today) . '+1 day').'';
         } while ($today <= (time() + 3 * 24 * 60 * 60));
 
-        $day = strtotime(date('Y-m-d', time()));
+        $day = strtotime(date('Y-m-d', time())).'';
         $stop_schedule = SmartSchedule::find()->select('cinema_no,cinema_name,count(*) top_stop_num ')->where('status=1 or  schedule_status=9')->andWhere(['show_date' => $day])->groupBy('cinema_no')->limit(10)->orderBy(['top_stop_num' => SORT_DESC])->asArray()->all();
-
         foreach ($stop_schedule as $stop) {
             $cinema_no[] = $stop['cinema_no'];
         }
