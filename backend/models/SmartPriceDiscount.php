@@ -27,7 +27,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         'all'=>'全部状态',
         0=>'未开始',
         1=>'生效中',
-        3=>'已结束',
+        3=>'已关闭',
         4=>'已结束',
         5=>'库存不足'
     );
