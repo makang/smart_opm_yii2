@@ -78,7 +78,7 @@ class SmartPublicsignalStatistics extends \yii\db\ActiveRecord
         if ($this->validate()) {
             return $dataProvider;
         }
-        $query->select('id , publicsignalname, sum(new_user) new_user,sum(cancel_user) cancel_user,sum(increase_user) increase_user,max(cumulate_user) cumulate_user,sum(total_orders) total_orders,sum(total_sales)/100 total_sales,sum(suits_order_totals) suits_order_totals,sum(suits_order_money_totals) suits_order_money_totals ');
+        $query->select('id , publicsignalname, sum(new_user) new_user,sum(cancel_user) cancel_user,sum(increase_user) increase_user,max(cumulate_user) cumulate_user,sum(total_orders) total_orders,sum(total_sales)/100 total_sales,sum(suits_order_totals) suits_order_totals,sum(suits_order_money_totals)/100 suits_order_money_totals ');
         if (isset($params['start_date']) || isset($params['end_date'])) {
             if ($params['start_date'] && $params['end_date']) {
                 $query->where("create_time between '" . $params['start_date'] . "' and '" . $params['end_date'] . "'");
