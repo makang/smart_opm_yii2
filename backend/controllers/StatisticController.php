@@ -9,12 +9,15 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use backend\controllers\CommonController;
 
 /**
  * StatisticController implements the CRUD actions for SmartPublicsignalStatistics model.
  */
-class StatisticController extends Controller
+class StatisticController extends CommonController
 {
+    protected $mo       =   'SmartOrderStatistic';
+    public    $param    =   '';
     /**
      * @inheritdoc
      */
@@ -29,6 +32,14 @@ class StatisticController extends Controller
             ],
         ];
     }
+
+    //列表页条件查询
+    public function _map(){
+        $where = '';
+        if(Yii::$app->request->get('day')) $where .= "order_day='".Yii::$app->request->get('day')."' and ";
+        return $where?substr($where,0,-5):'';
+    }
+
 
     /**
      * Lists all SmartPublicsignalStatistics models.
