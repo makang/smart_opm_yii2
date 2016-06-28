@@ -38,8 +38,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'headerOptions' => ['width' => '100']
             ],
-            'creatTime',
-            'upTime',
+            ['label'=>'创建时间','value'=>function($row){
+              return $row['creatTime']!='0000-00-00 00:00:00'?$row['creatTime']:"";
+            }],
+            ['label'=>'修改时间','value'=>function($row){
+                return $row['upTime']!='0000-00-00 00:00:00'?$row['upTime']:"";
+            }],
             'uid',
             'uname',
            [
