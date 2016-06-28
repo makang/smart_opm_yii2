@@ -117,6 +117,8 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
 
     //组织一下畸形的hall存储
     private function _orgHall($halls){
+        if(!$halls)return '';
+
         $ids = explode(',',substr($halls,0,-1));
         foreach($ids as $v){
             $infos = explode('_',$v);
