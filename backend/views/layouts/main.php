@@ -283,13 +283,16 @@ AppAsset::register($this);
 <script src="/assets_ace/js/chosen.jquery.min.js"></script>
 <!-- page specific plugin scripts -->
 
-
+a
 <!-- ace scripts -->
 
 <script src="/assets_ace/js/ace-elements.min.js"></script>
 <script src="/assets_ace/js/ace.min.js"></script>
 
 <!-- inline scripts related to this page -->
+
+<script src="/assets/9ddf213d/yii.js"></script>
+<script src="/assets/cc7e9c46/js/sidenav.js"></script>
 </body>
 </html>
 <?php $this->endPage() ?>
