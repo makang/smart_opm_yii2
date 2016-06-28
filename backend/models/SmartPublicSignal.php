@@ -86,7 +86,8 @@ class SmartPublicSignal extends \yii\db\ActiveRecord
     }
     //获取合作主题文字
     public function sGetThemeDesc($id){
-        return self::$_THEME_DESC[$id];
+
+        return array_key_exists($id,self::$_THEME_DESC)?self::$_THEME_DESC[$id]:"";
     }
 
 
