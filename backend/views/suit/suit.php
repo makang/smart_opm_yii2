@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <input type="text" name="suit_id" class="search-query" placeholder="请输入卖品订单编号"
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
                         </span>
-                        <span class="input-icon align-middle" style="width: 200px">
+                        <span class="input-icon align-middle" style="width: 150px">
 
                             <select class="width-100" name="status">
                                   <option value="all" >全部状态</option>
