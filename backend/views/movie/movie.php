@@ -38,12 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
                             <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号"
+<<<<<<< Updated upstream
                                    value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
+=======
+                                   value="<?= !empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '' ?>"/>
+>>>>>>> Stashed changes
                         </span>
                         <span class="input-icon align-middle" style="width: 130px">
 
                             <select class="width-100" name="status">
-                                  <option value="all" >全部状态</option>
                                 <?php
                                 foreach($dataStatus as $k=>$v){
                                     $k = $k."";

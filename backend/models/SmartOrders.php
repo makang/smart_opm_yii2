@@ -51,13 +51,13 @@ class SmartOrders extends \yii\db\ActiveRecord
     public static function getStatus()
     {
         return array(
+            'all'=>'全部状态',
             0 => '未支付',
             1 => '已支付',
             2 => '已出票',
             3 => '已发码',
             4 => '退款中',
             5 => '已退款',
-
             11 => '支付失败',
             12 => '出票失败',
             13 => '发码失败',
@@ -194,7 +194,6 @@ class SmartOrders extends \yii\db\ActiveRecord
                 $return .= $tmp[1] . '排' . $tmp[2] . '座   ';
             }
         }
-
         return $return;
     }
 }
