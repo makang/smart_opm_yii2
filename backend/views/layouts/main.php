@@ -290,7 +290,6 @@ AppAsset::register($this);
 <script src="/assets_ace/js/ace.min.js"></script>
 
 <!-- inline scripts related to this page -->
-<?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
