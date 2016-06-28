@@ -98,7 +98,7 @@ use yii\widgets\ActiveForm;
                     ['label'=>'类型','value'=>function($row){
                         return \backend\models\SmartPublicSignal::model()->sGetThemeDesc($row['PublicSignalTheme']);
                     }],
-                    ['label'=>'注册公司名称','value'=>'PublicSignalNickname'],
+                    ['label'=>'注册公司名称','value'=>'CompanyName'],
                     ['label'=>'合作状态','value'=>function($row){
                         return \backend\models\SmartPublicSignal::model()->sGetCoorStatus($row['CooperationStatus']);
                     }],
