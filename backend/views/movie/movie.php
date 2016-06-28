@@ -27,22 +27,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号"
-<<<<<<< Updated upstream
-                                   value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
-=======
-                                   value="<?= !empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '' ?>"/>
->>>>>>> Stashed changes
+                            <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号" value="<?= !empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 130px">
 

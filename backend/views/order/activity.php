@@ -24,13 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
                             <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="input-icon align-middle" style="width: 15qa0px">
 
                             <select class="width-100" name="status">
-                                  <option value="all" >全部状态</option>
                                  <?php
                                  foreach($dataStatus as $k=>$v){
                                      $k = $k."";
