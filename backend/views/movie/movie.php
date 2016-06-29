@@ -39,6 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             <i class="icon-search"></i>
                             <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号" value="<?= !empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '' ?>"/>
                         </span>
+                        <span class="input-icon align-middle">
+                            <i class="icon-search"></i>
+                            <input type="text" name="cinema_name" class="search-query" placeholder="请输入影院名称" value="<?= !empty($_REQUEST['cinema_name']) ? $_REQUEST['cinema_name'] : '' ?>"/>
+                        </span>
                         <span class="input-icon align-middle" style="width: 130px">
 
                             <select class="width-100" name="status">
