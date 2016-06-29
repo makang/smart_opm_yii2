@@ -294,7 +294,6 @@ AppAsset::register($this);
 
 </body>
 </html>
-<?php $this->endBody() ?>
 <?php $this->endPage() ?>
 
 

@@ -50,9 +50,38 @@ $this->params['breadcrumbs'][] = $this->title;
                'class' => 'yii\grid\ActionColumn',
                'header' => '操作',
                'template' => '{view} {update} {delete}',
-               'headerOptions' => ['width' => '170'],
+               'headerOptions' => ['width' => '270'],
+               'buttons'  =>[
+                   'view' => function($url, $row, $key){
+                       return Html::a('查看',
+                           ['edit', 'id'=> $row->id],
+                           [
+                               'class' => 'btn btn-xs btn-success',
+                           ]
+                       );
+
+                   },
+                   'update' => function($url, $row, $key){
+                       return Html::a('修改',
+                           ['update', 'id'=> $row->id],
+                           [
+                               'class' => 'btn btn-xs btn-primary',
+                           ]
+                       );
+
+                   },
+                   'delete' => function($url, $row, $key){
+                       return Html::a('删除',
+                           ['delete', 'id'=> $row->id],
+                           [
+                               'class' => 'btn btn-xs btn-warning confirm',
+                           ]
+                       );
+
+                   },
+               ]
                
-           ],
+           ]
         ],
     ]); ?>
 </div>
