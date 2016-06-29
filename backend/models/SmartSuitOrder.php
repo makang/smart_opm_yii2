@@ -108,4 +108,24 @@ class SmartSuitOrder extends \yii\db\ActiveRecord
         $query->OrderBy('create_time desc');
         return $dataProvider;
     }
+    public static function getIsSuit($order_id){
+        $is_suit='无';
+       $suit_info=SmartSuitOrder::find()->where(['order_id'=>$order_id])->asArray()->one();
+        if($suit_info){
+            $is_suit='有';
+        }
+       return $is_suit;
+    }
+    public static function getSuitMoney($order_id){
+        $suit_money=0;
+        if($order_id){
+            $suit=SmartSuitOrder::find()->select('SUM(fee) AS suit_money')->where(['order_id'=>$order_id])->asArray()->all();
+            if($suit){
+                $suit_money=$suit[0]['suit_money'];
+            }
+           // var_dump($suit);
+        }
+        return $suit_money;
+
+    }
 }
