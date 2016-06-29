@@ -42,7 +42,7 @@ use yii\widgets\ActiveForm;
 
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers" name="start_date" class="search-query" placeholder="开始日期" value="<?= !empty($_REQUEST['start_date'])?$_REQUEST['start_date']:"";?>"/>
+                            <input type="text" id="datepickers" name="start_date" class="search-query datepicker" placeholder="开始日期" value="<?= !empty($_REQUEST['start_date'])?$_REQUEST['start_date']:"";?>"/>
                         </span>
 
 
@@ -156,24 +156,19 @@ use yii\widgets\ActiveForm;
     window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
-
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
     jQuery(function($) {
-        $("#datepickers").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat:"yy-mm",
-            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-            dayNamesMin: ['日','一','二','三','四','五','六']
+        //日历选择
+        $(".datepicker").datepicker({
+
+            language:  'zh-CN',
+            format: "yyyy-mm",
+            autoclose:'true'
         })
-        $("#datepickere").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat:"yy-mm",
-            monthNames: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'],
-            dayNamesMin: ['日','一','二','三','四','五','六']
-        });
 
 
         $(".chosen-select").chosen();
