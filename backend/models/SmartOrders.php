@@ -67,7 +67,7 @@ class SmartOrders extends \yii\db\ActiveRecord
     }
     public static function getDiscountType(){
         return array(//折扣类型,0:无折扣 1:储值会员卡 2:立减 3:代金券 4:权益卡 5:虚拟会员卡
-            ''=>'',
+            'all'=>'使用优惠',
             0 => '无折扣',
             1 => '储值会员卡',
             2 => '立减',
@@ -173,14 +173,19 @@ class SmartOrders extends \yii\db\ActiveRecord
         $query->andwhere(['NOT IN','smart_orders.status',[0,11]]);
         $cinema_name = isset($params['cinema_name']) ? $params['cinema_name'] : '';
         !empty($params['order_id'])?$query->andWhere(['smart_orders.orderid'=>$params['order_id']]):'';
-        !empty($params['discount_type'])?$query->andWhere(['smart_orders.discount_type'=>$params['discount_type']]):'';
+
         $order_status = (isset($params['status'])&&$params['status']!='all') ? $params['status']  : 'all';
+        $discount_type = (isset($params['discount_type'])&&$params['discount_type']!='all') ? $params['discount_type']  : 'all';
+
         if($cinema_name){
             $query->andFilterWhere(['like', 'smart_schedule.cinema_name', $cinema_name]);
         }
 
         if ($order_status!='all') {
             $query->andWhere(['smart_orders.status' => $order_status]);
+        }
+        if ($discount_type!='all') {
+            $query->andWhere(['smart_orders.discount_type' => $discount_type]);
         }
         $query->OrderBy('smart_orders.dateline desc');
         return $dataProvider;

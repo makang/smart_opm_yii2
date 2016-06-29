@@ -61,5 +61,12 @@ class SmartSingleOrder extends \yii\db\ActiveRecord {
         return $total;
     }
 
+    public static function getPayType($order_id)
+    {
+        $orderInfo=SmartSingleOrder::findOne($order_id);
+        if($orderInfo){
+            return $orderInfo['pay_type'];
+        }
+    }
 
 }

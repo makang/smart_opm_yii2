@@ -51,14 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ?>
                             </select>
                         </span>
-                        <span class="input-icon align-middle">
+                        <span class="input-icon align-middle" style="width: 130px">
 
-                            <select class="width-100 chosen-select" name="discountType">
-                                  <option value="">使用优惠</option>
+                            <select class="width-100" name="discount_type">
                                 <?php
                                 foreach ($discountType as $k => $v) {
                                     $k = $k."";
-                                    $selected=(isset($_REQUEST['status'])&&($_REQUEST['status']==$k))?'selected':'';
+                                    $selected=(isset($_REQUEST['discount_type'])&&($_REQUEST['discount_type']==$k))?'selected':'';
                                     echo '<option value="'.$k.'" '.$selected.'>'.$v.'</option>';
                                 }
                                 ?>
@@ -94,9 +93,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '购买时间', 'value' => function ($row) {
                         return date('Y-m-d H:i:s', $row['dateline']);
                     }],
-//                    ['label' => '卖品', 'value' => function ($row) {
-//                        return $row['isSuit'] ? '是' : '无';
-//                    }],
+                    ['label' => '卖品', 'value' => function ($row) {
+                        return SmartSuitOrder::getIsSuit($row['orderid']);
+                    }],
                     ['label' => '原价', 'value' => function ($row) {
                         return $row['total_money'] / 100;
                     }],
@@ -104,16 +103,20 @@ $this->params['breadcrumbs'][] = $this->title;
                         $discountType = $row['discount_type'];
                         return \backend\models\SmartOrders::getDiscountType()[$discountType];
                     }],
-//                    ['label' => '优惠金额', 'value' => 'discount_money'],
-                    ['label' => '实际支付', 'value' => function ($row) {
-                        return $row['pay_money'] / 100;;
+                    ['label' => '优惠金额', 'value' => function($row){
+                         return ($row['total_money']-$row['pay_money'])/100;
                     }],
-//                    ['label' => '支付方式', 'value' => function ($row) {
-//                        if ($row['pay_type'] == 2)
-//                            return '会员卡';
-//                        else
-//                            return '微信支付';
-//                    }],
+                    ['label' => '实际支付', 'value' => function ($row) {
+                        $suit_money= SmartSuitOrder::getSuitMoney($row['orderid']);
+                        return $suit_money+$row['pay_money']/100;
+                    }],
+                    ['label' => '支付方式', 'value' => function ($row) {
+                        $pay_type=\backend\models\SmartSingleOrder::getPayType($row['orderid']);
+                        if ($pay_type == 2)
+                            return '会员卡';
+                        else
+                            return '微信支付';
+                    }],
                     ['label' => '订单状态', 'value' => function ($row) {
                         return \backend\models\SmartOrders::getStatus()[$row['status']];
                     }],
