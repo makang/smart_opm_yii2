@@ -117,8 +117,15 @@ use yii\widgets\ActiveForm;
                         'headerOptions' => ['width' => '170'],
                         'buttons' => [
                             'detail' => function($url, $row, $key){
-                                return \backend\models\SmartPriceDiscount::model()->sGetAction($row);
-
+                                $operate_platform=\backend\models\SmartPriceDiscount::iGetOperatePlatform($row['pd_id']);
+                                if($operate_platform==2) {
+                                    return \backend\models\SmartPriceDiscount::model()->sGetAction($row);
+                                }elseif($operate_platform==1){
+                                    return Html::a('关闭', ['stop', 'id' =>$row['pd_id']], [
+                                        'class'         =>  'btn btn-xs btn-warning',
+                                        'data-confirm'  =>  '确定要关闭么?'
+                                    ]).'&nbsp;'.Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+                                }
                             }
                         ],
                     ]

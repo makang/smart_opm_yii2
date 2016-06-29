@@ -95,7 +95,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
         $data['halls']                  =       $halls;
         $data['protect_price']          =       $map['scenes_price_protection'];
         $data['report_price_type']      =       $map['report_price_type'];
-        $data['set_report_price']       =       $map['set_report_price']?$map['set_report_price']*100:0;
+        $data['set_report_price']       =       isset($map['set_report_price'])?$map['set_report_price']*100:0;
         $data['price_protection']       =       0;
         $data['discount_price_type']    =       $map['discount_price_type'];
         $data['discount_price']         =       $map['discount_price_type']?$map['discount_price']*100:$map['discountprice']*100;
@@ -110,6 +110,7 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
 
         $data['price_protection']       =       0;
         $data['pid']                    =       0;
+        $data['status']                 =       0;
         $data['create_time']            =       time();
         return $data;
     }
@@ -182,29 +183,35 @@ class SmartPriceDiscount extends \yii\db\ActiveRecord
     public function sGetAction($row){
         $delOption = [
             'class'         =>  'btn btn-xs btn-warning',
-            'data-confirm'  =>  '确定要删除'
+            'data-confirm'  =>  '确定要关闭'
         ];
         switch ($row['status']) {
             case self::$_STATUS_UNSTART:
-                return  Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-               // Html::a('关闭', ['delete', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                return  Html::a('修改', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
                 Html::a('开启', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                Html::a('复制', ['edit', 'id' =>$row['pd_id'],'copy'=>'copy'], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
                 Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
 
                 break;
             case self::$_STATUS_STARTING:
                 return  //Html::a('编辑', ['edit', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-info',]).'&nbsp;'.
-                Html::a('暂停', ['stop', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('关闭', ['stop', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('复制', ['edit', 'id' =>$row['pd_id'],'copy'=>'copy'], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
                 Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
             case self::$_STATUS_FINISHED:
-                return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+                return Html::a('复制', ['edit', 'id' =>$row['pd_id'],'copy'=>'copy'], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                    Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+
                 break;
             case self::$_STATUS_STOCKOUT:
-                return Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
+                return  Html::a('关闭', ['stop', 'id' =>$row['pd_id']], $delOption).'&nbsp;'.
+                Html::a('复制', ['edit', 'id' =>$row['pd_id'],'copy'=>'copy'], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                 Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
             case self::$_STATUS_CLOSED:
-                return  Html::a('开始', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                return  Html::a('开启', ['start', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
+                Html::a('复制', ['edit', 'id' =>$row['pd_id'],'copy'=>'copy'], ['class' => 'btn btn-xs btn-primary',]).'&nbsp;'.
                 Html::a('查看', ['details', 'id' =>$row['pd_id']], ['class' => 'btn btn-xs btn-success',]);
                 break;
         }
