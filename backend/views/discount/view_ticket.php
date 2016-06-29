@@ -19,17 +19,15 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>每人限购 </label>
 
             <div class="col-sm-9">
-                <label class="col-xs-4 rl">
-                    <input class="" type="radio" name="ticketlimit" value="0" <?php if(!$discountInfo['one_use_max']) echo 'checked';?>>
 
-                    <span class="label pointer <?php if(!$discountInfo['one_use_max']) echo 'label-warning'?>"> 不限</span>
+                <label class="col-xs-2 rl">
+                    <?php if($discountInfo['one_use_max']){
+                        echo '限购：'.$discountInfo['one_use_max'].'张';
+                    }else{
+                        echo '不限';
+                    }?>
                 </label>
 
-                <label class="rl">
-                    <input class="" type="radio" name="ticketlimit" value="1" <?php if($discountInfo['one_use_max']) echo 'checked';?>>
-                    <span class="label pointer <?php if($discountInfo['one_use_max']) echo 'label-warning'?>"> 限购&nbsp;</span>
-                    <input type="text" class="input-small" disabled name="one_use_max" value="<?php if($discountInfo['one_use_max']) echo $discountInfo['one_use_max'];?>">&nbsp;张
-                </label>
 
 
             </div>
@@ -49,53 +47,44 @@
              ?>
             <div class="col-sm-9 ">
                 <label class="inline checkbox-all">
-                    <input class="ace " type="checkbox" name="version" <?php if(!$discountInfo['movie_type']) echo 'checked';?>>
-                    <span class="lbl pointer">全部</span>
+                    <?php if(!$discountInfo['movie_type']) echo '全部';?>
                 </label >
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="2D" <?php if(in_array("2D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 2d</span>
+                    <?php if(in_array("2D",$movieType)) echo '2d';?>
+
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="3D" <?php if(in_array("3D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 3d</span>
+                    <?php if(in_array("3D",$movieType)) echo '3D';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="IMAX2D" <?php if(in_array("IMAX2D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> IMAX2D</span>
+                    <?php if(in_array("IMAX2D",$movieType)) echo 'IMAX2D';?>
+
+                <label>
+                    <?php if(in_array("IMAX3D",$movieType)) echo 'IMAX3D';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="IMAX3D" <?php if(in_array("IMAX3D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer">  IMAX3D </span>
+                    <?php if(in_array("IMAX",$movieType)) echo 'IMAX';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="versionx" value="IMAX" <?php if(in_array("IMAX",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> IMAX</span>
+                    <?php if(in_array("DMAX",$movieType)) echo 'DMAX';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="DMAX" <?php if(in_array("DMAX",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> DMAX</span>
+                    <?php if(in_array("DMAX3D",$movieType)) echo 'DMAX3D';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="DMAX3D" <?php if(in_array("DMAX3D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> DMAX3D</span>
+                    <?php if(in_array("中国巨幕",$movieType)) echo '中国巨幕';?>
                 </label>
 
                 <label>
-                    <input class="ace" type="checkbox" name="version" value="中国巨幕" <?php if(in_array("中国巨幕",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 中国巨幕</span>
-                </label>
+                    <?php if(in_array("4D",$movieType)) echo '4D';?>
 
-                <label>
-                    <input class="ace" type="checkbox" name="version" value="4D" <?php if(in_array("4D",$movieType)) echo 'checked';?>>
-                    <span class="lbl pointer"> 4D</span>
                 </label>
 
             </div>

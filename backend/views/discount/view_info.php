@@ -18,7 +18,7 @@
             </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="name" maxlength="8" placeholder="请输入优惠名称且长度不能超过8个汉字" class="col-xs-10 col-sm-5"  value="<?php echo $discountInfo['name']?>"/>
+              <?php echo $discountInfo['name']?>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>活动文案 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="title" maxlength="14" placeholder="请输入活动文案且长度不能超过14个汉字" class="col-xs-10 col-sm-5" value="<?php echo $discountInfo['title']?>"/>
+                <?php echo $discountInfo['title']?>
             </div>
         </div>
 
@@ -38,10 +38,7 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>活动说明 </label>
 
             <div class="col-sm-9">
-                <textarea id="" maxlength="140" name="desc" class="col-xs-10 col-sm-5" placeholder="请输入活动说明且长度不能超过140个汉字">
                     <?php echo $discountInfo['desc']?>
-                </textarea>
-
             </div>
         </div>
 
@@ -49,9 +46,9 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>起止时间 </label>
 
             <div class="col-sm-9">
-                <input type="text" id="a" name="startDatetime" readonly class="search-query datetimepicker" placeholder="开始日期" value="<?php echo date('Y-m-d H:i:s',$discountInfo['start_time'])?>"/>
+                <?php echo date('Y-m-d H:i:s',$discountInfo['start_time'])?>
                 --
-                <input type="text" id="" name="endDatetime" readonly class="search-query datetimepicker" placeholder="结束日期" value="<?php echo date('Y-m-d H:i:s',$discountInfo['end_time'])?>"/>
+                <?php echo date('Y-m-d H:i:s',$discountInfo['end_time'])?>
 
             </div>
         </div>
@@ -63,12 +60,11 @@
 
             <div>
                 <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="lack_stock_show" <?php if($discountInfo['lack_stock_show']==0) echo 'checked'; ?> value="0">
-                    <span class="label <?php if($discountInfo['lack_stock_show']==0) echo 'label-warning'; ?> pointer"> 库存不足自动结束</span>
-                </label>
-                <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="lack_stock_show" value="1" <?php if($discountInfo['lack_stock_show']==1) echo 'checked';?>>
-                    <span class="label <?php if($discountInfo['lack_stock_show']==1) echo 'label-warning'; ?> pointer"> 库存不足继续展示</span>
+                    <?php if($discountInfo['lack_stock_show']==0){
+                        echo '库存不足自动结束';
+                    }else{
+                        echo '库存不足继续展示';
+                    } ?>
                 </label>
             </div>
         </div>
@@ -79,24 +75,19 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>用户人群 </label>
 
             <div>
-                <label class="rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==0) echo 'checked';?> value="0">
-                    <span class="label  <?php if($discountInfo['user_limit']==0) echo 'label-warning'; ?> pointer"> 不限</span>
+                <label class="col-xs-2 rl">
+
+                    <?php if($discountInfo['user_limit']==0){
+                        echo '不限';
+                    }else if($discountInfo['user_limit']==1){
+                        echo '新用户';
+                    }else if($discountInfo['user_limit']==2){
+                        echo '老用户';
+                    }else if($discountInfo['user_limit']==3){
+                        echo '会员';
+                    } ?>
                 </label>
 
-                <label class="rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==1) echo 'checked';?>value="1">
-                    <span class="label  <?php if($discountInfo['user_limit']==1) echo 'label-warning'; ?> pointer"> 新用户</span>
-                </label>
-
-                <label class=" rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==2) echo 'checked';?>value="2">
-                    <span class="label <?php if($discountInfo['user_limit']==2) echo 'label-warning'; ?> pointer"> 老用户</span>
-                </label>
-                <label class="rl">
-                    <input class="" type="radio" name="userLimit" <?php if($discountInfo['user_limit']==3) echo 'checked';?> value="3">
-                    <span class="label  <?php if($discountInfo['user_limit']==3) echo 'label-warning'; ?> pointer"> 会员</span>
-                </label>
             </div>
         </div>
 
@@ -106,31 +97,18 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>参与影院 </label>
 
             <div >
-                <label class="rl">
-                    <input class="" type="radio" name="cinemaLimit" <?php if($discountInfo['join_cinema_type']==0) echo 'checked';?> value="0" id="cinemaLimit">
-                    <span class="label  <?php if($discountInfo['join_cinema_type']==0) echo 'label-warning'; ?>  pointer"> 全国</span>
+
+                <label class="col-xs-2 rl">
+                <?php if($discountInfo['join_cinema_type']==0){
+                    echo '不限';
+                }else if($discountInfo['join_cinema_type']==1){
+                    echo '手动选择';
+                }else if($discountInfo['join_cinema_type']==2){
+                    echo '排除影院';
+                } ?>
                 </label>
 
-                <label class="rl">
-                    <input class="" type="radio" name="cinemaLimit" <?php if($discountInfo['join_cinema_type']==1) echo 'checked';?> value="1">
-                    <span class="label <?php if($discountInfo['join_cinema_type']==1) echo 'label-warning'; ?>  pointer"> 手动选择</span>
-                </label>
 
-                <label class="rl">
-                    <input class="" type="radio" name="cinemaLimit" <?php if($discountInfo['join_cinema_type']==2) echo 'checked';?> value="2">
-                    <span class="label <?php if($discountInfo['join_cinema_type']==2) echo 'label-warning'; ?>  pointer"> 排除影院</span>
-                </label>
-
-                <label class="">
-                    <div class="input-icon">
-                        <input id="cinemaKeyword" type="text" placeholder="输入影院关键字">
-                        <i class="icon-search blue"></i>
-                        <button class="btn btn-purple btn-sm searchCinema" type="button">
-                            搜索
-                            <i class="icon-search icon-on-right bigger-110"></i>
-                        </button>
-                    </div>
-                </label>
             </div>
         </div>
 
@@ -138,31 +116,6 @@
 
         <div class="form-group">
 
-
-            <div class="col-sm-6">
-                <div class="widget-box ">
-                    <div class="widget-header">
-                        <h4 class="lighter smaller">
-                            <i class="icon-comment blue"></i>
-                            待选影院
-                            <label class="selectCinemaAll" id="selectCinema">
-                                <input class="ace ace-checkbox-2" type="checkbox" name="form-field-checkbox">
-                                <span class="lbl"> 全选</span>
-                            </label>
-                        </h4>
-                    </div>
-
-                    <div class="widget-body">
-                        <div class="widget-main no-padding">
-                            <div class="dialogs " id="selectCinemaFrom">
-
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
             <div class="col-sm-6">
                 <div class="widget-box ">
                     <div class="widget-header">

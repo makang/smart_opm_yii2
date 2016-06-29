@@ -17,11 +17,9 @@
             </label>
 
             <div class="col-sm-9">
-                <input type="text" id="" name="ticketStartTime" class="search-query datepicker" placeholder="开始日期"
-                       value="<?php echo $discountInfo['discount_start_date']; ?>"/>
+                <?php echo $discountInfo['discount_start_date']; ?>
                 --
-                <input type="text" id="" name="ticketEndTime" class="search-query datepicker" placeholder="结束日期"
-                       value="<?php echo $discountInfo['discount_end_date']; ?>"/>
+                <?php echo $discountInfo['discount_end_date']; ?>
 
             </div>
         </div>
@@ -32,26 +30,6 @@
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> <span class="red">*</span>场次优惠时段
             </label>
 
-            <div class="col-sm-9">
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
-                    <input id="" type="text" class="form-control timepicker" value="9"/>
-
-                </div>
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
-                    <input id="" type="text" class="form-control timepicker" value="9"/>
-                    <span class="input-group-addon">
-                        <i class="icon-time bigger-110"></i>
-                    </span>
-                </div>
-                <div class="input-group bootstrap-timepicker col-sm-2 ">
-                    <button class="btn btn-info btn-sm" type="button" id="addTime">
-                        <i class="icon-plus bigger-110"></i>
-                    </button>
-                </div>
-            </div>
-
-
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> </label>
 
             <div class="col-sm-9 " id="addTimeContenter">
                 <?php
@@ -59,17 +37,12 @@
                     $time_periods = json_decode($discountInfo['time_periods'], true);
                     foreach ($time_periods as $time) {
                         echo '<span class="label label-warning" style="margin-right:1px;margin-top:1px">' . $time . '
-<i class="icon-remove red bigger-120"></i>
 <input type="hidden" value="' . $time . '" name="useTimes[]">
 </span>';
                     }
                 }
                 ?>
-                <span class="label label-warning" style="margin-right:1px;margin-top:1px">
-09:00-09:00
-<i class="icon-remove red bigger-120"></i>
-<input type="hidden" value="09:00-09:00" name="useTimes[]">
-</span>
+
             </div>
 
 
@@ -81,16 +54,6 @@
         <div class="form-group">
             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 排除优惠时间 </label>
 
-            <div class="col-sm-9">
-                <div class="input-group bootstrap-timepicker col-sm-4 ">
-                    <input type="text" name="" class="datepicker">
-                    <button class="btn btn-info btn-sm" type="button" id="addDay">
-                        <i class="icon-plus bigger-110"></i>
-                    </button>
-                </div>
-            </div>
-
-            <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> </label>
 
             <div class="col-sm-9 " id="addDayContenter">
                 <?php
@@ -98,7 +61,7 @@
                     $exclude_date = json_decode($discountInfo['exclude_dates'], true);
                     foreach ($exclude_date as $date) {
                         echo '<span class="label label-warning" style="margin-right:1px;">' . $date . '
-                          <i class="icon-remove red bigger-120"></i><input type="hidden" value="' . $date . '" name="myNoUseDates[]"></span>';
+                          <input type="hidden" value="' . $date . '" name="myNoUseDates[]"></span>';
                     }
                 }
                 ?>
@@ -113,14 +76,14 @@
             </label>
 
             <div class="col-sm-9">
-                <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="Selecthalls"  value="0" <?php if(!$discountInfo['halls']) echo 'checked';?>>
-                    <span class="label pointer <?php if(!$discountInfo['halls']) echo 'label-warning';?>">全部</span>
-                </label>
+
 
                 <label class="col-xs-2 rl">
-                    <input class="" type="radio" name="Selecthalls" value="1" <?php if($discountInfo['halls']) echo 'checked';?>>
-                    <span class="label pointer  <?php if($discountInfo['halls']) echo 'label-warning';?>"> 选择影厅</span>
+                    <?php if($discountInfo['halls']){
+                        echo '选择影厅';
+                    }else if(!$discountInfo['halls']){
+                        echo '全部';
+                    } ?>
                 </label>
             </div>
         </div>
@@ -162,12 +125,12 @@
                                             $hallInfo = \backend\models\SmartHall::model()->aGetHallByCinemaNos($cinema_no);
                                             $hall_string = '<li class="item-blue clearfix">';
 
-                                            $hall_string .= '<label class="inline checkbox-all pointer"><input class="ace " value="0" type="checkbox"><span class="lbl text-primary"> 全选（' . $cinema_name . '）</span></label>';
+                                            $hall_string .= '<label class="inline checkbox-all pointer"><span class="lbl text-primary"> 全选（' . $cinema_name . '）</span></label>';
 
                                             foreach ($hallInfo[$cinema_no] as $hall) {
                                                 //var_dump($hall);exit;
                                                     $checked=in_array($hall['hall_no'],$hall_no_list)?'checked':'';
-                                                    $hall_string .= '<label class="inline pointer"><input name="halls[]" class="ace " '.$checked.' value="' . $hall['hall_no'] . '" type="checkbox" ><span class="lbl"> ' . $hall['hall_name'] . '</span></label>';
+                                                    $hall_string .= '<label class="inline pointer" style="padding-right:10px"><span class="lbl"> ' . $hall['hall_name'] . '</span></label>';
 
                                             }
                                             $hall_string .= '</label>';
