@@ -65,11 +65,6 @@
                     }
                 }
                 ?>
-                <span class="label label-warning" style="margin-right:1px;margin-top:1px">
-09:00-09:00
-<i class="icon-remove red bigger-120"></i>
-<input type="hidden" value="09:00-09:00" name="useTimes[]">
-</span>
             </div>
 
 
