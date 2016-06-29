@@ -242,6 +242,7 @@ class SmartTongjiWxOrder extends \yii\db\ActiveRecord
             'sum(mem_money) as mem_money',
             'sum(mem_fee) as mem_fee'
         );
+        return $field;
     }
 }
 ?>
