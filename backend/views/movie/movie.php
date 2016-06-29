@@ -25,25 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_start" name="start_date" readonly class="search-query datetimepicker"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_end" name="end_date" readonly class="search-query datetimepicker"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
-                            <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号"
-                                   value="<?= !empty($_REQUEST['suit_id']) ? $_REQUEST['suit_id'] : '' ?>"/>
+                            <input type="text" name="order_id" class="search-query" placeholder="请输入订单编号" value="<?= !empty($_REQUEST['order_id']) ? $_REQUEST['order_id'] : '' ?>"/>
                         </span>
                         <span class="input-icon align-middle" style="width: 130px">
 
                             <select class="width-100" name="status">
-                                  <option value="all" >全部状态</option>
                                 <?php
                                 foreach($dataStatus as $k=>$v){
                                     $k = $k."";
@@ -148,23 +146,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <script type="text/javascript">
 
-    $('.datetimepicker').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
-    });
+    jQuery(function ($) {
+        $("#datepickers_start").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        })
+        $("#datepickers_end").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        });
 
-    //        //日历选择
-    $(".datepicker").datepicker({
-        format: "yyyy-mm-dd",
-        language:  'zh-CN',
-        autoclose:'true'
-    })
+
+        $(".chosen-select").chosen();
+    });
 
 </script>
 

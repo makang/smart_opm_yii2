@@ -24,13 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query"
+                            <input type="text" id="datepickers_start" readonly name="start_date" class="search-query"
                                    placeholder="开始日期"
                                    value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ""; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query"
+                            <input type="text" id="datepickers_end" readonly name="end_date" class="search-query"
                                    placeholder="结束日期"
                                    value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ""; ?>"/>
                         </span>
@@ -67,7 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '订单额', 'value' => function ($row) {
                         return $row['pay_money'] / 100;
                     }],
-                    ['label' => '会员出票数', 'value' => 'member_num'],
+                    ['label' => '会员出票数', 'value' => function($row){
+                       return sprintf("%2d", $row['member_num']/$row['ticket_num']*100)."%  | ".$row['member_num'];
+                     }],
                     ['label' => '服务费', 'value' => function ($row) {
                         return $row['total_fee'] / 100;
                     }],
@@ -83,56 +85,38 @@ $this->params['breadcrumbs'][] = $this->title;
     </div><!-- /span -->
 </div><!-- /row -->
 
-
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/assets_ace/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
 </script>
 <script src="/assets_ace/js/jquery-ui-1.10.3.full.min.js"></script>
+<link rel="stylesheet" href="/assets_ace/css/bootstrap-timepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-timepicker.min.js"></script>
+
+
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<link rel="stylesheet" href="/assets_ace/css/date-time/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
+<link rel="stylesheet" href="/assets_ace/css/datepicker.css" />
+<script src="/assets_ace/js/date-time/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
     jQuery(function ($) {
         $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
         })
-        $("#datepickers_start").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
+        $("#datepickers_end").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
         });
 
 
         $(".chosen-select").chosen();
     });
-
-
-</script>
-<script type="text/javascript">
-    jQuery(function ($) {
-        $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        })
-        $("#datepickers_end").datepicker({
-            showOtherMonths: true,
-            selectOtherMonths: false,
-            dateFormat: "yy-mm-dd",
-            monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
-            dayNamesMin: ['日', '一', '二', '三', '四', '五', '六']
-        });
-
-
-        $(".chosen-select").chosen();
-    });
-
 
 </script>
 

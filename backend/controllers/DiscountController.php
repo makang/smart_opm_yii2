@@ -34,12 +34,15 @@ class DiscountController extends CommonController
         return $this->render('add');
     }
     public function actionEdit(){
-        $discountInfo=SmartPriceDiscount::agetDiscountInfoById(Yii::$app->request->queryParams);
+        $param=Yii::$app->request->queryParams;
+        $discountInfo=SmartPriceDiscount::agetDiscountInfoById($param);
 
         if(!$discountInfo){
             echo "<script> alert('无此活动信息'); history.go(-1);</script>";
         }
-        //var_dump($discountInfo);exit;
+        if(isset($param['copy'])){
+            return $this->render('copy',['discountInfo'=>$discountInfo]);
+        }
         return $this->render('edit',['discountInfo'=>$discountInfo]);
     }
     /*
@@ -97,7 +100,12 @@ class DiscountController extends CommonController
      */
     public function actionUpdate(){
         $postData = Yii::$app->request->post();
-        $res = SmartPriceDiscount::model()->updateDiscount($postData);
+        if(isset($postData['copy'])){
+            $res = SmartPriceDiscount::model()->saveDiscount($postData);
+        }else{
+            $res = SmartPriceDiscount::model()->updateDiscount($postData);
+        }
+
         if($res){
             $this->AjaxError('保存成功',$this->_CODE['SUC']);
         }else{

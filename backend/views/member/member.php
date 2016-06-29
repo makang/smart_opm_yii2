@@ -22,15 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_start" name="start_date" readonly class="search-query datetimepicker"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_end" name="end_date" readonly class="search-query datetimepicker"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
@@ -98,7 +98,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $row['price'];
                     }],
                     ['label' => '订单状态', 'value' => function($row){
-                        return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
+                        if($row['smart_orders']['status']) {
+                            return \backend\models\SmartOrders::getStatus()[$row['smart_orders']['status']];
+                        }else{
+                            return '';
+                        }
                     }],
                     ['label' => '会员卡号', 'value' =>function($row){
                         return \backend\models\SmartMemberCard::sGetCardNo($row['card_id']);
@@ -131,23 +135,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <script type="text/javascript">
 
-    $('.datetimepicker').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
-    });
+    jQuery(function ($) {
+        $("#datepickers_start").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        })
+        $("#datepickers_end").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        });
 
-    //        //日历选择
-    $(".datepicker").datepicker({
-        format: "yyyy-mm-dd",
-        language:  'zh-CN',
-        autoclose:'true'
-    })
+
+        $(".chosen-select").chosen();
+    });
 
 </script>
 

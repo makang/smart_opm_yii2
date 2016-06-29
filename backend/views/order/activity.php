@@ -22,15 +22,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]); ?>
                         <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_start" name="start_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_start" name="start_date" readonly class="search-query datetimepicker"
                                    placeholder="开始日期"
-                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : date('Y-m-d H:i:s',time()-2*24*60*60); ?>"/>
+                                   value="<?= !empty($_REQUEST['start_date']) ? $_REQUEST['start_date'] : ''; ?>"/>
                         </span>
                          <span class="input-icon align-middle">
                             <i class="icon-calendar"></i>
-                            <input type="text" id="datepickers_end" name="end_date" class="search-query datetimepicker"
+                            <input type="text" id="datepickers_end" name="end_date" readonly class="search-query datetimepicker"
                                    placeholder="结束日期"
-                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : date('Y-m-d H:i:s',time()); ?>"/>
+                                   value="<?= !empty($_REQUEST['end_date']) ? $_REQUEST['end_date'] : ''; ?>"/>
                         </span>
                         <span class="input-icon align-middle">
                             <i class="icon-search"></i>
@@ -40,7 +40,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="input-icon align-middle" style="width: 15qa0px">
 
                             <select class="width-100" name="status">
-                                  <option value="all" >全部状态</option>
                                  <?php
                                  foreach($dataStatus as $k=>$v){
                                      $k = $k."";
@@ -73,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ['label' => '影院名称', 'value' => function($row){
                         return $row['smart_orders']['smart_schedule']['cinema_name'];
                     }],
-//                    ['label' => '创建平台', 'value' => function($row){
-//                        var_dump($row['smart_orders']['smart_schedule']['movie_name']);exit();
-//                        return ($row==1)?'op':'opm';
-//                    }],
+                    ['label' => '创建平台', 'value' => function($row){
+                        $operate_platform=\backend\models\SmartPriceDiscount::iGetOperatePlatform($row['pd_id']);
+                        return ($operate_platform==1)?'op':'opm';
+                    }],
                     ['label' => '商品详情', 'value' => function($row){
                         $goodInfo="《".$row['smart_orders']['smart_schedule']['movie_name']."》"." ".$row['smart_orders']['smart_schedule']['hall_name'];
                         $goodInfo.="  ".\backend\models\SmartOrders::formatSeat($row['smart_orders']['seat_info']);
@@ -126,23 +125,21 @@ $this->params['breadcrumbs'][] = $this->title;
 <script type="text/javascript" src="/assets_ace/js/date-time/bootstrap-datepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
+    jQuery(function ($) {
+        $("#datepickers_start").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        })
+        $("#datepickers_end").datepicker({
+            format: "yyyy-mm-dd",
+            language:  'zh-CN',
+            autoclose:'true'
+        });
 
-    $('.datetimepicker').datetimepicker({
-        language:  'zh-CN',
-        weekStart: 1,
-        todayBtn:  1,
-        autoclose: 1,
-        todayHighlight: 1,
-        startView: 2,
-        forceParse: 0,
-        showMeridian: 1
+
+        $(".chosen-select").chosen();
     });
 
-    //        //日历选择
-    $(".datepicker").datepicker({
-        format: "yyyy-mm-dd",
-        language:  'zh-CN',
-        autoclose:'true'
-    })
 
 </script>
